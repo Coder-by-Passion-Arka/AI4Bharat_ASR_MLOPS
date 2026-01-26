@@ -1,0 +1,71 @@
+op_name,cpu_time_total_ms,self_cpu_time_ms,device_time_ms,self_device_time_ms,calls
+aten::conv1d,9.691549999999996,0.07077399999999398,6.333065499999993,6.333065499999993,8
+aten::convolution,9.620776000000001,0.10512400000000252,6.333065499999993,6.333065499999993,8
+aten::_convolution,9.515651999999998,1.950295000000001,6.333065499999993,6.333065499999993,8
+aten::cudnn_convolution,6.202737000000001,2.2947099999999874,5.963160374999994,5.963160374999994,8
+aten::_weight_norm,0.07482300000000032,0.006131000000001222,5.015654000000002,5.015654000000002,1
+aten::_weight_norm_interface,0.0686919999999991,0.028515999999997804,5.015654000000002,5.015654000000002,1
+"void at::native::(anonymous namespace)::weight_norm_fwd_last_dim_kernel<float, float>(float*, float*, float const*, float const*, int, int)",0.0,0.0,5.015654000000002,5.015654000000002,1
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_32x5_nhwc_align4>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_32x5_nhwc_align4::Params),0.0,0.0,1.9569670000000006,1.9569670000000006,1
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4>(cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4::Params),0.0,0.0,1.9379058124999993,1.9379058124999993,16
+sm86_xmma_fprop_implicit_gemm_indexed_tf32f32_tf32f32_f32_nhwckrsc_nchw_tilesize64x32x64_stage4_warpsize2x2x1_g1_tensor16x8x8_alignc4_execute_kernel__5x_cudnn,0.0,0.0,0.9057045999999994,0.9057045999999994,5
+ampere_sgemm_128x64_tn,0.0,0.0,0.6452408333333336,0.6452408333333336,144
+aten::linear,14.474244999999916,1.609019999999935,0.6387820753424669,0.6387820753424669,146
+aten::addmm,10.423054999999952,5.612327999999925,0.6387820753424669,0.6387820753424669,146
+Activity Buffer Request,2.6795910000000003,2.6795910000000003,0.39197100000000046,0.39197100000000046,1
+"void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, bool, bool, float const*, float const*, int*)",0.0,0.0,0.3866990000000005,0.3866990000000005,1
+"void cudnn::engines_precompiled::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::engines_precompiled::nchw2nhwc_params_t<float>, float const*, float*)",0.0,0.0,0.19519599999999943,0.19519599999999943,44
+ampere_sgemm_128x32_tn,0.0,0.0,0.15741100000000005,0.15741100000000005,1
+aten::add_,0.5335329999999967,0.25444599999999534,0.15107462499999996,0.15107462499999996,8
+"void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})",0.0,0.0,0.13632844444444406,0.13632844444444406,9
+"void at::native::vectorized_elementwise_kernel<4, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>)",0.0,0.0,0.06414638709677374,0.06414638709677374,31
+aten::gelu,1.5398349999999974,0.9566889999999876,0.06243756249999956,0.06243756249999956,32
+aten::layer_norm,4.831752000000041,0.7687260000000861,0.057097403508772245,0.057097403508772245,57
+aten::native_layer_norm,4.0630259999999545,1.3365909999999366,0.057097403508772245,0.057097403508772245,57
+"void cudnn::engines_precompiled::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::engines_precompiled::nhwc2nchw_params_t<float>, float const*, float*)",0.0,0.0,0.04929047058823465,0.04929047058823465,17
+ampere_sgemm_128x128_tn,0.0,0.0,0.048591458333335745,0.048591458333335745,24
+aten::contiguous,4.677347999999945,0.20313499999993836,0.04487270930232501,0.04487270930232501,86
+aten::bmm,2.2375540000000003,1.3525360000000146,0.04356779166666865,0.04356779166666865,48
+ampere_sgemm_128x128_nn,0.0,0.0,0.03854412500000157,0.03854412500000157,24
+aten::clone,5.622844000000004,0.5891500000000324,0.03729145454545414,0.03729145454545414,110
+aten::copy_,3.673465000000013,1.582957000000033,0.03729145454545414,0.03729145454545414,110
+"void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",0.0,0.0,0.03729145454545414,0.03729145454545414,110
+"void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<float, float, false>(int, float, float const*, float const*, float const*, float*, float*, float*)",0.0,0.0,0.03511384210526357,0.03511384210526357,57
+ampere_sgemm_32x32_sliced1x4_tn,0.0,0.0,0.0334770000000135,0.0334770000000135,1
+aten::add,1.5946749999999774,0.8146430000000182,0.01658030612244923,0.01658030612244923,49
+"void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul> >(int, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul>)",0.0,0.0,0.016543250000000325,0.016543250000000325,48
+"void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",0.0,0.0,0.009463999999999941,0.009463999999999941,1
+aten::softmax,1.079969000000001,0.08874900000000707,0.00800404166666461,0.00800404166666461,24
+aten::_softmax,0.9912199999999939,0.5520269999999837,0.00800404166666461,0.00800404166666461,24
+"void (anonymous namespace)::softmax_warp_forward<float, float, float, 6, false, false>(float*, float const*, int, int, int, bool const*, int, bool)",0.0,0.0,0.00800404166666461,0.00800404166666461,24
+aten::mul,0.8507650000000103,0.48499000000002707,0.007275958333334529,0.007275958333334529,24
+"void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",0.0,0.0,0.007275958333334529,0.007275958333334529,24
+"void cublasLt::splitKreduce_kernel<32, 16, int, float, float, float, float, false, float, float, float, true, true, false>(cublasLt::cublasSplitKParams<float>, float const*, float const*, float*, float*, float const*, float const*, float const*, float const*, float*, void*, long, float*, int*, float*, float*, float const*, float const*, float const*, float const*, float const*)",0.0,0.0,0.006543000000005122,0.006543000000005122,1
+"void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int)",0.0,0.0,0.005271999999999935,0.005271999999999935,1
+aten::reshape,2.411995999999962,0.6383010000000476,0.0010752522123894028,0.0010752522123894028,226
+Memset (Device),0.0,0.0,0.0010399183673476468,0.0010399183673476468,147
+aten::unsqueeze,0.25428899999999954,0.20597500000000127,0.0,0.0,17
+aten::as_strided,0.5895350000000141,0.5895350000000141,0.0,0.0,309
+cudaLaunchKernel,9.719066999999944,9.719066999999944,0.0,0.0,580
+aten::view,1.824199000000008,1.824199000000008,0.0,0.0,582
+aten::squeeze,0.13201800000000366,0.09221600000000581,0.0,0.0,8
+aten::transpose,1.6509680000000244,1.1542370000000082,0.0,0.0,283
+aten::empty_like,1.3716089999999603,0.37207899999996696,0.0,0.0,111
+aten::empty,2.072291999999994,2.072291999999994,0.0,0.0,306
+[memory],0.0,0.0,0.0,0.0,561
+cudaFuncSetAttribute,0.027338000000001556,0.027338000000001556,0.0,0.0,17
+cudaPeekAtLastError,0.005096999999997934,0.005096999999997934,0.0,0.0,44
+cudaFuncGetAttributes,0.03420900000000074,0.03420900000000074,0.0,0.0,5
+cudaLaunchKernelExC,0.0808849999999984,0.0808849999999984,0.0,0.0,5
+cudaMemsetAsync,2.260336000000045,2.260336000000045,0.0,0.0,147
+aten::t,1.2422360000000008,0.5356929999999793,0.0,0.0,146
+cudaOccupancyMaxActiveBlocksPerMultiprocessor,0.2885939999999755,0.2885939999999755,0.0,0.0,146
+aten::dropout,0.18049499999997715,0.18049499999997715,0.0,0.0,99
+aten::empty_strided,0.005469999999999345,0.005469999999999345,0.0,0.0,1
+cudaEventRecord,0.010846999999999753,0.010846999999999753,0.0,0.0,9
+cudaStreamWaitEvent,0.015655000000006112,0.015655000000006112,0.0,0.0,16
+aten::slice,0.03163100000000122,0.0269429999999993,0.0,0.0,1
+aten::rand,0.795781999999992,0.5253020000000033,0.0,0.0,24
+aten::uniform_,0.13496500000000014,0.13496500000000014,0.0,0.0,24
+aten::_unsafe_view,0.07572299999996175,0.07572299999996175,0.0,0.0,24
+cudaDeviceSynchronize,80.87851699999999,80.87851699999999,0.0,0.0,1
