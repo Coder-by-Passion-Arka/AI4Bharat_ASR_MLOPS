@@ -535,22 +535,26 @@ def deploy_best_trt_to_triton():
     print(f"[Triton] Engine deployed → {dst}")
 
 def start_triton_server():
-    model_repo = TRITON_REPO
+    import socket
+
+    def port_free(port):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            return s.connect_ex(("127.0.0.1", port)) != 0
+
+    if not port_free(8000):
+        print("[Triton] Port 8000 already in use — assuming Triton is running")
+        return
+
     cmd = [
         "docker", "run", "--gpus", "all", "--rm",
-        "-p", "8000:8000",
-        "-p", "8001:8001",
-        "-p", "8002:8002",
-        "-v", f"{model_repo}:/models",
+        "-p", "8000:8000", "-p", "8001:8001", "-p", "8002:8002",
+        "-v", f"{PROJECT_ROOT}/triton/model_repository:/models",
         "nvcr.io/nvidia/tritonserver:24.12-py3",
-        "tritonserver",
-        "--model-repository=/models",
-        "--strict-model-config=true"
+        "tritonserver", "--model-repository=/models"
     ]
 
-    print("\n[Triton] Starting Triton Inference Server")
-    print("👉 http://localhost:8000")
     subprocess.Popen(cmd)
+    print("👉 Triton running at http://localhost:8000")
     time.sleep(12)
 
 def run_triton_check():

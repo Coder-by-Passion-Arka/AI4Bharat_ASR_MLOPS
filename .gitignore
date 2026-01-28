@@ -1,6 +1,8 @@
 # Large data and model files (too large for GitHub)
 data/
 models/
+results/
+config/
 
 # Python
 __pycache__/
