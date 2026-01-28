@@ -60,14 +60,18 @@ def ts():
 def run_cmd(cmd, cwd=None, env=None, show_cmd=True):
     """
     Run a command as a subprocess while ensuring:
+    - All Path objects are converted to str (CRITICAL FIX)
     - Project root is on PYTHONPATH
     - Logs are visible in terminal
+
     """
+    #convert Path → str everywhere
+    cmd = [str(c) for c in cmd]
+    cwd = str(cwd) if cwd is not None else None
 
     if show_cmd:
         logger.info(f"[CMD] {' '.join(cmd)} (cwd={cwd})")
 
-    # --- CRITICAL FIX ---
     # Ensure project root is available to subprocesses
     run_env = (env or os.environ.copy()).copy()
     run_env["PYTHONPATH"] = (
@@ -396,33 +400,33 @@ def select_and_deploy_trt_to_triton(project_root: Path):
     # write minimal config.pbtxt (same as your existing)
     cfg_path = triton_model_dir / "config.pbtxt"
     cfg = f"""
-name: "wav2vec2"
-backend: "tensorrt"
-max_batch_size: 8
+            name: "wav2vec2"
+            backend: "tensorrt"
+            max_batch_size: 8
 
-input [
-{{
-  name: "input_values"
-  data_type: TYPE_FP32
-  dims: [-1, -1]
-}}
-]
+            input [
+            {{
+            name: "input_values"
+            data_type: TYPE_FP32
+            dims: [-1, -1]
+            }}
+            ]
 
-output [
-{{
-  name: "logits"
-  data_type: TYPE_FP32
-  dims: [-1, -1]
-}}
-]
+            output [
+            {{
+            name: "logits"
+            data_type: TYPE_FP32
+            dims: [-1, -1]
+            }}
+            ]
 
-instance_group [
-{{
-  kind: KIND_GPU
-  count: 1
-}}
-]
-"""
+            instance_group [
+            {{
+            kind: KIND_GPU
+            count: 1
+            }}
+            ]
+        """
     cfg_path.write_text(cfg.strip())
     print(f"[Triton] Wrote config to {cfg_path}")
 
