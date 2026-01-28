@@ -1,0 +1,127 @@
+2026-01-27 22:47:40 | INFO     | benchmark_latency.py:50 | Using ONNX model: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx
+2026-01-27 22:47:48 | INFO     | benchmark_latency.py:70 | ONNX Runtime active providers: ['CPUExecutionProvider']
+2026-01-27 22:47:48 | WARNING  | benchmark_latency.py:73 | CUDAExecutionProvider NOT active – inference is running on CPU!
+2026-01-27 22:47:48 | INFO     | benchmark_latency.py:84 | Running warm-up iterations...
+2026-01-27 22:47:49 | INFO     | benchmark_latency.py:92 | Running 20 timed inference runs...
+2026-01-27 22:47:52 | INFO     | benchmark_latency.py:100 | Average ONNX Runtime latency: 0.158214 seconds
+2026-01-27 22:47:52 | INFO     | benchmark_latency.py:105 | Saved latency → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_onnx.txt
+2026-01-27 22:47:52 | INFO     | benchmark_latency.py:113 | Profiling trace saved at: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile.json
+2026-01-27 22:47:53 | INFO     | benchmark_latency.py:150 | Operator profile CSV saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_ops.csv
+2026-01-27 22:47:54 | INFO     | benchmark_latency.py:165 | Operator latency plot saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_top_ops.png
+2026-01-27 22:47:54 | INFO     | benchmark_latency.py:167 | ONNX Runtime benchmarking completed successfully.
+2026-01-28 07:35:45 | INFO     | benchmark_latency.py:548 | Unified benchmark starting
+2026-01-28 07:35:45 | INFO     | benchmark_latency.py:549 | runs=20 warmup=5 force=False
+2026-01-28 07:35:45 | INFO     | benchmark_latency.py:245 | PyTorch latency already exists at /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_pytorch.txt. Skipping (use --force to re-run).
+2026-01-28 07:35:45 | INFO     | benchmark_latency.py:306 | ONNX latency already exists at /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_onnx.txt. Skipping (use --force to re-run).
+2026-01-28 07:35:45 | INFO     | benchmark_latency.py:409 | Found 3 TRT engine(s). Will try to benchmark each using trtexec.
+2026-01-28 07:35:45 | INFO     | benchmark_latency.py:440 | Running trtexec for engine wav2vec2_optimized_trt_fp16.plan
+2026-01-28 07:35:45 | WARNING  | benchmark_latency.py:451 | Could not parse trtexec latency for wav2vec2_optimized_trt_fp16.plan. Saving raw output to results for inspection.
+2026-01-28 07:35:45 | INFO     | benchmark_latency.py:440 | Running trtexec for engine wav2vec2_optimized_trt_fp32.plan
+2026-01-28 07:35:45 | WARNING  | benchmark_latency.py:451 | Could not parse trtexec latency for wav2vec2_optimized_trt_fp32.plan. Saving raw output to results for inspection.
+2026-01-28 07:35:45 | INFO     | benchmark_latency.py:440 | Running trtexec for engine wav2vec2_optimized_trt_mixed.plan
+2026-01-28 07:35:45 | WARNING  | benchmark_latency.py:451 | Could not parse trtexec latency for wav2vec2_optimized_trt_mixed.plan. Saving raw output to results for inspection.
+2026-01-28 07:35:47 | INFO     | benchmark_latency.py:517 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_fp16_ops.csv
+2026-01-28 07:35:48 | INFO     | benchmark_latency.py:517 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_fp32_ops.csv
+2026-01-28 07:35:49 | INFO     | benchmark_latency.py:517 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_mixed.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_mixed_ops.csv
+2026-01-28 07:35:51 | INFO     | benchmark_latency.py:517 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile_ops.csv
+2026-01-28 07:35:51 | INFO     | benchmark_latency.py:529 | Running Triton validation (triton_check.py)...
+2026-01-28 07:35:51 | INFO     | benchmark_latency.py:533 | Triton validation script finished.
+2026-01-28 07:35:51 | WARNING  | benchmark_latency.py:535 | Triton check returned non-zero exit code; examine triton_check logs
+2026-01-28 07:35:51 | INFO     | benchmark_latency.py:581 | Unified benchmark completed. Now run compare_backends.py to produce cross-backend charts & CSVs.
+2026-01-28 11:19:15 | INFO     | benchmark_latency.py:548 | Unified benchmark starting
+2026-01-28 11:19:15 | INFO     | benchmark_latency.py:549 | runs=20 warmup=5 force=False
+2026-01-28 11:19:15 | INFO     | benchmark_latency.py:245 | PyTorch latency already exists at /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_pytorch.txt. Skipping (use --force to re-run).
+2026-01-28 11:19:16 | INFO     | benchmark_latency.py:306 | ONNX latency already exists at /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_onnx.txt. Skipping (use --force to re-run).
+2026-01-28 11:19:16 | INFO     | benchmark_latency.py:409 | Found 3 TRT engine(s). Will try to benchmark each using trtexec.
+2026-01-28 11:19:16 | INFO     | benchmark_latency.py:440 | Running trtexec for engine wav2vec2_optimized_trt_fp16.plan
+2026-01-28 11:19:16 | WARNING  | benchmark_latency.py:451 | Could not parse trtexec latency for wav2vec2_optimized_trt_fp16.plan. Saving raw output to results for inspection.
+2026-01-28 11:19:16 | INFO     | benchmark_latency.py:440 | Running trtexec for engine wav2vec2_optimized_trt_fp32.plan
+2026-01-28 11:19:16 | WARNING  | benchmark_latency.py:451 | Could not parse trtexec latency for wav2vec2_optimized_trt_fp32.plan. Saving raw output to results for inspection.
+2026-01-28 11:19:16 | INFO     | benchmark_latency.py:440 | Running trtexec for engine wav2vec2_optimized_trt_mixed.plan
+2026-01-28 11:19:16 | WARNING  | benchmark_latency.py:451 | Could not parse trtexec latency for wav2vec2_optimized_trt_mixed.plan. Saving raw output to results for inspection.
+2026-01-28 11:19:17 | INFO     | benchmark_latency.py:517 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_fp16_ops.csv
+2026-01-28 11:19:18 | INFO     | benchmark_latency.py:517 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_fp32_ops.csv
+2026-01-28 11:19:19 | INFO     | benchmark_latency.py:517 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_mixed.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_mixed_ops.csv
+2026-01-28 11:19:21 | INFO     | benchmark_latency.py:517 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile_ops.csv
+2026-01-28 11:19:21 | INFO     | benchmark_latency.py:529 | Running Triton validation (triton_check.py)...
+2026-01-28 11:19:22 | INFO     | benchmark_latency.py:533 | Triton validation script finished.
+2026-01-28 11:19:22 | WARNING  | benchmark_latency.py:535 | Triton check returned non-zero exit code; examine triton_check logs
+2026-01-28 11:19:22 | INFO     | benchmark_latency.py:581 | Unified benchmark completed. Now run compare_backends.py to produce cross-backend charts & CSVs.
+2026-01-28 12:05:11 | INFO     | benchmark_latency.py:544 | Unified benchmark starting
+2026-01-28 12:05:11 | INFO     | benchmark_latency.py:545 | runs=20 warmup=5 force=True
+2026-01-28 12:05:15 | INFO     | benchmark_latency.py:257 | Benchmarking PyTorch (model=ai4bharat/indicwav2vec-hindi) on device=cuda
+2026-01-28 12:05:18 | INFO     | benchmark_latency.py:266 | PyTorch warmup: 5 runs
+2026-01-28 12:05:19 | INFO     | benchmark_latency.py:272 | PyTorch timed runs: 20
+2026-01-28 12:05:19 | INFO     | benchmark_latency.py:225 | Wrote latency file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_pytorch.txt  (mili_seconds)
+2026-01-28 12:05:19 | INFO     | benchmark_latency.py:283 | PyTorch average latency: 0.023090 s
+2026-01-28 12:05:19 | INFO     | benchmark_latency.py:308 | Using ONNX model: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx
+2026-01-28 12:05:33 | INFO     | benchmark_latency.py:317 | ONNX Runtime active providers: ['CUDAExecutionProvider', 'CPUExecutionProvider']
+2026-01-28 12:05:33 | INFO     | benchmark_latency.py:330 | ONNX warmup: 5 runs
+2026-01-28 12:05:33 | INFO     | benchmark_latency.py:334 | ONNX timed runs: 20
+2026-01-28 12:05:34 | INFO     | benchmark_latency.py:344 | ONNX average latency: 19.46 ms
+2026-01-28 12:05:34 | INFO     | benchmark_latency.py:350 | ONNX profiling trace saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile.json
+2026-01-28 12:05:35 | INFO     | benchmark_latency.py:371 | ONNX operator CSV saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_ops.csv
+2026-01-28 12:05:35 | INFO     | benchmark_latency.py:384 | ONNX operator plot saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_top_ops.png
+2026-01-28 12:05:35 | INFO     | benchmark_latency.py:405 | Found 3 TRT engine(s). Will try to benchmark each using trtexec.
+2026-01-28 12:05:35 | INFO     | benchmark_latency.py:436 | Running trtexec for engine wav2vec2_optimized_trt_fp16.plan
+2026-01-28 12:05:35 | WARNING  | benchmark_latency.py:447 | Could not parse trtexec latency for wav2vec2_optimized_trt_fp16.plan. Saving raw output to results for inspection.
+2026-01-28 12:05:35 | INFO     | benchmark_latency.py:436 | Running trtexec for engine wav2vec2_optimized_trt_fp32.plan
+2026-01-28 12:05:35 | WARNING  | benchmark_latency.py:447 | Could not parse trtexec latency for wav2vec2_optimized_trt_fp32.plan. Saving raw output to results for inspection.
+2026-01-28 12:05:35 | INFO     | benchmark_latency.py:436 | Running trtexec for engine wav2vec2_optimized_trt_mixed.plan
+2026-01-28 12:05:36 | WARNING  | benchmark_latency.py:447 | Could not parse trtexec latency for wav2vec2_optimized_trt_mixed.plan. Saving raw output to results for inspection.
+2026-01-28 12:05:37 | INFO     | benchmark_latency.py:513 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_fp16_ops.csv
+2026-01-28 12:05:37 | INFO     | benchmark_latency.py:513 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_fp32_ops.csv
+2026-01-28 12:05:38 | INFO     | benchmark_latency.py:513 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_mixed.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_mixed_ops.csv
+2026-01-28 12:05:39 | INFO     | benchmark_latency.py:513 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile_ops.csv
+2026-01-28 12:05:39 | INFO     | benchmark_latency.py:525 | Running Triton validation (triton_check.py)...
+2026-01-28 12:05:39 | INFO     | benchmark_latency.py:529 | Triton validation script finished.
+2026-01-28 12:05:39 | WARNING  | benchmark_latency.py:531 | Triton check returned non-zero exit code; examine triton_check logs
+2026-01-28 12:05:39 | INFO     | benchmark_latency.py:577 | Unified benchmark completed. Now run compare_backends.py to produce cross-backend charts & CSVs.
+2026-01-28 14:52:57 | INFO     | benchmark_latency.py:576 | Unified benchmark starting
+2026-01-28 14:52:57 | INFO     | benchmark_latency.py:577 | runs=20 warmup=5 force=True
+2026-01-28 14:53:01 | INFO     | benchmark_latency.py:257 | Benchmarking PyTorch (model=ai4bharat/indicwav2vec-hindi) on device=cuda
+2026-01-28 14:53:04 | INFO     | benchmark_latency.py:266 | PyTorch warmup: 5 runs
+2026-01-28 14:53:05 | INFO     | benchmark_latency.py:272 | PyTorch timed runs: 20
+2026-01-28 14:53:05 | INFO     | benchmark_latency.py:225 | Wrote latency file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_pytorch.txt  (mili_seconds)
+2026-01-28 14:53:05 | INFO     | benchmark_latency.py:283 | PyTorch average latency: 22.741890 ms
+2026-01-28 14:53:06 | INFO     | benchmark_latency.py:308 | Using ONNX model: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx
+2026-01-28 14:53:15 | INFO     | benchmark_latency.py:317 | ONNX Runtime active providers: ['CUDAExecutionProvider', 'CPUExecutionProvider']
+2026-01-28 14:53:15 | INFO     | benchmark_latency.py:329 | ONNX warmup: 5 runs
+2026-01-28 14:53:16 | INFO     | benchmark_latency.py:333 | ONNX timed runs: 20
+2026-01-28 14:53:16 | INFO     | benchmark_latency.py:343 | ONNX average latency: 30.89 ms
+2026-01-28 14:53:17 | INFO     | benchmark_latency.py:349 | ONNX profiling trace saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile.json
+2026-01-28 14:53:17 | INFO     | benchmark_latency.py:370 | ONNX operator CSV saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_ops.csv
+2026-01-28 14:53:18 | INFO     | benchmark_latency.py:383 | ONNX operator plot saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_top_ops.png
+2026-01-28 14:53:18 | WARNING  | benchmark_latency.py:461 | benchmark_trt_engine.py not found; skipping TRT API benchmark
+2026-01-28 14:53:20 | INFO     | benchmark_latency.py:545 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_fp16_ops.csv
+2026-01-28 14:53:20 | INFO     | benchmark_latency.py:545 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_fp32_ops.csv
+2026-01-28 14:53:21 | INFO     | benchmark_latency.py:545 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_mixed.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_mixed_ops.csv
+2026-01-28 14:53:22 | INFO     | benchmark_latency.py:545 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile_ops.csv
+2026-01-28 14:53:22 | INFO     | benchmark_latency.py:557 | Running Triton validation (triton_check.py)...
+2026-01-28 14:53:22 | INFO     | benchmark_latency.py:561 | Triton validation script finished.
+2026-01-28 14:53:22 | WARNING  | benchmark_latency.py:563 | Triton check returned non-zero exit code; examine triton_check logs
+2026-01-28 14:53:22 | INFO     | benchmark_latency.py:615 | Unified benchmark completed. Now run compare_backends.py to produce cross-backend charts & CSVs.
+2026-01-28 15:08:34 | INFO     | benchmark_latency.py:576 | Unified benchmark starting
+2026-01-28 15:08:34 | INFO     | benchmark_latency.py:577 | runs=20 warmup=5 force=True
+2026-01-28 15:08:38 | INFO     | benchmark_latency.py:257 | Benchmarking PyTorch (model=ai4bharat/indicwav2vec-hindi) on device=cuda
+2026-01-28 15:08:42 | INFO     | benchmark_latency.py:266 | PyTorch warmup: 5 runs
+2026-01-28 15:08:43 | INFO     | benchmark_latency.py:272 | PyTorch timed runs: 20
+2026-01-28 15:08:43 | INFO     | benchmark_latency.py:225 | Wrote latency file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_pytorch.txt  (mili_seconds)
+2026-01-28 15:08:43 | INFO     | benchmark_latency.py:283 | PyTorch average latency: 24.522364 ms
+2026-01-28 15:08:44 | INFO     | benchmark_latency.py:308 | Using ONNX model: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx
+2026-01-28 15:08:58 | INFO     | benchmark_latency.py:317 | ONNX Runtime active providers: ['CUDAExecutionProvider', 'CPUExecutionProvider']
+2026-01-28 15:08:58 | INFO     | benchmark_latency.py:329 | ONNX warmup: 5 runs
+2026-01-28 15:08:59 | INFO     | benchmark_latency.py:333 | ONNX timed runs: 20
+2026-01-28 15:08:59 | INFO     | benchmark_latency.py:343 | ONNX average latency: 24.18 ms
+2026-01-28 15:09:00 | INFO     | benchmark_latency.py:349 | ONNX profiling trace saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile.json
+2026-01-28 15:09:01 | INFO     | benchmark_latency.py:370 | ONNX operator CSV saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_ops.csv
+2026-01-28 15:09:02 | INFO     | benchmark_latency.py:383 | ONNX operator plot saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_top_ops.png
+2026-01-28 15:09:02 | WARNING  | benchmark_latency.py:461 | benchmark_trt_engine.py not found; skipping TRT API benchmark
+2026-01-28 15:09:04 | INFO     | benchmark_latency.py:545 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_fp16_ops.csv
+2026-01-28 15:09:05 | INFO     | benchmark_latency.py:545 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_fp32_ops.csv
+2026-01-28 15:09:06 | INFO     | benchmark_latency.py:545 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_mixed.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wav2vec2_optimized_trt_mixed_ops.csv
+2026-01-28 15:09:07 | INFO     | benchmark_latency.py:545 | Parsed TRT profile /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile.json -> /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/onnx_profile_ops.csv
+2026-01-28 15:09:07 | INFO     | benchmark_latency.py:557 | Running Triton validation (triton_check.py)...
+2026-01-28 15:09:07 | INFO     | benchmark_latency.py:561 | Triton validation script finished.
+2026-01-28 15:09:07 | WARNING  | benchmark_latency.py:563 | Triton check returned non-zero exit code; examine triton_check logs
+2026-01-28 15:09:07 | INFO     | benchmark_latency.py:615 | Unified benchmark completed. Now run compare_backends.py to produce cross-backend charts & CSVs.

@@ -1,0 +1,6 @@
+2026-01-27 22:54:47 | ERROR    | compare_ops.py:40 | FP16 CSV not found: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/trt_fp16_ops.csv
+2026-01-27 22:54:47 | ERROR    | compare_ops.py:40 | Mixed CSV not found: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/trt_mixed_ops.csv
+2026-01-27 22:54:47 | ERROR    | compare_ops.py:54 | Required TensorRT operator CSVs missing. Aborting comparison.
+2026-01-28 11:25:51 | ERROR    | compare_ops.py:40 | FP16 CSV not found: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/trt_fp16_ops.csv
+2026-01-28 11:25:51 | ERROR    | compare_ops.py:40 | Mixed CSV not found: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/trt_mixed_ops.csv
+2026-01-28 11:25:51 | ERROR    | compare_ops.py:54 | Required TensorRT operator CSVs missing. Aborting comparison.

@@ -1,0 +1,100 @@
+2026-01-28 13:54:39 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 13:54:39 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 13:55:05 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 13:55:05 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 13:55:05 | INFO     | benchmark_trt_engine.py:43 | Benchmarking TensorRT engine → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models.tensorrt.wav2vec2_optimized_trt_fp16.plan
+2026-01-28 14:05:37 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 14:05:37 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 14:05:37 | INFO     | benchmark_trt_engine.py:43 | Benchmarking TensorRT engine → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 14:54:16 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 14:54:16 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 14:54:16 | INFO     | benchmark_trt_engine.py:43 | Benchmarking TensorRT engine → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 14:54:21 | INFO     | benchmark_trt_engine.py:79 | TensorRT inputs : ['input_values']
+2026-01-28 14:54:21 | INFO     | benchmark_trt_engine.py:80 | TensorRT outputs: ['logits']
+2026-01-28 14:54:34 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 14:54:34 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 14:54:34 | INFO     | benchmark_trt_engine.py:43 | Benchmarking TensorRT engine → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.plan
+2026-01-28 14:54:43 | INFO     | benchmark_trt_engine.py:79 | TensorRT inputs : ['input_values']
+2026-01-28 14:54:43 | INFO     | benchmark_trt_engine.py:80 | TensorRT outputs: ['logits']
+2026-01-28 15:09:16 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 15:09:16 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 15:09:16 | INFO     | benchmark_trt_engine.py:166 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 15:09:22 | INFO     | benchmark_trt_engine.py:184 | Engine deserialized
+2026-01-28 15:09:22 | INFO     | benchmark_trt_engine.py:196 | TensorRT inputs : []
+2026-01-28 15:09:22 | INFO     | benchmark_trt_engine.py:197 | TensorRT outputs: []
+2026-01-28 15:09:22 | ERROR    | benchmark_trt_engine.py:234 | TensorRT benchmark failed: 'tensorrt_bindings.tensorrt.IExecutionContext' object has no attribute 'execute_async_v2'
+Traceback (most recent call last):
+  File "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/benchmark_trt_engine.py", line 210, in main
+    context.execute_async_v2(device_ptrs, stream.handle)
+AttributeError: 'tensorrt_bindings.tensorrt.IExecutionContext' object has no attribute 'execute_async_v2'
+2026-01-28 16:07:34 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:07:34 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:07:34 | INFO     | benchmark_trt_engine.py:49 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 16:07:47 | INFO     | benchmark_trt_engine.py:57 | Engine deserialized
+2026-01-28 16:07:48 | INFO     | benchmark_trt_engine.py:72 | TensorRT inputs : ['input_values']
+2026-01-28 16:07:48 | INFO     | benchmark_trt_engine.py:73 | TensorRT outputs: ['logits']
+2026-01-28 16:08:27 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:08:27 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:08:27 | INFO     | benchmark_trt_engine.py:49 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 16:08:39 | INFO     | benchmark_trt_engine.py:57 | Engine deserialized
+2026-01-28 16:08:39 | INFO     | benchmark_trt_engine.py:72 | TensorRT inputs : ['input_values']
+2026-01-28 16:08:39 | INFO     | benchmark_trt_engine.py:73 | TensorRT outputs: ['logits']
+2026-01-28 16:09:02 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:09:02 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:09:02 | INFO     | benchmark_trt_engine.py:49 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 16:09:14 | INFO     | benchmark_trt_engine.py:57 | Engine deserialized
+2026-01-28 16:09:14 | INFO     | benchmark_trt_engine.py:72 | TensorRT inputs : ['input_values']
+2026-01-28 16:09:14 | INFO     | benchmark_trt_engine.py:73 | TensorRT outputs: ['logits']
+2026-01-28 16:11:17 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:11:17 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:11:17 | INFO     | benchmark_trt_engine.py:49 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 16:11:28 | INFO     | benchmark_trt_engine.py:57 | Engine deserialized
+2026-01-28 16:11:28 | INFO     | benchmark_trt_engine.py:72 | TensorRT inputs : ['input_values']
+2026-01-28 16:11:28 | INFO     | benchmark_trt_engine.py:73 | TensorRT outputs: ['logits']
+2026-01-28 16:12:07 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:12:07 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:12:07 | INFO     | benchmark_trt_engine.py:49 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 16:12:20 | INFO     | benchmark_trt_engine.py:57 | Engine deserialized
+2026-01-28 16:12:21 | INFO     | benchmark_trt_engine.py:72 | TensorRT inputs : ['input_values']
+2026-01-28 16:12:21 | INFO     | benchmark_trt_engine.py:73 | TensorRT outputs: ['logits']
+2026-01-28 16:13:56 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:13:56 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:13:56 | INFO     | benchmark_trt_engine.py:49 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 16:14:09 | INFO     | benchmark_trt_engine.py:57 | Engine deserialized
+2026-01-28 16:14:10 | INFO     | benchmark_trt_engine.py:72 | TensorRT inputs : ['input_values']
+2026-01-28 16:14:10 | INFO     | benchmark_trt_engine.py:73 | TensorRT outputs: ['logits']
+2026-01-28 16:16:16 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:16:16 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:16:16 | INFO     | benchmark_trt_engine.py:61 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 16:16:28 | INFO     | benchmark_trt_engine.py:69 | Engine deserialized
+2026-01-28 16:16:29 | INFO     | benchmark_trt_engine.py:84 | TensorRT inputs : ['input_values']
+2026-01-28 16:16:29 | INFO     | benchmark_trt_engine.py:85 | TensorRT outputs: ['logits']
+2026-01-28 16:18:17 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:18:17 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:18:17 | INFO     | benchmark_trt_engine.py:61 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 16:18:29 | INFO     | benchmark_trt_engine.py:69 | Engine deserialized
+2026-01-28 16:18:29 | INFO     | benchmark_trt_engine.py:84 | TensorRT inputs : ['input_values']
+2026-01-28 16:18:29 | INFO     | benchmark_trt_engine.py:85 | TensorRT outputs: ['logits']
+2026-01-28 16:20:10 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:20:10 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:22:29 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:22:29 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:22:29 | INFO     | benchmark_trt_engine.py:80 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-28 16:22:40 | INFO     | benchmark_trt_engine.py:88 | Engine deserialized
+2026-01-28 16:22:41 | INFO     | benchmark_trt_engine.py:128 | Warmup: 5 runs
+2026-01-28 16:22:41 | INFO     | benchmark_trt_engine.py:134 | Timed runs: 20
+2026-01-28 16:22:41 | INFO     | benchmark_trt_engine.py:149 | TensorRT average latency: 18.176 ms
+2026-01-28 16:24:51 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:24:51 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:24:51 | INFO     | benchmark_trt_engine.py:80 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_fp32.plan
+2026-01-28 16:25:17 | INFO     | benchmark_trt_engine.py:88 | Engine deserialized
+2026-01-28 16:25:17 | INFO     | benchmark_trt_engine.py:128 | Warmup: 5 runs
+2026-01-28 16:25:18 | INFO     | benchmark_trt_engine.py:134 | Timed runs: 20
+2026-01-28 16:25:18 | INFO     | benchmark_trt_engine.py:149 | TensorRT average latency: 20.352 ms
+2026-01-28 16:25:35 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 16:25:35 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/benchmark_trt_engine.log
+2026-01-28 16:25:36 | INFO     | benchmark_trt_engine.py:80 | Benchmarking TensorRT engine → models/tensorrt/wav2vec2_optimized_trt_mixed.plan
+2026-01-28 16:25:48 | INFO     | benchmark_trt_engine.py:88 | Engine deserialized
+2026-01-28 16:25:49 | INFO     | benchmark_trt_engine.py:128 | Warmup: 5 runs
+2026-01-28 16:25:49 | INFO     | benchmark_trt_engine.py:134 | Timed runs: 20
+2026-01-28 16:25:49 | INFO     | benchmark_trt_engine.py:149 | TensorRT average latency: 11.230 ms

@@ -1,0 +1,38 @@
+2026-01-27 22:20:19 | DEBUG    | logger.py:91 | Logger initialized
+2026-01-27 22:20:19 | DEBUG    | logger.py:92 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
+2026-01-27 22:20:19 | INFO     | triton_check.py:79 | ========== Triton Inference Validation ==========
+2026-01-27 22:20:19 | INFO     | triton_check.py:43 | [Triton] Connecting to Triton server...
+2026-01-27 22:20:19 | ERROR    | triton_check.py:51 | Failed to connect to Triton server
+Traceback (most recent call last):
+  File "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/triton/triton_check.py", line 45, in connect
+    return httpclient.InferenceServerClient(
+TypeError: InferenceServerClient.__init__() got an unexpected keyword argument 'timeout'
+2026-01-27 22:54:48 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-27 22:54:48 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
+2026-01-27 22:54:48 | INFO     | triton_check.py:79 | ========== Triton Inference Validation ==========
+2026-01-27 22:54:48 | INFO     | triton_check.py:43 | [Triton] Connecting to Triton server...
+2026-01-27 22:54:48 | ERROR    | triton_check.py:51 | Failed to connect to Triton server
+Traceback (most recent call last):
+  File "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/triton/triton_check.py", line 45, in connect
+    return httpclient.InferenceServerClient(
+TypeError: InferenceServerClient.__init__() got an unexpected keyword argument 'timeout'
+2026-01-28 07:35:51 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 07:35:51 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
+2026-01-28 07:35:51 | INFO     | triton_check.py:79 | ========== Triton Inference Validation ==========
+2026-01-28 07:35:51 | INFO     | triton_check.py:43 | [Triton] Connecting to Triton server...
+2026-01-28 07:42:44 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 07:42:44 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
+2026-01-28 07:42:44 | INFO     | triton_check.py:79 | ========== Triton Inference Validation ==========
+2026-01-28 07:42:44 | INFO     | triton_check.py:43 | [Triton] Connecting to Triton server...
+2026-01-28 11:19:21 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 11:19:21 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
+2026-01-28 11:19:21 | INFO     | triton_check.py:79 | ========== Triton Inference Validation ==========
+2026-01-28 11:19:21 | INFO     | triton_check.py:43 | [Triton] Connecting to Triton server...
+2026-01-28 11:25:51 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 11:25:51 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
+2026-01-28 11:25:51 | INFO     | triton_check.py:79 | ========== Triton Inference Validation ==========
+2026-01-28 11:25:51 | INFO     | triton_check.py:43 | [Triton] Connecting to Triton server...
+2026-01-28 13:33:35 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 13:33:35 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
+2026-01-28 13:33:35 | INFO     | triton_check.py:79 | ========== Triton Inference Validation ==========
+2026-01-28 13:33:35 | INFO     | triton_check.py:43 | [Triton] Connecting to Triton server...

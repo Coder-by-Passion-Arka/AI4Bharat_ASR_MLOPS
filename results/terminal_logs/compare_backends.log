@@ -1,0 +1,76 @@
+2026-01-27 22:54:46 | INFO     | compare_backends.py:65 | Collecting backend latency metrics
+2026-01-27 22:54:46 | WARNING  | compare_backends.py:47 | Latency file missing or invalid: latency_trt_fp16.txt ([Errno 2] No such file or directory: '/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_trt_fp16.txt')
+2026-01-27 22:54:46 | WARNING  | compare_backends.py:47 | Latency file missing or invalid: latency_trt_mixed.txt ([Errno 2] No such file or directory: '/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_trt_mixed.txt')
+2026-01-27 22:54:46 | WARNING  | compare_backends.py:47 | Latency file missing or invalid: latency_trt_fp32.txt ([Errno 2] No such file or directory: '/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_trt_fp32.txt')
+2026-01-27 22:54:46 | WARNING  | compare_backends.py:47 | Latency file missing or invalid: latency_triton.txt ([Errno 2] No such file or directory: '/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_triton.txt')
+2026-01-27 22:54:46 | INFO     | compare_backends.py:99 | Saved backend latency table → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.csv
+2026-01-27 22:54:46 | INFO     | compare_backends.py:127 | Saved latency plot → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.png
+2026-01-27 22:54:46 | INFO     | compare_backends.py:145 | Saved WER plot → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wer_hi.png
+2026-01-27 22:54:46 | INFO     | compare_backends.py:152 | Backend Latency Comparison Summary:
+2026-01-27 22:54:46 | INFO     | compare_backends.py:153 | 
+     Backend  Latency_ms  Speedup_vs_PyTorch
+     PyTorch    0.028075            1.000000
+ONNX Runtime  158.214000            0.000177
+2026-01-27 22:54:46 | INFO     | compare_backends.py:154 | ========== Comparison step completed successfully ==========
+2026-01-28 07:42:43 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 07:42:43 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/compare_backends.log
+2026-01-28 07:42:43 | INFO     | compare_backends.py:70 | === Backend Benchmark & Comparison ===
+2026-01-28 07:42:43 | DEBUG    | compare_backends.py:56 | Read latency file latency_pytorch.txt: 0.038422
+2026-01-28 07:42:43 | INFO     | compare_backends.py:70 | [PyTorch] Using existing latency: 0.038422 s
+2026-01-28 07:42:43 | DEBUG    | compare_backends.py:56 | Read latency file latency_onnx.txt: 158.214
+2026-01-28 07:42:43 | INFO     | compare_backends.py:70 | [ONNX] Using existing latency: 158.214000 s
+2026-01-28 07:42:43 | ERROR    | compare_backends.py:214 | tensorrt/pycuda not available; skipping TensorRT benchmark
+Traceback (most recent call last):
+  File "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/benchmarking/compare_backends.py", line 211, in benchmark_trt_engine
+    import pycuda.driver as cuda
+ModuleNotFoundError: No module named 'pycuda'
+2026-01-28 07:42:43 | ERROR    | compare_backends.py:214 | tensorrt/pycuda not available; skipping TensorRT benchmark
+Traceback (most recent call last):
+  File "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/benchmarking/compare_backends.py", line 211, in benchmark_trt_engine
+    import pycuda.driver as cuda
+ModuleNotFoundError: No module named 'pycuda'
+2026-01-28 07:42:43 | ERROR    | compare_backends.py:214 | tensorrt/pycuda not available; skipping TensorRT benchmark
+Traceback (most recent call last):
+  File "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/benchmarking/compare_backends.py", line 211, in benchmark_trt_engine
+    import pycuda.driver as cuda
+ModuleNotFoundError: No module named 'pycuda'
+2026-01-28 07:42:43 | INFO     | compare_backends.py:70 | [Triton] Running Triton latency check...
+2026-01-28 11:25:49 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 11:25:49 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/compare_backends.log
+2026-01-28 11:25:49 | INFO     | compare_backends.py:82 | === Backend Latency Comparison ===
+2026-01-28 11:25:49 | INFO     | compare_backends.py:82 | [TensorRT FP16] latency missing → latency_trt_fp16.txt
+2026-01-28 11:25:49 | INFO     | compare_backends.py:82 | [TensorRT Mixed] latency missing → latency_trt_mixed.txt
+2026-01-28 11:25:49 | INFO     | compare_backends.py:82 | [TensorRT FP32] latency missing → latency_trt_fp32.txt
+2026-01-28 11:25:49 | INFO     | compare_backends.py:82 | [Triton] latency missing → latency_triton.txt
+2026-01-28 11:25:49 | INFO     | compare_backends.py:82 | [Compare] CSV saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.csv
+2026-01-28 11:25:49 | INFO     | compare_backends.py:82 | [Compare] Plot saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.png
+2026-01-28 11:25:49 | INFO     | compare_backends.py:82 | [Compare] WER plot saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wer_hi.png
+2026-01-28 11:25:49 | INFO     | compare_backends.py:82 | 
+Baseline used for speedup: PyTorch
+2026-01-28 11:25:49 | INFO     | compare_backends.py:82 | === Comparison complete ===
+2026-01-28 13:33:36 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 13:33:36 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/compare_backends.log
+2026-01-28 13:33:36 | INFO     | compare_backends.py:122 | === Backend Latency Comparison ===
+2026-01-28 13:33:36 | INFO     | compare_backends.py:122 | [TensorRT FP16] latency missing → latency_trt_fp16.txt
+2026-01-28 13:33:36 | INFO     | compare_backends.py:122 | [TensorRT Mixed] latency missing → latency_trt_mixed.txt
+2026-01-28 13:33:36 | INFO     | compare_backends.py:122 | [TensorRT FP32] latency missing → latency_trt_fp32.txt
+2026-01-28 13:33:36 | INFO     | compare_backends.py:122 | [Triton] latency missing → latency_triton.json
+2026-01-28 13:33:36 | INFO     | compare_backends.py:122 | [Compare] CSV saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.csv
+2026-01-28 13:33:37 | INFO     | compare_backends.py:122 | [Compare] Plot saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.png
+2026-01-28 13:33:37 | INFO     | compare_backends.py:122 | [Compare] WER plot saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wer_hi.png
+2026-01-28 13:33:37 | INFO     | compare_backends.py:122 | 
+Baseline used for speedup: PyTorch
+2026-01-28 13:33:37 | INFO     | compare_backends.py:122 | === Comparison complete ===
+2026-01-28 13:46:36 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 13:46:36 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/compare_backends.log
+2026-01-28 13:46:36 | INFO     | compare_backends.py:122 | === Backend Latency Comparison ===
+2026-01-28 13:46:36 | INFO     | compare_backends.py:122 | [TensorRT FP16] latency missing → latency_trt_fp16.txt
+2026-01-28 13:46:36 | INFO     | compare_backends.py:122 | [TensorRT Mixed] latency missing → latency_trt_mixed.txt
+2026-01-28 13:46:36 | INFO     | compare_backends.py:122 | [TensorRT FP32] latency missing → latency_trt_fp32.txt
+2026-01-28 13:46:36 | INFO     | compare_backends.py:122 | [Triton] latency missing → latency_triton.txt
+2026-01-28 13:46:36 | INFO     | compare_backends.py:122 | [Compare] CSV saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.csv
+2026-01-28 13:46:37 | INFO     | compare_backends.py:122 | [Compare] Plot saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.png
+2026-01-28 13:46:37 | INFO     | compare_backends.py:122 | [Compare] WER plot saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wer_hi.png
+2026-01-28 13:46:37 | INFO     | compare_backends.py:122 | 
+Baseline used for speedup: PyTorch
+2026-01-28 13:46:37 | INFO     | compare_backends.py:122 | === Comparison complete ===

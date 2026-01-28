@@ -1,0 +1,12 @@
+2026-01-27 22:47:58 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-27 22:47:58 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/compute_wer.log
+2026-01-27 22:47:58 | INFO     | compute_wer.py:42 | Computing Word Entity Recognition from Common Voice Hindi Dataset
+2026-01-28 07:35:56 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 07:35:56 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/compute_wer.log
+2026-01-28 07:35:56 | INFO     | compute_wer.py:42 | Computing Word Entity Recognition from Common Voice Hindi Dataset
+2026-01-28 11:19:26 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 11:19:26 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/compute_wer.log
+2026-01-28 11:19:26 | INFO     | compute_wer.py:42 | Computing Word Entity Recognition from Common Voice Hindi Dataset
+2026-01-28 20:14:02 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 20:14:02 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/compute_wer.log
+2026-01-28 20:14:02 | INFO     | compute_wer.py:42 | Computing Word Entity Recognition from Common Voice Hindi Dataset

@@ -1,0 +1,62 @@
+2026-01-27 22:42:37 | INFO     | export_to_onnx.py:55 | Exporting model → ONNX
+2026-01-27 22:42:37 | INFO     | export_to_onnx.py:56 | Model      : ai4bharat/indicwav2vec-hindi
+2026-01-27 22:42:37 | INFO     | export_to_onnx.py:57 | Opset      : 18
+2026-01-27 22:42:37 | INFO     | export_to_onnx.py:58 | Output ONNX: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2.onnx
+2026-01-27 22:42:37 | INFO     | export_to_onnx.py:63 | Loading PyTorch model on CPU (eval mode)
+2026-01-27 22:42:39 | INFO     | export_to_onnx.py:80 | Starting torch.onnx.export(...)
+2026-01-27 22:46:04 | INFO     | export_to_onnx.py:98 | ONNX export completed
+2026-01-27 22:46:04 | INFO     | export_to_onnx.py:103 | Running ONNX checker
+2026-01-27 22:46:34 | INFO     | export_to_onnx.py:107 | ONNX model passed checker successfully
+2026-01-27 22:46:34 | INFO     | export_to_onnx.py:113 | ONNX graph name        : main_graph
+2026-01-27 22:46:34 | INFO     | export_to_onnx.py:114 | ONNX inputs            : ['input_values']
+2026-01-27 22:46:34 | INFO     | export_to_onnx.py:115 | ONNX outputs           : ['logits']
+2026-01-27 22:46:34 | INFO     | export_to_onnx.py:116 | ONNX initializer count : 441
+2026-01-27 22:46:34 | INFO     | export_to_onnx.py:118 | ========== ONNX export finished successfully ==========
+2026-01-28 06:53:09 | INFO     | export_to_onnx.py:55 | Exporting model → ONNX
+2026-01-28 06:53:09 | INFO     | export_to_onnx.py:56 | Model      : ai4bharat/indicwav2vec-hindi
+2026-01-28 06:53:09 | INFO     | export_to_onnx.py:57 | Opset      : 18
+2026-01-28 06:53:09 | INFO     | export_to_onnx.py:58 | Output ONNX: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2.onnx
+2026-01-28 06:53:09 | INFO     | export_to_onnx.py:63 | Loading PyTorch model on CPU (eval mode)
+2026-01-28 06:53:12 | INFO     | export_to_onnx.py:80 | Starting torch.onnx.export(...)
+2026-01-28 07:32:45 | INFO     | export_to_onnx.py:56 | === Export PyTorch -> ONNX (robust) ===
+2026-01-28 07:32:45 | INFO     | export_to_onnx.py:56 | Project root : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission
+2026-01-28 07:32:45 | INFO     | export_to_onnx.py:56 | Model        : ai4bharat/indicwav2vec-hindi
+2026-01-28 07:32:45 | INFO     | export_to_onnx.py:56 | Output ONNX  : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2.onnx
+2026-01-28 07:32:45 | INFO     | export_to_onnx.py:56 | Opset        : 18
+2026-01-28 07:32:45 | INFO     | export_to_onnx.py:56 | Loading PyTorch model (CPU, eval mode). This may download weights the first time.
+2026-01-28 07:32:46 | INFO     | export_to_onnx.py:56 | Attempting ONNX export: dynamic axes (INPUT only)
+2026-01-28 07:33:56 | INFO     | export_to_onnx.py:56 | Primary export (dynamic input) succeeded.
+2026-01-28 07:33:56 | INFO     | export_to_onnx.py:56 | Running ONNX checker & shape inference
+2026-01-28 07:34:37 | INFO     | export_to_onnx.py:56 | Shape inference applied and saved to ONNX file
+2026-01-28 07:34:43 | INFO     | export_to_onnx.py:56 | ONNX model validated successfully
+2026-01-28 07:34:43 | INFO     | export_to_onnx.py:56 | Saved ONNX metadata → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2.onnx.meta.json
+2026-01-28 07:34:43 | INFO     | export_to_onnx.py:56 | Export completed in 118.6s
+2026-01-28 07:34:43 | INFO     | export_to_onnx.py:56 | === Export finished ===
+2026-01-28 11:13:09 | INFO     | export_to_onnx.py:56 | === Export PyTorch -> ONNX (robust) ===
+2026-01-28 11:13:09 | INFO     | export_to_onnx.py:56 | Project root : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission
+2026-01-28 11:13:09 | INFO     | export_to_onnx.py:56 | Model        : ai4bharat/indicwav2vec-hindi
+2026-01-28 11:13:09 | INFO     | export_to_onnx.py:56 | Output ONNX  : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2.onnx
+2026-01-28 11:13:09 | INFO     | export_to_onnx.py:56 | Opset        : 18
+2026-01-28 11:13:09 | INFO     | export_to_onnx.py:56 | Loading PyTorch model (CPU, eval mode). This may download weights the first time.
+2026-01-28 11:13:11 | INFO     | export_to_onnx.py:56 | Attempting ONNX export: dynamic axes (INPUT only)
+2026-01-28 11:16:39 | INFO     | export_to_onnx.py:56 | Primary export (dynamic input) succeeded.
+2026-01-28 11:16:39 | INFO     | export_to_onnx.py:56 | Running ONNX checker & shape inference
+2026-01-28 11:17:59 | INFO     | export_to_onnx.py:56 | Shape inference applied and saved to ONNX file
+2026-01-28 11:18:06 | INFO     | export_to_onnx.py:56 | ONNX model validated successfully
+2026-01-28 11:18:06 | INFO     | export_to_onnx.py:56 | Saved ONNX metadata → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2.onnx.meta.json
+2026-01-28 11:18:06 | INFO     | export_to_onnx.py:56 | Export completed in 296.4s
+2026-01-28 11:18:06 | INFO     | export_to_onnx.py:56 | === Export finished ===
+2026-01-28 20:10:39 | INFO     | export_to_onnx.py:56 | === Export PyTorch -> ONNX (robust) ===
+2026-01-28 20:10:39 | INFO     | export_to_onnx.py:56 | Project root : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission
+2026-01-28 20:10:39 | INFO     | export_to_onnx.py:56 | Model        : ai4bharat/indicwav2vec-hindi
+2026-01-28 20:10:39 | INFO     | export_to_onnx.py:56 | Output ONNX  : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2.onnx
+2026-01-28 20:10:39 | INFO     | export_to_onnx.py:56 | Opset        : 18
+2026-01-28 20:10:39 | INFO     | export_to_onnx.py:56 | Loading PyTorch model (CPU, eval mode). This may download weights the first time.
+2026-01-28 20:10:40 | INFO     | export_to_onnx.py:56 | Attempting ONNX export: dynamic axes (INPUT only)
+2026-01-28 20:11:49 | INFO     | export_to_onnx.py:56 | Primary export (dynamic input) succeeded.
+2026-01-28 20:11:49 | INFO     | export_to_onnx.py:56 | Running ONNX checker & shape inference
+2026-01-28 20:12:37 | INFO     | export_to_onnx.py:56 | Shape inference applied and saved to ONNX file
+2026-01-28 20:12:44 | INFO     | export_to_onnx.py:56 | ONNX model validated successfully
+2026-01-28 20:12:44 | INFO     | export_to_onnx.py:56 | Saved ONNX metadata → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2.onnx.meta.json
+2026-01-28 20:12:44 | INFO     | export_to_onnx.py:56 | Export completed in 126.0s
+2026-01-28 20:12:44 | INFO     | export_to_onnx.py:56 | === Export finished ===

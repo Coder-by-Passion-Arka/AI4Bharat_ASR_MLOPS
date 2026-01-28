@@ -1,0 +1,3 @@
+Backend,Latency_ms,Speedup_vs_PyTorch
+ONNX Runtime,19.463,1.1863535939988696
+PyTorch,23.09,1.0

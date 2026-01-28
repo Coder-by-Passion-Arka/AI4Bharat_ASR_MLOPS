@@ -1,358 +1,23 @@
 #!/usr/bin/env python3
 """
-AI4Bharat ASR Optimization – Local Execution Script
+AI4Bharat ASR Optimization – Local Execution Script (UPDATED)
+- More verbose, timestamped progress logging
+- Prefer Python TensorRT API builder (build_engine_py.build_trt_engines) and fall back to trtexec scripts
+- Print durations for each step
 """
 
-# import os
-# import sys
-# import subprocess
-# import torch
-# import shutil
-
-# # ---------------------------------------------------------------------
-# # Path resolution (CRITICAL FIX)
-# # ---------------------------------------------------------------------
-
-# PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-# CODE_DIR = os.path.join(PROJECT_ROOT, "code")
-# MODELS_DIR = os.path.join(PROJECT_ROOT, "models")
-# RESULTS_DIR = os.path.join(PROJECT_ROOT, "results")
-
-
-# # ---------------------------------------------------------------------
-# # Utility helpers
-# # ---------------------------------------------------------------------
-
-# def run_cmd(cmd, cwd=None):
-#     print(f"\n[CMD] {' '.join(cmd)}")
-#     result = subprocess.run(cmd, cwd=cwd)
-#     if result.returncode != 0:
-#         raise RuntimeError(f"Command failed: {' '.join(cmd)}")
-
-
-# def check_gpu():
-#     print("Checking GPU availability...")
-#     print("CUDA available:", torch.cuda.is_available())
-#     if torch.cuda.is_available():
-#         print("GPU:", torch.cuda.get_device_name(0))
-#     else:
-#         print("WARNING: CUDA not available. GPU optimizations will not work.")
-
-
-# def ensure_dirs():
-#     for d in [MODELS_DIR, RESULTS_DIR]:
-#         os.makedirs(d, exist_ok=True)
-
-
-# # ---------------------------------------------------------------------
-# # Pipeline steps
-# # ---------------------------------------------------------------------
-
-# def run_profiler():
-#     run_cmd([
-#         sys.executable,
-#         os.path.join(CODE_DIR, "profiling", "pytorch_profiler.py")
-#     ])
-
-
-# def export_onnx():
-#     run_cmd([
-#         sys.executable,
-#         os.path.join(CODE_DIR, "onnx_export", "export_to_onnx.py")
-#     ])
-#     run_cmd(["ls", "-lh", MODELS_DIR])
-
-
-# def optimize_onnx():
-#     run_cmd([
-#         sys.executable,
-#         os.path.join(CODE_DIR, "onnx_optim", "optimize_onnx.py")
-#     ])
-#     run_cmd(["ls", "-lh", MODELS_DIR])
-
-
-# def benchmark_latency():
-#     run_cmd([
-#         sys.executable,
-#         os.path.join(CODE_DIR, "benchmarking", "benchmark_latency.py")
-#     ])
-
-
-# def compute_wer():
-#     run_cmd([
-#         sys.executable,
-#         os.path.join(CODE_DIR, "benchmarking", "compute_wer.py")
-#     ])
-
-# def build_tensorrt_engine():
-#     if not shutil.which("trtexec"):
-#         print("WARNING: trtexec not found. Skipping TensorRT build.")
-#         return
-
-#     run_cmd(["bash", "code/tensorrt/build_engine_fp16.sh"])
-#     run_cmd(["bash", "code/tensorrt/build_engine_mixed.sh"])
-#     run_cmd(["bash", "code/tensorrt/benchmark_trt.sh"])
-
-
-# def parse_trt_profiles():
-#     profile_path = "models/tensorrt/trt_fp16_profile.json"
-
-#     if not os.path.exists(profile_path):
-#         print("[TensorRT] No profile found. Skipping TRT profile parsing.")
-#         return
-
-#     run_cmd([
-#         sys.executable,
-#         "code/tensorrt/parse_trt_profile.py",
-#         profile_path,
-#         "results/trt_fp16_ops.csv"
-#     ])
-
-
-#     run_cmd([
-#         sys.executable,
-#         "code/tensorrt/parse_trt_profile.py",
-#         "models/tensorrt/trt_mixed_profile.json",
-#         "results/trt_mixed_ops.csv",
-#     ])
-
-# def compare_results():
-#     run_cmd([sys.executable, "code/benchmarking/compare_backends.py"])
-#     run_cmd([sys.executable, "code/benchmarking/compare_ops.py"])
-
-# def launch_netron(model_path: str, port: int, label: str):
-#     """
-#     Launch Netron for a given model artifact on a fixed port.
-#     Runs non-blocking so multiple Netron servers can coexist.
-#     """
-#     if not os.path.exists(model_path):
-#         print(f"[Netron] ❌ {label} model not found, skipping.")
-#         return
-
-#     if shutil.which("netron") is None:
-#         print("[Netron] ❌ Netron is not installed. Run: pip install netron")
-#         return
-
-#     print(f"[Netron] Launching {label} graph on port {port}...")
-
-#     subprocess.Popen(
-#         [
-#             "netron",
-#             model_path,
-#             "--port",
-#             str(port),
-#             "--host",
-#             "0.0.0.0"
-#         ],
-#         stdout=subprocess.DEVNULL,
-#         stderr=subprocess.DEVNULL
-#     )
-
-# def launch_all_netron():
-#     """
-#     Launch Netron UIs for PyTorch, ONNX, and TensorRT artifacts.
-#     """
-#     PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-#     pytorch_model = os.path.join(
-#         PROJECT_ROOT, "models", "pytorch", "wav2vec2.pt"
-#     )
-#     onnx_model = os.path.join(
-#         PROJECT_ROOT, "models", "onnx", "wav2vec2.onnx"
-#     )
-#     tensorrt_engine = os.path.join(
-#         PROJECT_ROOT, "models", "tensorrt", "wav2vec2_fp16.engine"
-#     )
-
-#     launch_netron(pytorch_model, 8081, "PyTorch (TorchScript)")
-#     launch_netron(onnx_model, 8082, "ONNX")
-#     launch_netron(tensorrt_engine, 8083, "TensorRT")
-
-#     # Small delay to allow servers to start
-#     time.sleep(2)
-
-#     print("\n[Netron] Graph viewers available at:")
-#     print("  PyTorch   → http://localhost:8081")
-#     print("  ONNX      → http://localhost:8082")
-#     print("  TensorRT  → http://localhost:8083")
-
-# # --- Helper: select best engine and deploy to Triton ---
-# def _read_latency_file(path):
-#     try:
-#         with open(path, "r") as f:
-#             val = float(f.read().strip())
-#             return val
-#     except Exception:
-#         return None
-
-# def select_and_deploy_trt_to_triton(project_root: str):
-#     """
-#     Look for engines produced by build scripts. Choose best engine (lowest latency)
-#     using results/latency_trt_fp16.txt and results/latency_trt_mixed.txt if present,
-#     otherwise prefer fp16, then mixed, then fp32.
-#     Copy chosen engine into triton/model_repository/wav2vec2/1/model.plan
-#     and write config.pbtxt.
-#     """
-#     print("[Triton] Selecting best TensorRT engine for Triton deployment...")
-
-#     trt_dir = os.path.join(project_root, "models", "tensorrt")
-#     candidates = {
-#         "fp16": os.path.join(trt_dir, "wav2vec2_fp16.plan"),
-#         "mixed": os.path.join(trt_dir, "wav2vec2_mixed.plan"),
-#         "fp32": os.path.join(trt_dir, "wav2vec2_fp32.plan"),
-#     }
-
-#     # Latency result files (if your benchmark produces these)
-#     lat_files = {
-#         "fp16": os.path.join(project_root, "results", "latency_trt_fp16.txt"),
-#         "mixed": os.path.join(project_root, "results", "latency_trt_mixed.txt"),
-#         "fp32": os.path.join(project_root, "results", "latency_trt_fp32.txt"),
-#     }
-
-#     scores = {}
-#     for k, p in candidates.items():
-#         if os.path.exists(p):
-#             # default score: very high (bad) if no latency info
-#             lat = _read_latency_file(lat_files.get(k))
-#             scores[k] = lat if lat is not None else float("inf")
-#         else:
-#             scores[k] = None
-
-#     # Filter only available engines
-#     available = {k: v for k, v in candidates.items() if scores.get(k) is not None}
-
-#     if not available:
-#         print("[Triton] No TRT engines found; skipping Triton deployment.")
-#         return
-
-#     # Choose min-latency engine (latencies with inf treat as unknown)
-#     # Prefer lower latency; if all unknown, prefer fp16 -> mixed -> fp32
-#     chosen = None
-#     # If any have real latency (not inf), pick min
-#     real_latencies = {k: s for k, s in scores.items() if s not in (None, float("inf"))}
-#     if real_latencies:
-#         chosen = min(real_latencies, key=real_latencies.get)
-#     else:
-#         # prefer order fp16, mixed, fp32
-#         for pref in ("fp16", "mixed", "fp32"):
-#             if scores.get(pref) is not None:
-#                 chosen = pref
-#                 break
-
-#     if chosen is None:
-#         print("[Triton] Unable to choose engine. Aborting deployment.")
-#         return
-
-#     chosen_path = candidates[chosen]
-#     print(f"[Triton] Chosen engine: {chosen} -> {chosen_path}")
-
-#     # Create triton model repository folders
-#     triton_model_dir = os.path.join(project_root, "triton", "model_repository", "wav2vec2")
-#     version_dir = os.path.join(triton_model_dir, "1")
-#     os.makedirs(version_dir, exist_ok=True)
-
-#     # Copy chosen engine as model.plan
-#     dst_engine = os.path.join(version_dir, "model.plan")
-#     shutil.copyfile(chosen_path, dst_engine)
-#     print(f"[Triton] Copied engine to {dst_engine}")
-
-#     # Write config.pbtxt
-#     cfg = f"""
-#             name: "wav2vec2"
-#             backend: "tensorrt"
-#             max_batch_size: 8
-
-#             input [
-#             {{
-#                 name: "input_values"
-#                 data_type: TYPE_FP32
-#                 dims: [-1, -1]
-#             }}
-#             ]
-
-#             output [
-#             {{
-#                 name: "logits"
-#                 data_type: TYPE_FP32
-#                 dims: [-1, -1]
-#             }}
-#             ]
-
-#             instance_group [
-#             {{
-#                 kind: KIND_GPU
-#                 count: 1
-#             }}
-#             ]
-#         """
-#     cfg_path = os.path.join(triton_model_dir, "config.pbtxt")
-#     with open(cfg_path, "w") as f:
-#         f.write(cfg.strip())
-#     print(f"[Triton] Wrote Triton config at {cfg_path}")
-
-#     print("[Triton] Model deployed to model_repository/wav2vec2. You can now start Triton Server.")
-
-#     run_cmd([
-#         "bash",
-#         "tritonserver",
-#         "--model-repository=triton/model_repository",
-#         "--strict-model-config=false"
-#     ])
-
-# # ---------------------------------------------------------------------
-# # Main entry point
-# # ---------------------------------------------------------------------
-
-# def main():
-#     print("=" * 60)
-#     print("AI4Bharat ASR Optimization – Local Pipeline")
-#     print("=" * 60)
-
-#     ensure_dirs()
-#     check_gpu()
-
-#     print("\n[STEP 1] PyTorch Profiling")
-#     run_profiler()
-
-#     print("\n[STEP 2] Export ONNX")
-#     export_onnx()
-
-#     print("\n[STEP 3] Optimize ONNX (INT8 bypass)")
-#     optimize_onnx()
-
-#     print("\n[STEP 4] Benchmark ONNX Runtime")
-#     benchmark_latency()
-
-#     print("\n[STEP 5] Compute WER")
-#     compute_wer()
-
-#     print("\n[STEP 6] TensorRT Engine Build")
-#     build_tensorrt_engine()
-
-#     print("\n[STEP 6.5] Deploy best TRT engine to Triton model_repository")
-#     select_and_deploy_trt_to_triton(PROJECT_ROOT)
-
-#     print("\n[STEP 7] Parse TRT Profiles")
-#     parse_trt_profiles()
-
-#     print("\n[STEP 8] Compare Results")
-#     compare_results()
-
-#     print("\n[INFO] Launching Netron graph visualizers...")
-#     launch_all_netron()
-
-#     print("\nPipeline completed successfully.")
-
-# if __name__ == "__main__":
-#     main()
-
 import os
+import re
 import sys
-import subprocess
+import time
+import glob
 import torch
 import shutil
-import time
+import logging
+import subprocess
+import threading
 from pathlib import Path
+from datetime import datetime
 
 # PROJECT layout
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -360,16 +25,74 @@ CODE_DIR = PROJECT_ROOT / "code"
 MODELS_DIR = PROJECT_ROOT / "models"
 RESULTS_DIR = PROJECT_ROOT / "results"
 
-# helpers
+# -------------------------------------------
+# Paths
+# -------------------------------------------
+PROJECT_ROOT = Path(__file__).resolve().parent
+CODE_DIR = PROJECT_ROOT / "code"
+MODELS_DIR = PROJECT_ROOT / "models"
+RESULTS_DIR = PROJECT_ROOT / "results"
+TRITON_REPO = CODE_DIR / "triton" / "model_repository"
+
+for d in [CODE_DIR, MODELS_DIR, RESULTS_DIR, TRITON_REPO]:
+    d.mkdir(parents=True, exist_ok=True)
+
+import importlib.util
+_logger_spec = importlib.util.spec_from_file_location("logger", CODE_DIR / "utils" / "logger.py")
+_logger_module = importlib.util.module_from_spec(_logger_spec)
+_logger_spec.loader.exec_module(_logger_module)
+get_logger = _logger_module.get_logger
+
+logger = get_logger()
+
+logger.info("Pipeline started")
+logger.warning("This is a warning")
+logger.error("Something went wrong")
+
+# Ensure directories exist
+for d in [CODE_DIR, MODELS_DIR, RESULTS_DIR]:
+    d.mkdir(parents=True, exist_ok=True)
+
+def ts():
+    # return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print("- "* 30)
+
 def run_cmd(cmd, cwd=None, env=None, show_cmd=True):
+    """
+    Run a command as a subprocess while ensuring:
+    - Project root is on PYTHONPATH
+    - Logs are visible in terminal
+    """
+
     if show_cmd:
-        print(f"\n[CMD] {' '.join(cmd)} (cwd={cwd})")
-    result = subprocess.run(cmd, cwd=cwd, env=env)
+        logger.info(f"[CMD] {' '.join(cmd)} (cwd={cwd})")
+
+    # --- CRITICAL FIX ---
+    # Ensure project root is available to subprocesses
+    run_env = (env or os.environ.copy()).copy()
+    run_env["PYTHONPATH"] = (
+        str(PROJECT_ROOT)
+        + os.pathsep
+        + run_env.get("PYTHONPATH", "")
+    )
+
+    start = time.time()
+    result = subprocess.run(
+        cmd,
+        cwd=cwd,
+        env=run_env,
+    )
+    elapsed = time.time() - start
+
+    logger.info(f"[CMD] finished (rc={result.returncode}) in {elapsed:.2f}s")
+
     if result.returncode != 0:
-        raise RuntimeError(f"Command failed (rc={result.returncode}): {' '.join(cmd)}")
+        raise RuntimeError(
+            f"Command failed (rc={result.returncode}): {' '.join(cmd)}"
+        )
 
 def check_gpu():
-    print("Checking GPU availability...")
+    print(f"{ts()} Checking GPU availability...")
     print("CUDA available:", torch.cuda.is_available())
     if torch.cuda.is_available():
         try:
@@ -383,7 +106,25 @@ def ensure_dirs():
     for d in (MODELS_DIR, RESULTS_DIR):
         d.mkdir(parents=True, exist_ok=True)
 
-# pipeline steps
+# --------------------------------------------------
+# Pipeline steps
+# --------------------------------------------------
+
+def timed_step(name, fn, *args, **kwargs):
+    print(f"\n{ts()} [STEP] {name} -- START")
+    t0 = time.time()
+    try:
+        res = fn(*args, **kwargs)
+        status = "OK"
+    except Exception as e:
+        res = e
+        status = "FAILED"
+    t1 = time.time()
+    print(f"{ts()} [STEP] {name} -- {status} (elapsed: {t1-t0:.2f}s)")
+    if status == "FAILED":
+        raise res
+    return res
+
 def run_profiler():
     run_cmd([sys.executable, str(CODE_DIR / "profiling" / "pytorch_profiler.py")])
 
@@ -398,55 +139,99 @@ def optimize_onnx():
     run_cmd(["ls", "-lh", str(MODELS_DIR)])
 
 def benchmark_latency():
-    run_cmd([sys.executable, str(CODE_DIR / "benchmarking" / "benchmark_latency.py")])
+    run_cmd([sys.executable, str(CODE_DIR / "benchmarking" / "benchmark_latency.py", "--force")])
 
 def compute_wer():
     run_cmd([sys.executable, str(CODE_DIR / "benchmarking" / "compute_wer.py")])
 
 def build_tensorrt_engine():
     build_dir = CODE_DIR / "tensorrt"
+    onnx_path = MODELS_DIR / "onnx" / "wav2vec2_optimized.onnx"
+    out_dir = MODELS_DIR / "tensorrt"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
     trtexec = shutil.which("trtexec")
-    if trtexec is None:
-        print("WARNING: trtexec not found on PATH. Skipping TensorRT engine build.")
-        return
-    # call the build scripts if present
-    fp16 = build_dir / "build_engine_fp16.sh"
-    mixed = build_dir / "build_engine_mixed.sh"
-    bench = build_dir / "benchmark_trt.sh"
-    if fp16.exists():
-        run_cmd(["bash", str(fp16)], cwd=str(build_dir))
-    if mixed.exists():
-        run_cmd(["bash", str(mixed)], cwd=str(build_dir))
-    if bench.exists():
-        run_cmd(["bash", str(bench)], cwd=str(build_dir))
+    if trtexec:
+        # test whether trtexec runs correctly
+        try:
+            ret = subprocess.run([trtexec, "--version"], capture_output=True, text=True, timeout=10)
+            if ret.returncode == 0:
+                print("[TRT] trtexec is available and seems functional. Using trtexec for build (if scripts exist).")
+                # call existing scripts (they call trtexec internally)
+                fp16 = build_dir / "build_engine_fp16.sh"
+                mixed = build_dir / "build_engine_mixed.sh"
+                if fp16.exists(): run_cmd(["bash", str(fp16)], cwd=str(build_dir))
+                if mixed.exists(): run_cmd(["bash", str(mixed)], cwd=str(build_dir))
+                return
+            else:
+                print("[TRT] trtexec exists but returned non-zero --version. Will fallback to Python API builder.")
+        except Exception as e:
+            print("[TRT] trtexec check failed:", e)
+            print("[TRT] Will fallback to Python API builder.")
+
+    # Fallback: use Python builder directly
+    builder_py = CODE_DIR / "tensorrt" / "build_engine_py.py"
+    if not builder_py.exists():
+        raise FileNotFoundError("build_engine_py.py not found in code/tensorrt")
+    for precision in ("fp16", "mixed", "fp32"):
+        out_name = f"wav2vec2_trt_{precision}.plan"
+        out_path = out_dir / out_name
+        cmd = [
+            sys.executable,
+            str(builder_py),
+            "--onnx", str(onnx_path),
+            "--out_dir", str(out_dir),
+            "--precision", precision,
+            # you can tune min/opt/max here if desired
+        ]
+        try:
+            print(f"[TRT] Building {precision} engine via Python API...")
+            run_cmd(cmd, cwd=str(build_dir))
+        except Exception as e:
+            print(f"[TRT] Build {precision} failed: {e}")
+            # continue trying other precisions
 
 def parse_trt_profiles():
-    # two profiles we might have
     p1 = MODELS_DIR / "tensorrt" / "trt_fp16_profile.json"
     p2 = MODELS_DIR / "tensorrt" / "trt_mixed_profile.json"
     parser = CODE_DIR / "tensorrt" / "parse_trt_profile.py"
     if p1.exists():
         run_cmd([sys.executable, str(parser), str(p1), str(RESULTS_DIR / "trt_fp16_ops.csv")])
     else:
-        print("[TensorRT] No fp16 profile found; skipping.")
+        print(f"{ts()} [TensorRT] No fp16 profile found; skipping.")
     if p2.exists():
         run_cmd([sys.executable, str(parser), str(p2), str(RESULTS_DIR / "trt_mixed_ops.csv")])
     else:
-        print("[TensorRT] No mixed profile found; skipping.")
+        print(f"{ts()} [TensorRT] No mixed profile found; skipping.")
 
 def compare_results():
-    # compare_backends will expect latency files (latency_pytorch.txt etc)
-    # if missing, it may fail; call it and let it raise so user knows to produce latency files
     run_cmd([sys.executable, str(CODE_DIR / "benchmarking" / "compare_backends.py")])
     run_cmd([sys.executable, str(CODE_DIR / "benchmarking" / "compare_ops.py")])
 
 def _choose_trt_engine(project_root: Path):
-    # accept .plan or .engine and several file names
-    trt_dir = project_root / "models" / "tensorrt"
+    TRT_DIR = PROJECT_ROOT / "models" / "tensorrt"
+    TRITON_REPO = PROJECT_ROOT / "triton" / "wav2vec2" / "1"
+
+    TRITON_REPO.mkdir(parents=True, exist_ok=True)
+
+    # Choose which engine Triton should serve (recommend FP16 or mixed)
+    ENGINE_SRC = TRT_DIR / "wav2vec2_optimized_trt_fp16.plan"
+    ENGINE_DST = TRITON_REPO / "model.plan"
+
+    if not ENGINE_SRC.exists():
+        raise RuntimeError(f"TensorRT engine missing: {ENGINE_SRC}")
+
+    shutil.copyfile(ENGINE_SRC, ENGINE_DST)
+
+    # sanity check
+    if ENGINE_DST.stat().st_size < 1024:
+        raise RuntimeError("Copied Triton model.plan is empty or corrupted")
+
+    print(f"[Pipeline] Triton model updated → {ENGINE_DST}")
     candidates = {
-        "fp16": [trt_dir / "wav2vec2_fp16.plan", trt_dir / "wav2vec2_fp16.engine", trt_dir / "wav2vec2_fp16.trt"],
-        "mixed": [trt_dir / "wav2vec2_mixed.plan", trt_dir / "wav2vec2_mixed.engine"],
-        "fp32": [trt_dir / "wav2vec2_fp32.plan", trt_dir / "wav2vec2_fp32.engine"],
+        "fp16": [TRT_DIR / "wav2vec2_fp16.plan", TRT_DIR / "wav2vec2_fp16.engine", TRT_DIR / "wav2vec2_fp16.trt"],
+        "mixed": [TRT_DIR / "wav2vec2_mixed.plan", TRT_DIR / "wav2vec2_mixed.engine"],
+        "fp32": [TRT_DIR / "wav2vec2_fp32.plan", TRT_DIR / "wav2vec2_fp32.engine"],
     }
     found = {}
     for k, paths in candidates.items():
@@ -456,14 +241,14 @@ def _choose_trt_engine(project_root: Path):
                 break
     return found
 
-def select_and_deploy_trt_to_triton(project_root: Path):
-    print("[Triton] Attempting to select a TRT engine for Triton model_repository...")
+# Old Version
+# def select_and_deploy_trt_to_triton(project_root: Path):
+    print(f"{ts()} [Triton] Attempting to select a TRT engine for Triton model_repository...")
     found = _choose_trt_engine(project_root)
     if not found:
-        print("[Triton] No TensorRT engine files found in models/tensorrt/. Skipping Triton deployment.")
+        print(f"{ts()} [Triton] No TensorRT engine files found in models/tensorrt/. Skipping Triton deployment.")
         return
 
-    # read latencies if present
     lat_files = {
         "fp16": project_root / "results" / "latency_trt_fp16.txt",
         "mixed": project_root / "results" / "latency_trt_mixed.txt",
@@ -478,22 +263,19 @@ def select_and_deploy_trt_to_triton(project_root: Path):
             except Exception:
                 scores[k] = float("inf")
         else:
-            scores[k] = float("inf")  # unknown → large
+            scores[k] = float("inf")
 
-    # choose min latency
     chosen = min(scores, key=scores.get)
     engine_path = found[chosen]
-    print(f"[Triton] Chosen engine: {chosen} -> {engine_path}")
+    print(f"{ts()} [Triton] Chosen engine: {chosen} -> {engine_path}")
 
-    # copy to triton model repository
     triton_root = project_root / "triton" / "model_repository" / "wav2vec2"
     version_dir = triton_root / "1"
     version_dir.mkdir(parents=True, exist_ok=True)
     dst_engine = version_dir / "model.plan"
     shutil.copyfile(str(engine_path), str(dst_engine))
-    print(f"[Triton] Copied engine to {dst_engine}")
+    print(f"{ts()} [Triton] Copied engine to {dst_engine}")
 
-    # ensure config.pbtxt (minimal)
     cfg_path = triton_root / "config.pbtxt"
     cfg = f"""
             name: "wav2vec2"
@@ -524,17 +306,133 @@ def select_and_deploy_trt_to_triton(project_root: Path):
             ]
         """
     cfg_path.write_text(cfg.strip())
-    print(f"[Triton] Wrote config to {cfg_path}")
+    print(f"{ts()} [Triton] Wrote config to {cfg_path}")
 
     triton_exe = shutil.which("tritonserver")
     if triton_exe is None:
-        print("[Triton] tritonserver not found on PATH. To run Triton manually:")
-        print(f"  tritonserver --model-repository={project_root / 'triton' / 'model_repository'} --strict-model-config=false")
+        print(f"{ts()} [Triton] tritonserver not found on PATH. To run Triton manually:\n  tritonserver --model-repository={project_root/'triton'/'model_repository'} --strict-model-config=false")
         return
 
-    # everything ready — start triton server (user can stop with ctrl-c)
-    print("[Triton] Starting tritonserver (this will block until terminated)...")
+    print(f"{ts()} [Triton] Starting tritonserver (this will block until terminated)...")
     run_cmd([triton_exe, f"--model-repository={project_root/'triton'/'model_repository'}", "--strict-model-config=false"])
+
+# New Version 
+def _discover_trt_engines(trt_dir: Path):
+    # return dict precision -> path
+    found = {}
+    for p in trt_dir.glob("*.plan"):
+        name = p.name.lower()
+        # infer precision from filename if possible
+        if "fp16" in name:
+            found.setdefault("fp16", []).append(p)
+        elif "mixed" in name:
+            found.setdefault("mixed", []).append(p)
+        elif "fp32" in name:
+            found.setdefault("fp32", []).append(p)
+        else:
+            # fallback: treat unknown as fp32 candidate
+            found.setdefault("fp32", []).append(p)
+    return found
+
+def select_and_deploy_trt_to_triton(project_root: Path):
+    print("[Triton] Attempting to select a TRT engine for Triton model_repository...")
+    TRT_DIR = project_root / "models" / "tensorrt"
+    TRT_DIR.mkdir(parents=True, exist_ok=True)
+    found = _discover_trt_engines(TRT_DIR)
+
+    if not found:
+        print("[Triton] No TensorRT engine files found in models/tensorrt/. Skipping Triton deployment.")
+        return
+
+    # read latency files if present
+    lat_files = {
+        "fp16": project_root / "results" / "latency_trt_fp16.txt",
+        "mixed": project_root / "results" / "latency_trt_mixed.txt",
+        "fp32": project_root / "results" / "latency_trt_fp32.txt",
+    }
+    scores = {}
+    # choose best file per precision (smallest size) if multiple
+    chosen_per_precision = {}
+    for prec, paths in found.items():
+        # pick smallest file (heuristic)
+        chosen = min(paths, key=lambda p: p.stat().st_size) if paths else None
+        chosen_per_precision[prec] = chosen
+        # latency score (lower better), default inf
+        pf = lat_files.get(prec)
+        if pf and pf.exists():
+            try:
+                scores[prec] = float(pf.read_text().strip())
+            except Exception:
+                scores[prec] = float("inf")
+        else:
+            scores[prec] = float("inf")
+
+    # If any have real latency, pick smallest; else prefer fp16->mixed->fp32
+    real_lat = {k: v for k, v in scores.items() if v not in (None, float("inf"))}
+    if real_lat:
+        chosen_prec = min(real_lat, key=real_lat.get)
+    else:
+        for pref in ("fp16", "mixed", "fp32"):
+            if chosen_per_precision.get(pref) is not None:
+                chosen_prec = pref
+                break
+
+    if chosen_prec is None:
+        print("[Triton] Unable to find a suitable engine to deploy.")
+        return
+
+    chosen_path = chosen_per_precision[chosen_prec]
+    print(f"[Triton] Selected engine: {chosen_prec} -> {chosen_path}")
+
+    # prepare model repository
+    triton_model_dir = project_root / "triton" / "model_repository" / "wav2vec2"
+    version_dir = triton_model_dir / "1"
+    version_dir.mkdir(parents=True, exist_ok=True)
+
+    dst_engine = version_dir / "model.plan"
+    shutil.copyfile(str(chosen_path), str(dst_engine))
+    print(f"[Triton] Copied engine to {dst_engine}")
+
+    # write minimal config.pbtxt (same as your existing)
+    cfg_path = triton_model_dir / "config.pbtxt"
+    cfg = f"""
+name: "wav2vec2"
+backend: "tensorrt"
+max_batch_size: 8
+
+input [
+{{
+  name: "input_values"
+  data_type: TYPE_FP32
+  dims: [-1, -1]
+}}
+]
+
+output [
+{{
+  name: "logits"
+  data_type: TYPE_FP32
+  dims: [-1, -1]
+}}
+]
+
+instance_group [
+{{
+  kind: KIND_GPU
+  count: 1
+}}
+]
+"""
+    cfg_path.write_text(cfg.strip())
+    print(f"[Triton] Wrote config to {cfg_path}")
+
+    triton_exe = shutil.which("tritonserver")
+    if triton_exe:
+        print("[Triton] Starting tritonserver (will block). Run manually if you prefer.")
+        run_cmd([triton_exe, f"--model-repository={project_root/'triton'/'model_repository'}", "--strict-model-config=false"])
+    else:
+        print("[Triton] tritonserver not found on PATH. To run manually:")
+        print(f"  tritonserver --model-repository={project_root/'triton'/'model_repository'} --strict-model-config=false")
 
 def _choose_netron_candidate(paths):
     for p in paths:
@@ -542,19 +440,19 @@ def _choose_netron_candidate(paths):
             return str(p)
     return None
 
+
 def launch_netron(model_path: str, port: int, label: str):
     if not shutil.which("netron"):
-        print("[Netron] netron not installed (pip install netron). Skipping Netron for", label)
+        print(f"{ts()} [Netron] netron not installed (pip install netron). Skipping Netron for {label}")
         return
     if not Path(model_path).exists():
-        print(f"[Netron] Model not found for {label}: {model_path}; skipping.")
+        print(f"{ts()} [Netron] Model not found for {label}: {model_path}; skipping.")
         return
-    print(f"[Netron] Launching {label} on port {port}...")
-    subprocess.Popen(["netron", model_path, "--port", str(port), "--host", "0.0.0.0"],
-                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    print(f"{ts()} [Netron] Launching {label} on port {port}...")
+    subprocess.Popen(["netron", model_path, "--port", str(port), "--host", "0.0.0.0"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
 
 def launch_all_netron():
-    # check common candidate paths
     p_torch = _choose_netron_candidate([
         PROJECT_ROOT / "models" / "pytorch" / "wav2vec2.pt",
         PROJECT_ROOT / "models" / "pytorch" / "wav2vec2_state_dict.pt"
@@ -577,15 +475,86 @@ def launch_all_netron():
     if p_trt:
         launch_netron(p_trt, 8083, "TensorRT")
 
-    # allow servers to come up slightly
     time.sleep(2)
-    print("\n[Netron] Graph viewers (if launched):")
+    print(f"\n{ts()} [Netron] Graph viewers (if launched):")
     if p_torch:
         print("  PyTorch → http://localhost:8081")
     if p_onnx:
         print("  ONNX    → http://localhost:8082")
     if p_trt:
         print("  TRT     → http://localhost:8083")
+
+# Old Triton Starting Code
+# def start_triton_server(project_root: Path):
+#     triton_exe = shutil.which("tritonserver")
+#     if not triton_exe:
+#         logger.warning("tritonserver not found. Skipping auto-start.")
+#         return None
+
+#     cmd = [
+#         triton_exe,
+#         f"--model-repository={project_root/'triton'/'model_repository'}",
+#         "--strict-model-config=false"
+#     ]
+
+#     logger.info("[Triton] Starting Triton server...")
+#     return subprocess.Popen(cmd)
+
+# New Triton Starting Code
+# -----------------------------------------------
+# Triton deployment (CRITICAL FIX)
+# -----------------------------------------------
+def deploy_best_trt_to_triton():
+    trt_dir = MODELS_DIR / "tensorrt"
+    model_dir = TRITON_REPO / "wav2vec2"
+    version_dir = model_dir / "1"
+    version_dir.mkdir(parents=True, exist_ok=True)
+
+    preferred = trt_dir / "wav2vec2_optimized_trt_mixed.plan"
+    fallback = trt_dir / "wav2vec2_optimized_trt_fp16.plan"
+
+    if preferred.exists():
+        engine = preferred
+        print("[Triton] Using MIXED precision engine")
+    elif fallback.exists():
+        engine = fallback
+        print("[Triton] Mixed not found, using FP16 engine")
+    else:
+        raise RuntimeError("No TensorRT engine found for Triton deployment")
+
+    dst = version_dir / "model.plan"
+    shutil.copyfile(engine, dst)
+
+    if dst.stat().st_size < 1024:
+        raise RuntimeError("Copied model.plan is empty or corrupted")
+
+    print(f"[Triton] Engine deployed → {dst}")
+
+def start_triton_server():
+    model_repo = TRITON_REPO
+    cmd = [
+        "docker", "run", "--gpus", "all", "--rm",
+        "-p", "8000:8000",
+        "-p", "8001:8001",
+        "-p", "8002:8002",
+        "-v", f"{model_repo}:/models",
+        "nvcr.io/nvidia/tritonserver:24.12-py3",
+        "tritonserver",
+        "--model-repository=/models",
+        "--strict-model-config=true"
+    ]
+
+    print("\n[Triton] Starting Triton Inference Server")
+    print("👉 http://localhost:8000")
+    subprocess.Popen(cmd)
+    time.sleep(12)
+
+def run_triton_check():
+    run_cmd([sys.executable, CODE_DIR / "triton" / "triton_check.py"])
+
+def compare_results():
+    run_cmd([sys.executable, CODE_DIR / "benchmarking" / "compare_backends.py"])
+
 
 def main():
     print("=" * 60)
@@ -594,65 +563,41 @@ def main():
     ensure_dirs()
     check_gpu()
 
-    print("\n[STEP 1] PyTorch Profiling")
-    try:
-        run_profiler()
-    except Exception as e:
-        print("[STEP 1] failed:", e)
-        # continue, perhaps ONNX is available
+    steps = [
+        ("PyTorch Profiling", run_profiler),
+        ("Export ONNX", export_onnx),
+        ("Optimize ONNX", optimize_onnx),
+        ("Benchmark ONNX Runtime", benchmark_latency),
+        ("Compute WER", compute_wer),
+        ("Build TensorRT Engines", build_tensorrt_engine),
+        # ("Deploy best TRT to Triton", lambda: select_and_deploy_trt_to_triton(PROJECT_ROOT)),
+        ("Deploy TensorRT → Triton", deploy_best_trt_to_triton),
+        ("Parse TRT Profiles", parse_trt_profiles),
+        ("Compare Results", compare_results),
+        ("Starting Triton Server...", start_triton_server
+        # (PROJECT_ROOT)
+        ),
+        ("Triton Health Check", run_triton_check),
+        ("Compare Backends", compare_results),
+    ]
 
-    print("\n[STEP 2] Export ONNX")
-    try:
-        export_onnx()
-    except Exception as e:
-        print("[STEP 2] ONNX export failed:", e)
+    for name, fn in steps:
+        try:
+            timed_step(name, fn)
+        except Exception as e:
+            print(f"{ts()} [WARN] Step '{name}' failed: {e}\nContinuing with next steps...")
 
-    print("\n[STEP 3] Optimize ONNX")
-    try:
-        optimize_onnx()
-    except Exception as e:
-        print("[STEP 3] ONNX optimization failed:", e)
-
-    print("\n[STEP 4] Benchmark ONNX Runtime")
-    try:
-        benchmark_latency()
-    except Exception as e:
-        print("[STEP 4] Benchmark failed:", e)
-
-    print("\n[STEP 5] Compute WER")
-    try:
-        compute_wer()
-    except Exception as e:
-        print("[STEP 5] WER computation failed:", e)
-
-    print("\n[STEP 6] TensorRT Engine Build")
-    try:
-        build_tensorrt_engine()
-    except Exception as e:
-        print("[STEP 6] TRT build failed:", e)
-
-    print("\n[STEP 6.5] Deploy best TRT to Triton (if available)")
-    try:
-        select_and_deploy_trt_to_triton(PROJECT_ROOT)
-    except Exception as e:
-        print("[STEP 6.5] Triton deployment failed:", e)
-
-    print("\n[STEP 7] Parse TRT Profiles")
-    try:
-        parse_trt_profiles()
-    except Exception as e:
-        print("[STEP 7] TRT profile parsing failed:", e)
-
-    print("\n[STEP 8] Compare Results")
-    try:
-        compare_results()
-    except Exception as e:
-        print("[STEP 8] Compare failed:", e)
-
-    print("\n[INFO] Launching Netron graph viewers (if netron installed)...")
+    print(f"\n{ts()} [INFO] Launching Netron graph viewers (if netron installed)...")
     launch_all_netron()
 
-    print("\nPipeline finished (some steps may have been skipped or failed).")
+    print(f"\n{ts()} [STEP] Triton Server Validation & Benchmark")
+
+    print(f"\n{ts()} Pipeline finished (some steps may have been skipped or failed).")
+
+    # try:
+    #     run_triton_check()
+    # except Exception as e:
+    #     print("[STEP] Triton validation failed:", e)
 
 if __name__ == "__main__":
     main()

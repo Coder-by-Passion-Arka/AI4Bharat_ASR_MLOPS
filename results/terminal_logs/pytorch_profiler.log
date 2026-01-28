@@ -1,0 +1,282 @@
+2026-01-27 22:42:03 | INFO     | pytorch_profiler.py:62 | ======================================================================
+2026-01-27 22:42:03 | INFO     | pytorch_profiler.py:63 | PyTorch Profiling – IndicWav2Vec ASR
+2026-01-27 22:42:03 | INFO     | pytorch_profiler.py:64 | ======================================================================
+2026-01-27 22:42:03 | INFO     | pytorch_profiler.py:65 | Project root : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission
+2026-01-27 22:42:03 | INFO     | pytorch_profiler.py:66 | Model        : ai4bharat/indicwav2vec-hindi
+2026-01-27 22:42:03 | INFO     | pytorch_profiler.py:67 | Device       : cuda
+2026-01-27 22:42:03 | INFO     | pytorch_profiler.py:72 | Loading model and processor
+2026-01-27 22:42:09 | INFO     | pytorch_profiler.py:86 | Running warm-up iterations
+2026-01-27 22:42:10 | INFO     | pytorch_profiler.py:94 | Measuring end-to-end PyTorch inference latency
+2026-01-27 22:42:10 | INFO     | pytorch_profiler.py:108 | Average PyTorch latency: 0.028075 s
+2026-01-27 22:42:10 | INFO     | pytorch_profiler.py:109 | Saved latency → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_pytorch.txt
+2026-01-27 22:42:10 | INFO     | pytorch_profiler.py:114 | Starting PyTorch profiler
+2026-01-27 22:42:14 | INFO     | pytorch_profiler.py:155 | Saved profiler table → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/pytorch_profiler.txt
+2026-01-27 22:42:14 | INFO     | pytorch_profiler.py:181 | Saved operator CSV → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/pytorch_ops.csv
+2026-01-27 22:42:14 | INFO     | pytorch_profiler.py:187 | Top CUDA-consuming operators:
+2026-01-27 22:42:14 | INFO     | pytorch_profiler.py:189 | aten::conv1d                                5.150 ms (calls: 8)
+2026-01-27 22:42:14 | INFO     | pytorch_profiler.py:189 | aten::convolution                           5.150 ms (calls: 8)
+2026-01-27 22:42:14 | INFO     | pytorch_profiler.py:189 | aten::_convolution                          5.150 ms (calls: 8)
+2026-01-27 22:42:14 | INFO     | pytorch_profiler.py:189 | aten::cudnn_convolution                     5.000 ms (calls: 8)
+2026-01-27 22:42:14 | INFO     | pytorch_profiler.py:189 | void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4>(cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4::Params)    1.960 ms (calls: 16)
+2026-01-27 22:42:14 | INFO     | pytorch_profiler.py:189 | void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_32x5_nhwc_align4>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_32x5_nhwc_align4::Params)    1.790 ms (calls: 1)
+2026-01-27 22:42:14 | INFO     | pytorch_profiler.py:189 | aten::_weight_norm                          1.609 ms (calls: 1)
+2026-01-27 22:42:14 | INFO     | pytorch_profiler.py:189 | aten::_weight_norm_interface                1.609 ms (calls: 1)
+2026-01-27 22:42:31 | INFO     | pytorch_profiler.py:200 | Saved PyTorch state_dict → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/pytorch/wav2vec2_state_dict.pt
+2026-01-27 22:42:31 | INFO     | pytorch_profiler.py:202 | PyTorch profiling completed successfully
+2026-01-27 22:42:31 | INFO     | pytorch_profiler.py:203 | ======================================================================
+2026-01-28 06:52:34 | INFO     | pytorch_profiler.py:62 | ======================================================================
+2026-01-28 06:52:34 | INFO     | pytorch_profiler.py:63 | PyTorch Profiling – IndicWav2Vec ASR
+2026-01-28 06:52:34 | INFO     | pytorch_profiler.py:64 | ======================================================================
+2026-01-28 06:52:34 | INFO     | pytorch_profiler.py:65 | Project root : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission
+2026-01-28 06:52:34 | INFO     | pytorch_profiler.py:66 | Model        : ai4bharat/indicwav2vec-hindi
+2026-01-28 06:52:34 | INFO     | pytorch_profiler.py:67 | Device       : cuda
+2026-01-28 06:52:34 | INFO     | pytorch_profiler.py:72 | Loading model and processor
+2026-01-28 06:52:40 | INFO     | pytorch_profiler.py:86 | Running warm-up iterations
+2026-01-28 06:52:41 | INFO     | pytorch_profiler.py:94 | Measuring end-to-end PyTorch inference latency
+2026-01-28 06:52:41 | INFO     | pytorch_profiler.py:108 | Average PyTorch latency: 0.031067 s
+2026-01-28 06:52:41 | INFO     | pytorch_profiler.py:109 | Saved latency → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_pytorch.txt
+2026-01-28 06:52:41 | INFO     | pytorch_profiler.py:114 | Starting PyTorch profiler
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:156 | 
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                            aten::addmm         5.84%       4.694ms        10.84%       8.712ms      59.669us      57.160ms        49.08%      57.160ms     391.510us           0 B           0 B      41.55 MB      41.55 MB           146  
+                                 ampere_sgemm_128x64_tn         0.00%       0.000us         0.00%       0.000us       0.000us      56.845ms        48.80%      56.845ms     394.760us           0 B           0 B           0 B           0 B           144  
+                                aten::cudnn_convolution         1.07%     857.836us         8.62%       6.929ms     866.080us      47.499ms        40.78%      48.040ms       6.005ms           0 B           0 B      13.02 MB      13.02 MB             8  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s168...         0.00%       0.000us         0.00%       0.000us       0.000us      37.749ms        32.41%      37.749ms       2.359ms           0 B           0 B           0 B           0 B            16  
+void cudnn::engines_precompiled::nchwToNhwcKernel<fl...         0.00%       0.000us         0.00%       0.000us       0.000us       4.078ms         3.50%       4.078ms      92.675us           0 B           0 B           0 B           0 B            44  
+                                            aten::copy_         1.69%       1.356ms         4.14%       3.324ms      30.220us       3.426ms         2.94%       3.426ms      31.142us           0 B           0 B           0 B           0 B           110  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       3.426ms         2.94%       3.426ms      31.142us           0 B           0 B           0 B           0 B           110  
+                                              aten::bmm         1.45%       1.161ms         2.27%       1.825ms      38.014us       2.851ms         2.45%       2.851ms      59.389us           0 B           0 B       8.12 MB       8.12 MB            48  
+sm86_xmma_fprop_implicit_gemm_indexed_tf32f32_tf32f3...         0.00%       0.000us         0.00%       0.000us       0.000us       2.759ms         2.37%       2.759ms     551.819us           0 B           0 B           0 B           0 B             5  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s168...         0.00%       0.000us         0.00%       0.000us       0.000us       2.150ms         1.85%       2.150ms       2.150ms           0 B           0 B           0 B           0 B             1  
+                           aten::_weight_norm_interface         0.03%      20.617us         0.08%      66.070us      66.070us       1.803ms         1.55%       1.803ms       1.803ms           0 B           0 B      32.00 MB           0 B             1  
+void at::native::(anonymous namespace)::weight_norm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.803ms         1.55%       1.803ms       1.803ms           0 B           0 B           0 B           0 B             1  
+                                aten::native_layer_norm         1.86%       1.492ms         5.26%       4.223ms      74.085us       1.740ms         1.49%       2.991ms      52.467us           0 B           0 B      21.96 MB     -12.39 MB            57  
+void at::native::(anonymous namespace)::vectorized_l...         0.00%       0.000us         0.00%       0.000us       0.000us       1.740ms         1.49%       1.740ms      30.526us           0 B           0 B           0 B           0 B            57  
+                                ampere_sgemm_128x128_tn         0.00%       0.000us         0.00%       0.000us       0.000us       1.486ms         1.28%       1.486ms      61.904us           0 B           0 B           0 B           0 B            24  
+                                ampere_sgemm_128x128_nn         0.00%       0.000us         0.00%       0.000us       0.000us       1.365ms         1.17%       1.365ms      56.874us           0 B           0 B           0 B           0 B            24  
+                                             aten::gelu         0.67%     536.874us         1.34%       1.073ms      33.537us     698.876us         0.60%     698.876us      21.840us           0 B           0 B      30.96 MB      30.96 MB            32  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     685.698us         0.59%     685.698us      22.119us           0 B           0 B           0 B           0 B            31  
+                                Activity Buffer Request         5.35%       4.301ms         5.35%       4.301ms       4.301ms     540.905us         0.46%     540.905us     540.905us           0 B           0 B           0 B           0 B             1  
+void precomputed_convolve_sgemm<float, 1024, 5, 5, 4...         0.00%       0.000us         0.00%       0.000us       0.000us     535.699us         0.46%     535.699us     535.699us           0 B           0 B           0 B           0 B             1  
+                                              aten::add         0.97%     778.841us         1.93%       1.549ms      31.611us     462.946us         0.40%     462.946us       9.448us           0 B           0 B       9.38 MB       9.38 MB            49  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     440.333us         0.38%     440.333us       9.174us           0 B           0 B           0 B           0 B            48  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us     392.727us         0.34%     392.727us      43.636us           0 B           0 B           0 B           0 B             9  
+                                             aten::add_         0.20%     162.606us         0.57%     455.762us      56.970us     370.114us         0.32%     370.114us      46.264us           0 B           0 B           0 B           0 B             8  
+                                         aten::_softmax         0.36%     288.371us         0.75%     599.294us      24.971us     279.335us         0.24%     279.335us      11.639us           0 B           0 B       3.53 MB       3.53 MB            24  
+void (anonymous namespace)::softmax_warp_forward<flo...         0.00%       0.000us         0.00%       0.000us       0.000us     279.335us         0.24%     279.335us      11.639us           0 B           0 B           0 B           0 B            24  
+void cudnn::engines_precompiled::nhwcToNchwKernel<fl...         0.00%       0.000us         0.00%       0.000us       0.000us     219.954us         0.19%     219.954us      12.938us           0 B           0 B           0 B           0 B            17  
+                                              aten::mul         0.54%     435.464us         1.02%     816.676us      34.028us     185.235us         0.16%     185.235us       7.718us           0 B           0 B       4.59 MB       4.59 MB            24  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     185.235us         0.16%     185.235us       7.718us           0 B           0 B           0 B           0 B            24  
+                                        Memset (Device)         0.00%       0.000us         0.00%       0.000us       0.000us     138.712us         0.12%     138.712us       0.944us           0 B           0 B           0 B           0 B           147  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 80.346ms
+Self CUDA time total: 116.475ms
+
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:158 | Saved profiler table → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/pytorch_profiler.txt
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:184 | Saved operator CSV → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/pytorch_ops.csv
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:190 | Top CUDA-consuming operators:
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:192 | aten::conv1d                                6.184 ms (calls: 8)
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:192 | aten::convolution                           6.184 ms (calls: 8)
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:192 | aten::_convolution                          6.184 ms (calls: 8)
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:192 | aten::cudnn_convolution                     6.005 ms (calls: 8)
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:192 | void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4>(cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4::Params)    2.359 ms (calls: 16)
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:192 | void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_32x5_nhwc_align4>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_32x5_nhwc_align4::Params)    2.150 ms (calls: 1)
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:192 | aten::_weight_norm                          1.803 ms (calls: 1)
+2026-01-28 06:52:45 | INFO     | pytorch_profiler.py:192 | aten::_weight_norm_interface                1.803 ms (calls: 1)
+2026-01-28 06:53:04 | INFO     | pytorch_profiler.py:203 | Saved PyTorch state_dict → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/pytorch/wav2vec2_state_dict.pt
+2026-01-28 06:53:04 | INFO     | pytorch_profiler.py:205 | PyTorch profiling completed successfully
+2026-01-28 06:53:04 | INFO     | pytorch_profiler.py:206 | ======================================================================
+2026-01-28 07:32:08 | INFO     | pytorch_profiler.py:62 | ======================================================================
+2026-01-28 07:32:08 | INFO     | pytorch_profiler.py:63 | PyTorch Profiling – IndicWav2Vec ASR
+2026-01-28 07:32:08 | INFO     | pytorch_profiler.py:64 | ======================================================================
+2026-01-28 07:32:08 | INFO     | pytorch_profiler.py:65 | Project root : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission
+2026-01-28 07:32:08 | INFO     | pytorch_profiler.py:66 | Model        : ai4bharat/indicwav2vec-hindi
+2026-01-28 07:32:08 | INFO     | pytorch_profiler.py:67 | Device       : cuda
+2026-01-28 07:32:08 | INFO     | pytorch_profiler.py:72 | Loading model and processor
+2026-01-28 07:32:15 | INFO     | pytorch_profiler.py:86 | Running warm-up iterations
+2026-01-28 07:32:16 | INFO     | pytorch_profiler.py:94 | Measuring end-to-end PyTorch inference latency
+2026-01-28 07:32:17 | INFO     | pytorch_profiler.py:108 | Average PyTorch latency: 0.038422 s
+2026-01-28 07:32:17 | INFO     | pytorch_profiler.py:109 | Saved latency → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_pytorch.txt
+2026-01-28 07:32:17 | INFO     | pytorch_profiler.py:114 | Starting PyTorch profiler
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:156 | 
+Model Profiling Stats:-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                            aten::addmm         8.05%       5.869ms        15.77%      11.494ms      78.726us      54.649ms        49.15%      54.649ms     374.308us           0 B           0 B      41.55 MB      41.55 MB           146  
+                                 ampere_sgemm_128x64_tn         0.00%       0.000us         0.00%       0.000us       0.000us      54.348ms        48.88%      54.348ms     377.417us           0 B           0 B           0 B           0 B           144  
+                                aten::cudnn_convolution         1.22%     886.643us         6.63%       4.830ms     603.740us      45.246ms        40.70%      45.762ms       5.720ms           0 B           0 B      13.02 MB      13.02 MB             8  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s168...         0.00%       0.000us         0.00%       0.000us       0.000us      35.902ms        32.29%      35.902ms       2.244ms           0 B           0 B           0 B           0 B            16  
+void cudnn::engines_precompiled::nchwToNhwcKernel<fl...         0.00%       0.000us         0.00%       0.000us       0.000us       3.931ms         3.54%       3.931ms      89.337us           0 B           0 B           0 B           0 B            44  
+                                            aten::copy_         2.01%       1.463ms         5.40%       3.934ms      35.761us       3.263ms         2.94%       3.263ms      29.666us           0 B           0 B           0 B           0 B           110  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       3.263ms         2.94%       3.263ms      29.666us           0 B           0 B           0 B           0 B           110  
+                                              aten::bmm         2.13%       1.551ms         3.64%       2.651ms      55.227us       2.721ms         2.45%       2.721ms      56.682us           0 B           0 B       8.12 MB       8.12 MB            48  
+sm86_xmma_fprop_implicit_gemm_indexed_tf32f32_tf32f3...         0.00%       0.000us         0.00%       0.000us       0.000us       2.636ms         2.37%       2.636ms     527.256us           0 B           0 B           0 B           0 B             5  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s168...         0.00%       0.000us         0.00%       0.000us       0.000us       2.049ms         1.84%       2.049ms       2.049ms           0 B           0 B           0 B           0 B             1  
+                           aten::_weight_norm_interface         0.03%      21.323us         0.10%      75.671us      75.671us       1.751ms         1.57%       1.751ms       1.751ms           0 B           0 B      32.00 MB           0 B             1  
+void at::native::(anonymous namespace)::weight_norm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.751ms         1.57%       1.751ms       1.751ms           0 B           0 B           0 B           0 B             1  
+                                aten::native_layer_norm         2.58%       1.883ms         7.42%       5.408ms      94.879us       1.659ms         1.49%       2.855ms      50.087us           0 B           0 B      21.96 MB     -12.39 MB            57  
+void at::native::(anonymous namespace)::vectorized_l...         0.00%       0.000us         0.00%       0.000us       0.000us       1.659ms         1.49%       1.659ms      29.105us           0 B           0 B           0 B           0 B            57  
+                                ampere_sgemm_128x128_tn         0.00%       0.000us         0.00%       0.000us       0.000us       1.417ms         1.27%       1.417ms      59.062us           0 B           0 B           0 B           0 B            24  
+                                ampere_sgemm_128x128_nn         0.00%       0.000us         0.00%       0.000us       0.000us       1.303ms         1.17%       1.303ms      54.303us           0 B           0 B           0 B           0 B            24  
+                                             aten::gelu         0.81%     592.836us         1.77%       1.293ms      40.397us     663.358us         0.60%     663.358us      20.730us           0 B           0 B      30.96 MB      30.96 MB            32  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     650.920us         0.59%     650.920us      20.997us           0 B           0 B           0 B           0 B            31  
+                                Activity Buffer Request         2.92%       2.127ms         2.92%       2.127ms       2.127ms     516.565us         0.46%     516.565us     516.565us           0 B           0 B           0 B           0 B             1  
+void precomputed_convolve_sgemm<float, 1024, 5, 5, 4...         0.00%       0.000us         0.00%       0.000us       0.000us     511.726us         0.46%     511.726us     511.726us           0 B           0 B           0 B           0 B             1  
+                                              aten::add         1.27%     922.903us         2.69%       1.964ms      40.081us     436.804us         0.39%     436.804us       8.914us           0 B           0 B       9.38 MB       9.38 MB            49  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     415.403us         0.37%     415.403us       8.654us           0 B           0 B           0 B           0 B            48  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us     376.073us         0.34%     376.073us      41.786us           0 B           0 B           0 B           0 B             9  
+                                             aten::add_         0.27%     198.783us         0.85%     619.069us      77.384us     354.672us         0.32%     354.672us      44.334us           0 B           0 B           0 B           0 B             8  
+                                         aten::_softmax         0.62%     449.328us         1.24%     900.580us      37.524us     263.871us         0.24%     263.871us      10.995us           0 B           0 B       3.53 MB       3.53 MB            24  
+void (anonymous namespace)::softmax_warp_forward<flo...         0.00%       0.000us         0.00%       0.000us       0.000us     263.871us         0.24%     263.871us      10.995us           0 B           0 B           0 B           0 B            24  
+void cudnn::engines_precompiled::nhwcToNchwKernel<fl...         0.00%       0.000us         0.00%       0.000us       0.000us     207.394us         0.19%     207.394us      12.200us           0 B           0 B           0 B           0 B            17  
+                                              aten::mul         0.69%     502.553us         1.34%     979.931us      40.830us     174.168us         0.16%     174.168us       7.257us           0 B           0 B       4.59 MB       4.59 MB            24  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     174.168us         0.16%     174.168us       7.257us           0 B           0 B           0 B           0 B            24  
+                                        Memset (Device)         0.00%       0.000us         0.00%       0.000us       0.000us     133.688us         0.12%     133.688us       0.909us           0 B           0 B           0 B           0 B           147  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 72.882ms
+Self CUDA time total: 111.182ms
+
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:158 | Saved profiler table → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/pytorch_profiler.txt
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:184 | Saved operator CSV → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/pytorch_ops.csv
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:190 | Top CUDA-consuming operators:
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:192 | aten::conv1d                                5.891 ms (calls: 8)
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:192 | aten::convolution                           5.891 ms (calls: 8)
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:192 | aten::_convolution                          5.891 ms (calls: 8)
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:192 | aten::cudnn_convolution                     5.720 ms (calls: 8)
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:192 | void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4>(cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4::Params)    2.244 ms (calls: 16)
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:192 | void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_32x5_nhwc_align4>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_32x5_nhwc_align4::Params)    2.049 ms (calls: 1)
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:192 | aten::_weight_norm                          1.751 ms (calls: 1)
+2026-01-28 07:32:20 | INFO     | pytorch_profiler.py:192 | aten::_weight_norm_interface                1.751 ms (calls: 1)
+2026-01-28 07:32:38 | INFO     | pytorch_profiler.py:203 | Saved PyTorch state_dict → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/pytorch/wav2vec2_state_dict.pt
+2026-01-28 07:32:38 | INFO     | pytorch_profiler.py:205 | PyTorch profiling completed successfully
+2026-01-28 07:32:38 | INFO     | pytorch_profiler.py:206 | ======================================================================
+2026-01-28 11:12:32 | INFO     | pytorch_profiler.py:62 | ======================================================================
+2026-01-28 11:12:32 | INFO     | pytorch_profiler.py:63 | PyTorch Profiling – IndicWav2Vec ASR
+2026-01-28 11:12:32 | INFO     | pytorch_profiler.py:64 | ======================================================================
+2026-01-28 11:12:32 | INFO     | pytorch_profiler.py:65 | Project root : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission
+2026-01-28 11:12:32 | INFO     | pytorch_profiler.py:66 | Model        : ai4bharat/indicwav2vec-hindi
+2026-01-28 11:12:32 | INFO     | pytorch_profiler.py:67 | Device       : cuda
+2026-01-28 11:12:32 | INFO     | pytorch_profiler.py:72 | Loading model and processor
+2026-01-28 11:12:38 | INFO     | pytorch_profiler.py:86 | Running warm-up iterations
+2026-01-28 11:12:39 | INFO     | pytorch_profiler.py:94 | Measuring end-to-end PyTorch inference latency
+2026-01-28 11:12:39 | INFO     | pytorch_profiler.py:108 | Average PyTorch latency: 0.030188 s
+2026-01-28 11:12:39 | INFO     | pytorch_profiler.py:109 | Saved latency → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_pytorch.txt
+2026-01-28 11:12:39 | INFO     | pytorch_profiler.py:114 | Starting PyTorch profiler
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:156 | 
+Model Profiling Stats:-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                            aten::addmm        12.29%       9.670ms        21.75%      17.119ms     117.253us      46.413ms        49.09%      46.413ms     317.898us           0 B           0 B      41.55 MB      41.55 MB           146  
+                                 ampere_sgemm_128x64_tn         0.00%       0.000us         0.00%       0.000us       0.000us      46.130ms        48.79%      46.130ms     320.350us           0 B           0 B           0 B           0 B           144  
+                                aten::cudnn_convolution         1.61%       1.269ms         9.47%       7.453ms     931.651us      38.402ms        40.62%      38.839ms       4.855ms           0 B           0 B      13.02 MB      13.02 MB             8  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s168...         0.00%       0.000us         0.00%       0.000us       0.000us      30.491ms        32.25%      30.491ms       1.906ms           0 B           0 B           0 B           0 B            16  
+void cudnn::engines_precompiled::nchwToNhwcKernel<fl...         0.00%       0.000us         0.00%       0.000us       0.000us       3.340ms         3.53%       3.340ms      75.911us           0 B           0 B           0 B           0 B            44  
+                                            aten::copy_         2.67%       2.099ms         6.67%       5.253ms      47.752us       2.794ms         2.96%       2.794ms      25.404us           0 B           0 B           0 B           0 B           110  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       2.794ms         2.96%       2.794ms      25.404us           0 B           0 B           0 B           0 B           110  
+                                              aten::bmm         2.99%       2.353ms         4.63%       3.641ms      75.847us       2.313ms         2.45%       2.313ms      48.179us           0 B           0 B       8.12 MB       8.12 MB            48  
+sm86_xmma_fprop_implicit_gemm_indexed_tf32f32_tf32f3...         0.00%       0.000us         0.00%       0.000us       0.000us       2.221ms         2.35%       2.221ms     444.185us           0 B           0 B           0 B           0 B             5  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s168...         0.00%       0.000us         0.00%       0.000us       0.000us       1.736ms         1.84%       1.736ms       1.736ms           0 B           0 B           0 B           0 B             1  
+                           aten::_weight_norm_interface         0.12%      90.698us         0.24%     185.407us     185.407us       1.579ms         1.67%       1.579ms       1.579ms           0 B           0 B      32.00 MB           0 B             1  
+void at::native::(anonymous namespace)::weight_norm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.579ms         1.67%       1.579ms       1.579ms           0 B           0 B           0 B           0 B             1  
+                                aten::native_layer_norm         3.05%       2.397ms         8.84%       6.958ms     122.079us       1.413ms         1.49%       2.429ms      42.612us           0 B           0 B      21.96 MB     -12.39 MB            57  
+void at::native::(anonymous namespace)::vectorized_l...         0.00%       0.000us         0.00%       0.000us       0.000us       1.413ms         1.49%       1.413ms      24.786us           0 B           0 B           0 B           0 B            57  
+                                ampere_sgemm_128x128_tn         0.00%       0.000us         0.00%       0.000us       0.000us       1.205ms         1.27%       1.205ms      50.190us           0 B           0 B           0 B           0 B            24  
+                                ampere_sgemm_128x128_nn         0.00%       0.000us         0.00%       0.000us       0.000us       1.108ms         1.17%       1.108ms      46.167us           0 B           0 B           0 B           0 B            24  
+                                             aten::gelu         1.29%       1.019ms         2.51%       1.973ms      61.643us     575.448us         0.61%     575.448us      17.983us           0 B           0 B      30.96 MB      30.96 MB            32  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     564.796us         0.60%     564.796us      18.219us           0 B           0 B           0 B           0 B            31  
+                                Activity Buffer Request         5.20%       4.095ms         5.20%       4.095ms       4.095ms     437.360us         0.46%     437.360us     437.360us           0 B           0 B           0 B           0 B             1  
+void precomputed_convolve_sgemm<float, 1024, 5, 5, 4...         0.00%       0.000us         0.00%       0.000us       0.000us     433.118us         0.46%     433.118us     433.118us           0 B           0 B           0 B           0 B             1  
+                                              aten::add         1.82%       1.430ms         3.71%       2.920ms      59.601us     377.693us         0.40%     377.693us       7.708us           0 B           0 B       9.38 MB       9.38 MB            49  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     358.781us         0.38%     358.781us       7.475us           0 B           0 B           0 B           0 B            48  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us     325.579us         0.34%     325.579us      36.175us           0 B           0 B           0 B           0 B             9  
+                                             aten::add_         0.45%     355.571us         0.90%     706.132us      88.267us     306.667us         0.32%     306.667us      38.333us           0 B           0 B           0 B           0 B             8  
+                                         aten::_softmax         0.64%     501.912us         1.28%       1.004ms      41.850us     227.511us         0.24%     227.511us       9.480us           0 B           0 B       3.53 MB       3.53 MB            24  
+void (anonymous namespace)::softmax_warp_forward<flo...         0.00%       0.000us         0.00%       0.000us       0.000us     227.511us         0.24%     227.511us       9.480us           0 B           0 B           0 B           0 B            24  
+void cudnn::engines_precompiled::nhwcToNchwKernel<fl...         0.00%       0.000us         0.00%       0.000us       0.000us     173.393us         0.18%     173.393us      10.200us           0 B           0 B           0 B           0 B            17  
+                                              aten::mul         1.20%     942.297us         2.23%       1.755ms      73.133us     149.032us         0.16%     149.032us       6.210us           0 B           0 B       4.59 MB       4.59 MB            24  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     149.032us         0.16%     149.032us       6.210us           0 B           0 B           0 B           0 B            24  
+                                        Memset (Device)         0.00%       0.000us         0.00%       0.000us       0.000us     139.748us         0.15%     139.748us       0.951us           0 B           0 B           0 B           0 B           147  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 78.694ms
+Self CUDA time total: 94.550ms
+
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:158 | Saved profiler table → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/pytorch_profiler.txt
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:184 | Saved operator CSV → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/pytorch_ops.csv
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:190 | Top CUDA-consuming operators:
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:192 | aten::conv1d                                5.000 ms (calls: 8)
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:192 | aten::convolution                           5.000 ms (calls: 8)
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:192 | aten::_convolution                          5.000 ms (calls: 8)
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:192 | aten::cudnn_convolution                     4.855 ms (calls: 8)
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:192 | void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4>(cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4::Params)    1.906 ms (calls: 16)
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:192 | void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_32x5_nhwc_align4>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_32x5_nhwc_align4::Params)    1.736 ms (calls: 1)
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:192 | aten::_weight_norm                          1.579 ms (calls: 1)
+2026-01-28 11:12:43 | INFO     | pytorch_profiler.py:192 | aten::_weight_norm_interface                1.579 ms (calls: 1)
+2026-01-28 11:13:02 | INFO     | pytorch_profiler.py:203 | Saved PyTorch state_dict → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/pytorch/wav2vec2_state_dict.pt
+2026-01-28 11:13:02 | INFO     | pytorch_profiler.py:205 | PyTorch profiling completed successfully
+2026-01-28 11:13:02 | INFO     | pytorch_profiler.py:206 | ======================================================================
+2026-01-28 20:10:21 | INFO     | pytorch_profiler.py:62 | ======================================================================
+2026-01-28 20:10:21 | INFO     | pytorch_profiler.py:63 | PyTorch Profiling – IndicWav2Vec ASR
+2026-01-28 20:10:21 | INFO     | pytorch_profiler.py:64 | ======================================================================
+2026-01-28 20:10:21 | INFO     | pytorch_profiler.py:65 | Project root : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission
+2026-01-28 20:10:21 | INFO     | pytorch_profiler.py:66 | Model        : ai4bharat/indicwav2vec-hindi
+2026-01-28 20:10:21 | INFO     | pytorch_profiler.py:67 | Device       : cuda
+2026-01-28 20:10:21 | INFO     | pytorch_profiler.py:72 | Loading model and processor
+2026-01-28 20:10:26 | INFO     | pytorch_profiler.py:86 | Running warm-up iterations
+2026-01-28 20:10:27 | INFO     | pytorch_profiler.py:94 | Measuring end-to-end PyTorch inference latency
+2026-01-28 20:10:28 | INFO     | pytorch_profiler.py:108 | Average PyTorch latency: 0.021437 s
+2026-01-28 20:10:28 | INFO     | pytorch_profiler.py:109 | Saved latency → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/latency_pytorch.txt
+2026-01-28 20:10:28 | INFO     | pytorch_profiler.py:114 | Starting PyTorch profiler
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:156 | 
+Model Profiling Stats:-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                            aten::addmm        11.82%       3.803ms        21.82%       7.018ms      48.068us      13.504ms        46.20%      13.504ms      92.492us           0 B           0 B      41.55 MB      41.55 MB           146  
+                                 ampere_sgemm_128x64_tn         0.00%       0.000us         0.00%       0.000us       0.000us      13.382ms        45.78%      13.382ms      92.933us           0 B           0 B           0 B           0 B           144  
+                                aten::cudnn_convolution         2.51%     808.717us        14.42%       4.638ms     579.720us      12.178ms        41.66%      12.272ms       1.534ms           0 B           0 B      13.02 MB      13.02 MB             8  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s168...         0.00%       0.000us         0.00%       0.000us       0.000us       9.851ms        33.70%       9.851ms     615.690us           0 B           0 B           0 B           0 B            16  
+void cudnn::engines_precompiled::nchwToNhwcKernel<fl...         0.00%       0.000us         0.00%       0.000us       0.000us       1.231ms         4.21%       1.231ms      27.987us           0 B           0 B           0 B           0 B            44  
+                                            aten::copy_         2.73%     878.089us         7.38%       2.374ms      21.586us       1.187ms         4.06%       1.187ms      10.792us           0 B           0 B           0 B           0 B           110  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       1.187ms         4.06%       1.187ms      10.792us           0 B           0 B           0 B           0 B           110  
+                           aten::_weight_norm_interface         0.06%      18.603us         0.17%      53.299us      53.299us     797.214us         2.73%     797.214us     797.214us           0 B           0 B      32.00 MB           0 B             1  
+void at::native::(anonymous namespace)::weight_norm_...         0.00%       0.000us         0.00%       0.000us       0.000us     797.214us         2.73%     797.214us     797.214us           0 B           0 B           0 B           0 B             1  
+sm86_xmma_fprop_implicit_gemm_indexed_tf32f32_tf32f3...         0.00%       0.000us         0.00%       0.000us       0.000us     557.244us         1.91%     557.244us     111.449us           0 B           0 B           0 B           0 B             5  
+                                              aten::bmm         3.23%       1.040ms         4.96%       1.597ms      33.264us     516.908us         1.77%     516.908us      10.769us           0 B           0 B       8.12 MB       8.12 MB            48  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s168...         0.00%       0.000us         0.00%       0.000us       0.000us     366.669us         1.25%     366.669us     366.669us           0 B           0 B           0 B           0 B             1  
+                                aten::native_layer_norm         3.15%       1.012ms         9.42%       3.030ms      53.157us     352.823us         1.21%     577.418us      10.130us           0 B           0 B      21.96 MB     -12.39 MB            57  
+void at::native::(anonymous namespace)::vectorized_l...         0.00%       0.000us         0.00%       0.000us       0.000us     352.823us         1.21%     352.823us       6.190us           0 B           0 B           0 B           0 B            57  
+                                             aten::gelu         1.44%     464.234us         2.80%     900.566us      28.143us     309.577us         1.06%     309.577us       9.674us           0 B           0 B      30.96 MB      30.96 MB            32  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     306.950us         1.05%     306.950us       9.902us           0 B           0 B           0 B           0 B            31  
+                                ampere_sgemm_128x128_tn         0.00%       0.000us         0.00%       0.000us       0.000us     277.070us         0.95%     277.070us      11.545us           0 B           0 B           0 B           0 B            24  
+                                ampere_sgemm_128x128_nn         0.00%       0.000us         0.00%       0.000us       0.000us     239.838us         0.82%     239.838us       9.993us           0 B           0 B           0 B           0 B            24  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us     153.799us         0.53%     153.799us      17.089us           0 B           0 B           0 B           0 B             9  
+                                             aten::add_         0.48%     154.124us         1.00%     320.966us      40.121us     149.122us         0.51%     149.122us      18.640us           0 B           0 B           0 B           0 B             8  
+                                              aten::add         2.06%     663.919us         4.02%       1.292ms      26.370us     134.702us         0.46%     134.702us       2.749us           0 B           0 B       9.38 MB       9.38 MB            49  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     130.025us         0.44%     130.025us       2.709us           0 B           0 B           0 B           0 B            48  
+                                Activity Buffer Request         4.62%       1.488ms         4.62%       1.488ms       1.488ms      93.125us         0.32%      93.125us      93.125us           0 B           0 B           0 B           0 B             1  
+void precomputed_convolve_sgemm<float, 1024, 5, 5, 4...         0.00%       0.000us         0.00%       0.000us       0.000us      91.811us         0.31%      91.811us      91.811us           0 B           0 B           0 B           0 B             1  
+                                        Memset (Device)         0.00%       0.000us         0.00%       0.000us       0.000us      85.862us         0.29%      85.862us       0.584us           0 B           0 B           0 B           0 B           147  
+void cudnn::engines_precompiled::nhwcToNchwKernel<fl...         0.00%       0.000us         0.00%       0.000us       0.000us      78.326us         0.27%      78.326us       4.607us           0 B           0 B           0 B           0 B            17  
+                                         aten::_softmax         0.76%     245.373us         1.44%     462.297us      19.262us      53.177us         0.18%      53.177us       2.216us           0 B           0 B       3.53 MB       3.53 MB            24  
+void (anonymous namespace)::softmax_warp_forward<flo...         0.00%       0.000us         0.00%       0.000us       0.000us      53.177us         0.18%      53.177us       2.216us           0 B           0 B           0 B           0 B            24  
+                                              aten::mul         1.14%     367.481us         2.11%     679.418us      28.309us      49.266us         0.17%      49.266us       2.053us           0 B           0 B       4.59 MB       4.59 MB            24  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us      49.266us         0.17%      49.266us       2.053us           0 B           0 B           0 B           0 B            24  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 32.170ms
+Self CUDA time total: 29.232ms
+
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:158 | Saved profiler table → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/pytorch_profiler.txt
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:184 | Saved operator CSV → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/pytorch_ops.csv
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:190 | Top CUDA-consuming operators:
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:192 | aten::conv1d                                1.640 ms (calls: 8)
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:192 | aten::convolution                           1.640 ms (calls: 8)
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:192 | aten::_convolution                          1.640 ms (calls: 8)
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:192 | aten::cudnn_convolution                     1.534 ms (calls: 8)
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:192 | aten::_weight_norm                          0.797 ms (calls: 1)
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:192 | aten::_weight_norm_interface                0.797 ms (calls: 1)
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:192 | void at::native::(anonymous namespace)::weight_norm_fwd_last_dim_kernel<float, float>(float*, float*, float const*, float const*, int, int)    0.797 ms (calls: 1)
+2026-01-28 20:10:30 | INFO     | pytorch_profiler.py:192 | void cutlass__5x_cudnn::Kernel<cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4>(cutlass_tensorop_s1688fprop_analytic_tf32_128x64_32x3_nhwc_align4::Params)    0.616 ms (calls: 16)
+2026-01-28 20:10:36 | INFO     | pytorch_profiler.py:203 | Saved PyTorch state_dict → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/pytorch/wav2vec2_state_dict.pt
+2026-01-28 20:10:36 | INFO     | pytorch_profiler.py:205 | PyTorch profiling completed successfully
+2026-01-28 20:10:36 | INFO     | pytorch_profiler.py:206 | ======================================================================

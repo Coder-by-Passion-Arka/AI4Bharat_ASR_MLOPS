@@ -15,6 +15,7 @@ This script evaluates accuracy, not performance.
 import os
 import csv
 import torch
+import logging
 import evaluate
 # import torchaudio
 import soundfile as sf
@@ -33,6 +34,12 @@ TSV_PATH = os.path.join(DATA_DIR, "validated.tsv")
 RESULTS_DIR = os.path.join(PROJECT_ROOT, "results")
 
 os.makedirs(RESULTS_DIR, exist_ok=True)
+
+from code.utils.logger import get_logger
+
+logger = get_logger(level=logging.DEBUG)
+
+logger.info("Computing Word Entity Recognition from Common Voice Hindi Dataset")
 
 # -----------------------------
 # Config

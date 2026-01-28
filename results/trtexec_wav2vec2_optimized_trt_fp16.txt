@@ -1,0 +1,3 @@
+&&&& RUNNING TensorRT.trtexec [TensorRT v101401] [b48] # /usr/bin/trtexec --loadEngine=/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.plan --warmUp=5 --iterations=20 --sync
+
+Cuda failure at /_src/samples/common/common.h:1038: CUDA driver version is insufficient for CUDA runtime version
