@@ -36,3 +36,7 @@ TypeError: InferenceServerClient.__init__() got an unexpected keyword argument '
 2026-01-28 13:33:35 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
 2026-01-28 13:33:35 | INFO     | triton_check.py:79 | ========== Triton Inference Validation ==========
 2026-01-28 13:33:35 | INFO     | triton_check.py:43 | [Triton] Connecting to Triton server...
+2026-01-28 22:58:24 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 22:58:24 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
+2026-01-28 22:58:24 | INFO     | triton_check.py:330 | ========== Triton Inference Validation ==========
+2026-01-28 22:58:24 | WARNING  | triton_check.py:334 | [Triton] Server not reachable — skipping Triton validation

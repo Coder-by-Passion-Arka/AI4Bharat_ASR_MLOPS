@@ -3,6 +3,7 @@ data/
 models/
 results/
 config/
+*.plan
 
 # Python
 __pycache__/

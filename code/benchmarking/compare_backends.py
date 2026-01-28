@@ -19,7 +19,7 @@ from __future__ import annotations
 import sys
 import json
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Optional, Dict, List
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -39,165 +39,165 @@ RESULTS_DIR = PROJECT_ROOT / "results"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 # -----------------------------------------------------------------------------
-# Expected latency artifacts
+# Expected artifacts
 # -----------------------------------------------------------------------------
 LATENCY_FILES: Dict[str, Path] = {
     "PyTorch": RESULTS_DIR / "latency_pytorch.txt",
     "ONNX Runtime": RESULTS_DIR / "latency_onnx.txt",
     "TensorRT FP16": RESULTS_DIR / "latency_trt_fp16.txt",
-    "TensorRT Mixed": RESULTS_DIR / "latency_trt_mixed.txt",
     "TensorRT FP32": RESULTS_DIR / "latency_trt_fp32.txt",
+    "TensorRT Mixed": RESULTS_DIR / "latency_trt_mixed.txt",
     "Triton": RESULTS_DIR / "latency_triton.json",
+}
+
+WER_FILES: Dict[str, Path] = {
+    "PyTorch": RESULTS_DIR / "WER_hi.txt",
+    "ONNX Runtime": RESULTS_DIR / "WER_onnx.txt",
+    "TensorRT FP16": RESULTS_DIR / "WER_trt_fp16.txt",
+    "TensorRT FP32": RESULTS_DIR / "WER_trt_fp32.txt",
+    "TensorRT Mixed": RESULTS_DIR / "WER_trt_mixed.txt",
+    "Triton": RESULTS_DIR / "WER_triton.txt",
 }
 
 # -----------------------------------------------------------------------------
 # Utilities
 # -----------------------------------------------------------------------------
-def read_and_normalize_latency(path: Path) -> Optional[float]:
-    """
-    Read latency artifact and normalize to milliseconds.
-
-    Supports:
-    - .txt  → float (seconds or ms)
-    - .json → Triton output
-
-    Rules:
-    - < 1.0  → seconds → ms
-    - >=1.0 → already ms
-    """
+def read_latency(path: Path) -> Optional[float]:
     if not path.exists():
-        logger.debug(f"Latency file not found: {path}")
         return None
 
     try:
-        # ---------------- Triton JSON ----------------
         if path.suffix == ".json":
             data = json.loads(path.read_text())
-
-            # ✅ FIX: correct Triton keys
-            for key in ("avg_ms", "avg_latency_ms", "latency_ms", "p50_ms"):
-                if key in data:
-                    val = float(data[key])
-                    logger.debug(f"Read {key}={val} from {path.name}")
-                    return val
-
-            logger.warning(f"No known latency key in Triton JSON: {path}")
+            for k in ("avg_latency_ms", "p50_ms", "avg_ms"):
+                if k in data:
+                    return float(data[k])
             return None
 
-        # ---------------- Plain text ----------------
-        raw = path.read_text().strip()
-        val = float(raw)
+        val = float(path.read_text().strip())
+        return val * 1000.0 if val < 1.0 else val
 
-        if val < 1.0:
-            logger.debug(f"{path.name}: assuming seconds → ms")
-            return val * 1000.0
-
-        return val
-
-    except Exception as e:
-        logger.warning(f"Failed to parse latency file {path}: {e}")
+    except Exception:
         return None
 
 
-def print_and_log(msg: str):
-    print(msg)
-    logger.info(msg)
+def read_wer(path: Path) -> Optional[float]:
+    if not path.exists():
+        return None
+    try:
+        for line in path.read_text().splitlines():
+            if "WER" in line.upper():
+                return float(line.split(":")[-1].strip())
+    except Exception:
+        pass
+    return None
+
+
+# -----------------------------------------------------------------------------
+# Plotting helpers
+# -----------------------------------------------------------------------------
+def plot_latency(df: pd.DataFrame):
+    plt.figure(figsize=(10, 5))
+    bars = plt.bar(df["Backend"], df["Latency_ms"])
+    plt.ylabel("Latency (ms)")
+    plt.title("ASR Backend Latency Comparison")
+    plt.grid(axis="y", linestyle="--", alpha=0.4)
+
+    for bar, val in zip(bars, df["Latency_ms"]):
+        plt.text(
+            bar.get_x() + bar.get_width() / 2,
+            bar.get_height(),
+            f"{val:.2f}",
+            ha="center",
+            va="bottom",
+            fontsize=9
+        )
+
+    plt.xticks(rotation=20)
+    plt.tight_layout()
+    out = RESULTS_DIR / "backend_latency_comparison.png"
+    plt.savefig(out, dpi=150)
+    plt.close()
+    logger.info(f"[Plot] Saved latency comparison → {out}")
+
+
+def plot_wer(df: pd.DataFrame):
+    if df["WER"].isna().all():
+        logger.warning("No WER data available for plotting")
+        return
+
+    plt.figure(figsize=(8, 4))
+    plt.bar(df["Backend"], df["WER"])
+    plt.ylabel("WER")
+    plt.title("ASR Accuracy (WER)")
+    plt.xticks(rotation=20)
+    plt.tight_layout()
+
+    out = RESULTS_DIR / "wer_comparison.png"
+    plt.savefig(out, dpi=150)
+    plt.close()
+    logger.info(f"[Plot] Saved WER comparison → {out}")
+
 
 # -----------------------------------------------------------------------------
 # Main
 # -----------------------------------------------------------------------------
 def main():
-    print_and_log("=== Backend Latency Comparison ===")
+    logger.info("=== Backend Performance Aggregation ===")
 
-    rows = []
+    rows: List[dict] = []
 
-    for backend, path in LATENCY_FILES.items():
-        latency_ms = read_and_normalize_latency(path)
+    for backend in LATENCY_FILES:
+        latency = read_latency(LATENCY_FILES[backend])
+        wer = read_wer(WER_FILES.get(backend, Path()))
 
-        if latency_ms is None:
-            print_and_log(f"[{backend}] ❌ missing or unreadable → {path.name}")
+        if latency is None:
+            logger.warning(f"[{backend}] Missing latency")
             continue
 
         rows.append({
             "Backend": backend,
-            "Latency_ms": latency_ms,
+            "Latency_ms": latency,
+            "WER": wer,
         })
 
     if not rows:
-        print_and_log("❌ No valid latency files found. Run benchmarking first.")
+        logger.error("No valid backend data found")
         sys.exit(1)
 
-    df = pd.DataFrame(rows)
+    df = pd.DataFrame(rows).sort_values("Latency_ms")
 
-    # -------------------------------------------------------------------------
-    # Speedup calculation
-    # -------------------------------------------------------------------------
+    # Speedup vs PyTorch
     if "PyTorch" in df["Backend"].values:
-        baseline = float(df.loc[df["Backend"] == "PyTorch", "Latency_ms"].iloc[0])
-        baseline_name = "PyTorch"
+        base = df.loc[df["Backend"] == "PyTorch", "Latency_ms"].iloc[0]
+        df["Speedup_vs_PyTorch"] = base / df["Latency_ms"]
     else:
-        baseline = float(df["Latency_ms"].min())
-        baseline_name = "Fastest backend"
+        df["Speedup_vs_PyTorch"] = None
 
-    df["Speedup_vs_PyTorch"] = baseline / df["Latency_ms"]
-    df = df.sort_values("Latency_ms")
-
-    # -------------------------------------------------------------------------
     # Save CSV
-    # -------------------------------------------------------------------------
     csv_path = RESULTS_DIR / "backend_latency_comparison.csv"
     df.to_csv(csv_path, index=False)
-    print_and_log(f"[Compare] CSV saved → {csv_path}")
+    logger.info(f"[CSV] Saved → {csv_path}")
 
-    # -------------------------------------------------------------------------
-    # Plot latency bar chart
-    # -------------------------------------------------------------------------
-    plt.figure(figsize=(9, 4))
-    plt.bar(df["Backend"], df["Latency_ms"])
-    plt.ylabel("Latency (ms)")
-    plt.title("Backend Latency Comparison")
-    plt.xticks(rotation=20)
-    plt.tight_layout()
+    # Save TXT summaries
+    for _, r in df.iterrows():
+        txt = RESULTS_DIR / f"summary_{r['Backend'].replace(' ', '_').lower()}.txt"
+        txt.write_text(
+            f"Backend: {r['Backend']}\n"
+            f"Latency_ms: {r['Latency_ms']:.4f}\n"
+            f"WER: {r['WER']}\n"
+            f"Speedup_vs_PyTorch: {r['Speedup_vs_PyTorch']}\n"
+        )
 
-    plot_path = RESULTS_DIR / "backend_latency_comparison.png"
-    plt.savefig(plot_path, dpi=150)
-    plt.close()
-    print_and_log(f"[Compare] Plot saved → {plot_path}")
+    # Plots
+    plot_latency(df)
+    plot_wer(df)
 
-    # -------------------------------------------------------------------------
-    # Optional WER plot
-    # -------------------------------------------------------------------------
-    wer_file = RESULTS_DIR / "WER_hi.txt"
-    if wer_file.exists():
-        try:
-            for line in wer_file.read_text().splitlines():
-                if "WER" in line:
-                    wer = float(line.split(":")[-1].strip())
-                    plt.figure(figsize=(4, 3))
-                    plt.bar(["Hindi"], [wer])
-                    plt.ylabel("WER")
-                    plt.title("ASR Accuracy (Hindi)")
-                    plt.tight_layout()
-
-                    wer_plot = RESULTS_DIR / "wer_hi.png"
-                    plt.savefig(wer_plot, dpi=150)
-                    plt.close()
-                    print_and_log(f"[Compare] WER plot saved → {wer_plot}")
-                    break
-        except Exception:
-            logger.exception("Failed to parse WER file")
-
-    # -------------------------------------------------------------------------
     # Terminal summary
-    # -------------------------------------------------------------------------
-    print("\n=== Backend Latency Summary (ms) ===\n")
-    print(
-        df[["Backend", "Latency_ms", "Speedup_vs_PyTorch"]]
-        .to_string(index=False, float_format="{:,.3f}".format)
-    )
+    print("\n=== Final Backend Summary ===\n")
+    print(df.to_string(index=False, float_format="{:,.4f}".format))
 
-    print_and_log(f"\nBaseline used for speedup: {baseline_name}")
-    print_and_log("=== Comparison complete ===")
+    logger.info("=== Backend comparison complete ===")
 
 
 if __name__ == "__main__":

@@ -74,3 +74,19 @@ Baseline used for speedup: PyTorch
 2026-01-28 13:46:37 | INFO     | compare_backends.py:122 | 
 Baseline used for speedup: PyTorch
 2026-01-28 13:46:37 | INFO     | compare_backends.py:122 | === Comparison complete ===
+2026-01-28 22:58:09 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 22:58:09 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/compare_backends.log
+2026-01-28 22:58:09 | INFO     | compare_backends.py:146 | === Backend Performance Aggregation ===
+2026-01-28 22:58:09 | WARNING  | compare_backends.py:155 | [Triton] Missing latency
+2026-01-28 22:58:09 | INFO     | compare_backends.py:180 | [CSV] Saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.csv
+2026-01-28 22:58:09 | INFO     | compare_backends.py:121 | [Plot] Saved latency comparison → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.png
+2026-01-28 22:58:09 | INFO     | compare_backends.py:139 | [Plot] Saved WER comparison → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wer_comparison.png
+2026-01-28 22:58:09 | INFO     | compare_backends.py:200 | === Backend comparison complete ===
+2026-01-28 22:58:27 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-28 22:58:27 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/compare_backends.log
+2026-01-28 22:58:27 | INFO     | compare_backends.py:146 | === Backend Performance Aggregation ===
+2026-01-28 22:58:27 | WARNING  | compare_backends.py:155 | [Triton] Missing latency
+2026-01-28 22:58:27 | INFO     | compare_backends.py:180 | [CSV] Saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.csv
+2026-01-28 22:58:28 | INFO     | compare_backends.py:121 | [Plot] Saved latency comparison → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/backend_latency_comparison.png
+2026-01-28 22:58:28 | INFO     | compare_backends.py:139 | [Plot] Saved WER comparison → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/wer_comparison.png
+2026-01-28 22:58:28 | INFO     | compare_backends.py:200 | === Backend comparison complete ===
