@@ -51,7 +51,21 @@ conda create -n env-ai4bharat python=3.10 -y
 conda activate env-ai4bharat
 ```
 
-3. Then proceed to install dependencies manually (Steps 4-8).
+## 3. | Package   | Purpose               |
+| --------------- | --------------------- |
+| transformers    | Pretrained Wav2Vec2   |
+| onnx            | ONNX format           |
+| onnxruntime-gpu | GPU inference         |
+| tensorrt        | TensorRT optimization |
+| tritonclient    | Triton client         |
+| datasets        | HuggingFace datasets  |
+| evaluate        | WER                   |
+| jiwer           | WER metric            |
+| matplotlib      | Visualization         |
+| pandas          | Analysis              |
+ 
+
+Then proceed to install all these dependencies easily (Steps 4-8).
 
 ---
 
@@ -67,21 +81,6 @@ If you have installed any more dependencies in the conda virtual env, make sure 
 ```bash
 conda env export > environment.yml
 ```
-
-### Key Packages Installed
-
-| Package | Purpose |
-|---------|---------|
-| `transformers` | Pre-trained Wav2Vec2 model |
-| `onnx` | ONNX model format support |
-| `onnxruntime-gpu` | GPU-accelerated ONNX inference |
-| `tensorrt` | NVIDIA TensorRT optimization |
-| `tritonclient` | Triton Inference Server client |
-| `datasets` | HuggingFace datasets library |
-| `evaluate` | WER computation |
-| `jiwer` | Word Error Rate metrics |
-| `matplotlib` | Visualization |
-| `pandas` | Data analysis |
 
 ---
 
@@ -194,6 +193,8 @@ sudo apt -o Acquire::Retries=5 \
          libnvinfer-plugin-dev \
          tensorrt
 ```
+⚠️ Some trtexec binaries fail due to CUDA mismatches.
+This project automatically falls back to TensorRT Python API.
 
 ### Verify Installation
 
@@ -202,7 +203,7 @@ sudo apt -o Acquire::Retries=5 \
 which trtexec
 
 # Check version
-trtexec --version
+trtexec --version || echo "trtexec unavailable – Python API will be used"
 
 # Verify GPU access
 nvidia-smi
@@ -211,7 +212,20 @@ How ever, some versions of 'trtexec' will show CUDA compatibility issues if CUDA
 
 Thus I have kept TensorRT API calling in case 'trtexec' fails.
 
-## 9. Launch Triton Inference Server
+## 9. 8. Install ONNX Runtime (GPU)
+```bash
+pip uninstall onnxruntime onnxruntime-gpu -y
+pip install onnxruntime-gpu
+
+# Verify:
+python -c "import onnxruntime as ort; print(ort.get_available_providers())"
+``` 
+```bash
+# Expected output:
+['CUDAExecutionProvider', 'CPUExecutionProvider', ....]
+```
+
+## 10. Launch Triton Inference Server
 ```bash
 tritonserver \
   --model-repository=triton/model_repository \
@@ -292,20 +306,25 @@ wsl -l -v
 
 ---
 
-### ONNX Runtime GPU Not Available
+## 11. Docker Setup for Triton Server
 
+Verify GPU inside Docker:
 ```bash
-# Check available providers
-python -c "import onnxruntime as ort; print(ort.get_available_providers())"
-
-# If 'CUDAExecutionProvider' is missing:
-pip uninstall onnxruntime onnxruntime-gpu
-pip install onnxruntime-gpu
+docker run --rm --gpus all nvidia/cuda:12.2.0-base-ubuntu22.04 nvidia-smi
 ```
 
----
+If this fails, install NVIDIA Container Toolkit.
 
-### Triton Server Connection Refused
+## 12. Launch Triton Inference Server
+```bash
+docker run --gpus all --rm \
+  -p 8000:8000 -p 8001:8001 -p 8002:8002 \
+  -v $(pwd)/triton/model_repository:/models \
+  nvcr.io/nvidia/tritonserver:24.12-py3 \
+  tritonserver --model-repository=/models --strict-model-config=false
+```
+
+## 13. Triton Server Connection Refused
 
 ```bash
 # Check if Triton is running

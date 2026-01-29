@@ -196,17 +196,23 @@ def build_tensorrt_engine():
             # continue trying other precisions
 
 def parse_trt_profiles():
-    p1 = MODELS_DIR / "tensorrt" / "trt_fp16_profile.json"
-    p2 = MODELS_DIR / "tensorrt" / "trt_mixed_profile.json"
+    p1 = MODELS_DIR / "tensorrt" / "wav2vec2_optimized_trt_fp16.json"
+    p2 = MODELS_DIR / "tensorrt" / "wav2vec2_optimized_trt_fp32.json"
+    p3 = MODELS_DIR / "tensorrt" / "wav2vec2_optimized_trt_mixed.json"
+
     parser = CODE_DIR / "tensorrt" / "parse_trt_profile.py"
     if p1.exists():
         run_cmd([sys.executable, str(parser), str(p1), str(RESULTS_DIR / "trt_fp16_ops.csv")])
     else:
         print(f"{ts()} [TensorRT] No fp16 profile found; skipping.")
     if p2.exists():
-        run_cmd([sys.executable, str(parser), str(p2), str(RESULTS_DIR / "trt_mixed_ops.csv")])
+        run_cmd([sys.executable, str(parser), str(p3), str(RESULTS_DIR / "trt_mixed_ops.csv")])
     else:
         print(f"{ts()} [TensorRT] No mixed profile found; skipping.")
+    if p3.exists():
+        run_cmd([sys.executable, str(parser), str(p2), str(RESULTS_DIR / "trt_f32_ops.csv")])
+    else:
+        print(f"{ts()} [TensorRT] No fp32 profile found; skipping.")        
 
 def compare_results():
     run_cmd([sys.executable, str(CODE_DIR / "benchmarking" / "compare_backends.py")])
