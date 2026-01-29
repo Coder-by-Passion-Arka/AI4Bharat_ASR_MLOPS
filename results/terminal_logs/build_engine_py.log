@@ -208,3 +208,73 @@
 2026-01-28 22:57:09 | INFO     | build_engine_py.py:118 | Building TensorRT engine …
 2026-01-28 22:57:58 | INFO     | build_engine_py.py:129 | Engine built in 43.4s → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.plan
 2026-01-28 22:57:58 | INFO     | build_engine_py.py:150 | Engine metadata saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.json
+2026-01-29 10:35:36 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-29 10:35:36 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/build_engine_py.log
+2026-01-29 10:35:52 | INFO     | build_engine_py.py:75 | Guessed ONNX input name → input_values
+2026-01-29 10:35:52 | INFO     | build_engine_py.py:77 | TensorRT version: 10.14.1.48.post1
+2026-01-29 10:35:52 | INFO     | build_engine_py.py:78 | Precision mode: FP16
+2026-01-29 10:35:52 | INFO     | build_engine_py.py:79 | Workspace: 8 GB
+2026-01-29 10:35:52 | INFO     | build_engine_py.py:80 | Shapes: min=(1, 16000), opt=(4, 64000), max=(8, 128000)
+2026-01-29 10:35:53 | INFO     | build_engine_py.py:93 | Parsing ONNX → wav2vec2_optimized.onnx
+2026-01-29 10:36:11 | INFO     | build_engine_py.py:110 | FP16 enabled
+2026-01-29 10:36:11 | INFO     | build_engine_py.py:118 | Building TensorRT engine …
+2026-01-29 10:39:17 | INFO     | build_engine_py.py:129 | Engine built in 178.6s → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-29 10:39:17 | INFO     | build_engine_py.py:150 | Engine metadata saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.json
+2026-01-29 10:39:20 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-29 10:39:20 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/build_engine_py.log
+2026-01-29 10:39:37 | INFO     | build_engine_py.py:75 | Guessed ONNX input name → input_values
+2026-01-29 10:39:37 | INFO     | build_engine_py.py:77 | TensorRT version: 10.14.1.48.post1
+2026-01-29 10:39:37 | INFO     | build_engine_py.py:78 | Precision mode: MIXED
+2026-01-29 10:39:37 | INFO     | build_engine_py.py:79 | Workspace: 8 GB
+2026-01-29 10:39:37 | INFO     | build_engine_py.py:80 | Shapes: min=(1, 16000), opt=(4, 64000), max=(8, 128000)
+2026-01-29 10:39:38 | INFO     | build_engine_py.py:93 | Parsing ONNX → wav2vec2_optimized.onnx
+2026-01-29 10:39:52 | INFO     | build_engine_py.py:110 | FP16 enabled
+2026-01-29 10:39:52 | INFO     | build_engine_py.py:118 | Building TensorRT engine …
+2026-01-29 10:42:54 | INFO     | build_engine_py.py:129 | Engine built in 174.4s → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_mixed.plan
+2026-01-29 10:42:54 | INFO     | build_engine_py.py:150 | Engine metadata saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_mixed.json
+2026-01-29 10:42:56 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-29 10:42:56 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/build_engine_py.log
+2026-01-29 10:43:12 | INFO     | build_engine_py.py:75 | Guessed ONNX input name → input_values
+2026-01-29 10:43:12 | INFO     | build_engine_py.py:77 | TensorRT version: 10.14.1.48.post1
+2026-01-29 10:43:12 | INFO     | build_engine_py.py:78 | Precision mode: FP32
+2026-01-29 10:43:12 | INFO     | build_engine_py.py:79 | Workspace: 8 GB
+2026-01-29 10:43:12 | INFO     | build_engine_py.py:80 | Shapes: min=(1, 16000), opt=(4, 64000), max=(8, 128000)
+2026-01-29 10:43:12 | INFO     | build_engine_py.py:93 | Parsing ONNX → wav2vec2_optimized.onnx
+2026-01-29 10:43:29 | INFO     | build_engine_py.py:118 | Building TensorRT engine …
+2026-01-29 10:44:44 | INFO     | build_engine_py.py:129 | Engine built in 60.9s → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.plan
+2026-01-29 10:44:44 | INFO     | build_engine_py.py:150 | Engine metadata saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.json
+2026-01-29 11:02:30 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-29 11:02:30 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/build_engine_py.log
+2026-01-29 11:02:40 | INFO     | build_engine_py.py:75 | Guessed ONNX input name → input_values
+2026-01-29 11:02:40 | INFO     | build_engine_py.py:77 | TensorRT version: 10.14.1.48.post1
+2026-01-29 11:02:40 | INFO     | build_engine_py.py:78 | Precision mode: FP16
+2026-01-29 11:02:40 | INFO     | build_engine_py.py:79 | Workspace: 8 GB
+2026-01-29 11:02:40 | INFO     | build_engine_py.py:80 | Shapes: min=(1, 16000), opt=(4, 64000), max=(8, 128000)
+2026-01-29 11:02:41 | INFO     | build_engine_py.py:93 | Parsing ONNX → wav2vec2_optimized.onnx
+2026-01-29 11:02:48 | INFO     | build_engine_py.py:110 | FP16 enabled
+2026-01-29 11:02:48 | INFO     | build_engine_py.py:118 | Building TensorRT engine …
+2026-01-29 11:04:55 | INFO     | build_engine_py.py:129 | Engine built in 125.1s → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.plan
+2026-01-29 11:04:55 | INFO     | build_engine_py.py:150 | Engine metadata saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.json
+2026-01-29 11:04:57 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-29 11:04:57 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/build_engine_py.log
+2026-01-29 11:05:05 | INFO     | build_engine_py.py:75 | Guessed ONNX input name → input_values
+2026-01-29 11:05:05 | INFO     | build_engine_py.py:77 | TensorRT version: 10.14.1.48.post1
+2026-01-29 11:05:05 | INFO     | build_engine_py.py:78 | Precision mode: MIXED
+2026-01-29 11:05:05 | INFO     | build_engine_py.py:79 | Workspace: 8 GB
+2026-01-29 11:05:05 | INFO     | build_engine_py.py:80 | Shapes: min=(1, 16000), opt=(4, 64000), max=(8, 128000)
+2026-01-29 11:05:06 | INFO     | build_engine_py.py:93 | Parsing ONNX → wav2vec2_optimized.onnx
+2026-01-29 11:05:12 | INFO     | build_engine_py.py:110 | FP16 enabled
+2026-01-29 11:05:12 | INFO     | build_engine_py.py:118 | Building TensorRT engine …
+2026-01-29 11:07:21 | INFO     | build_engine_py.py:129 | Engine built in 124.4s → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_mixed.plan
+2026-01-29 11:07:21 | INFO     | build_engine_py.py:150 | Engine metadata saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_mixed.json
+2026-01-29 11:07:23 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-29 11:07:23 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/build_engine_py.log
+2026-01-29 11:07:31 | INFO     | build_engine_py.py:75 | Guessed ONNX input name → input_values
+2026-01-29 11:07:31 | INFO     | build_engine_py.py:77 | TensorRT version: 10.14.1.48.post1
+2026-01-29 11:07:31 | INFO     | build_engine_py.py:78 | Precision mode: FP32
+2026-01-29 11:07:31 | INFO     | build_engine_py.py:79 | Workspace: 8 GB
+2026-01-29 11:07:31 | INFO     | build_engine_py.py:80 | Shapes: min=(1, 16000), opt=(4, 64000), max=(8, 128000)
+2026-01-29 11:07:31 | INFO     | build_engine_py.py:93 | Parsing ONNX → wav2vec2_optimized.onnx
+2026-01-29 11:07:38 | INFO     | build_engine_py.py:118 | Building TensorRT engine …
+2026-01-29 11:08:32 | INFO     | build_engine_py.py:129 | Engine built in 48.5s → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.plan
+2026-01-29 11:08:32 | INFO     | build_engine_py.py:150 | Engine metadata saved → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp32.json

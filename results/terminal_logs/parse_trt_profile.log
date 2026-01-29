@@ -84,3 +84,27 @@ ValueError: Unsupported TensorRT profile format
 2026-01-28 11:19:20 | INFO     | parse_trt_profile.py:37 | Top-K operators  : 30
 2026-01-28 11:19:21 | INFO     | parse_trt_profile.py:70 | Found 24677 raw layer entries
 2026-01-28 11:19:21 | ERROR    | parse_trt_profile.py:95 | No valid timing data found in TensorRT profile
+2026-01-29 10:45:09 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-29 10:45:09 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/parse_trt_profile.log
+2026-01-29 10:45:09 | INFO     | parse_trt_profile.py:35 | TensorRT profile  : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.json
+2026-01-29 10:45:09 | INFO     | parse_trt_profile.py:36 | Output CSV       : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/trt_fp16_ops.csv
+2026-01-29 10:45:09 | INFO     | parse_trt_profile.py:37 | Top-K operators  : 30
+2026-01-29 10:45:09 | ERROR    | parse_trt_profile.py:67 | Unable to extract layers from TensorRT profile
+Traceback (most recent call last):
+  File "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/parse_trt_profile.py", line 65, in <module>
+    layers_raw = extract_layers(raw)
+  File "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/parse_trt_profile.py", line 62, in extract_layers
+    raise ValueError("Unsupported TensorRT profile format")
+ValueError: Unsupported TensorRT profile format
+2026-01-29 11:08:45 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-29 11:08:45 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/parse_trt_profile.log
+2026-01-29 11:08:45 | INFO     | parse_trt_profile.py:35 | TensorRT profile  : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.json
+2026-01-29 11:08:45 | INFO     | parse_trt_profile.py:36 | Output CSV       : /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/trt_fp16_ops.csv
+2026-01-29 11:08:45 | INFO     | parse_trt_profile.py:37 | Top-K operators  : 30
+2026-01-29 11:08:45 | ERROR    | parse_trt_profile.py:67 | Unable to extract layers from TensorRT profile
+Traceback (most recent call last):
+  File "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/parse_trt_profile.py", line 65, in <module>
+    layers_raw = extract_layers(raw)
+  File "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/parse_trt_profile.py", line 62, in extract_layers
+    raise ValueError("Unsupported TensorRT profile format")
+ValueError: Unsupported TensorRT profile format

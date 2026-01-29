@@ -27,6 +27,7 @@ The project focuses on optimizing a **Wav2Vec2-based ASR model** for deployment 
 ---
 
 ## 1. Prerequisites
+For the best, most up-to-date code, clone the repository from the link: https://github.com/Coder-by-Passion-Arka/AI4Bharat_ASR_MLOPS.git
 
 ### For smooth setup
 - NVIDIA CUDA Version 12.x
@@ -39,8 +40,14 @@ The project focuses on optimizing a **Wav2Vec2-based ASR model** for deployment 
 
 ---
 
-## 2. Create Conda Environment
+## 2. Pull Latest Project & Create Conda Environment
+```bash
+# Clone repository
+git clone https://github.com/Coder-by-Passion-Arka/AI4Bharat_ASR_MLOPS.git
 
+# Verify you are on the 'main' branch
+git checkout <branch-name>
+```
 Create a fresh Conda environment named `env-ai4bharat`:
 
 ```bash
@@ -348,7 +355,6 @@ The `code` directory conflicts with Python's built-in `code` module.
 
 ```bash
 # Always run from submission/ directory
-cd /path/to/submission
 python run_pipeline.py
 ```
 

@@ -148,52 +148,177 @@ def benchmark_latency():
 def compute_wer():
     run_cmd([sys.executable, str(CODE_DIR / "benchmarking" / "compute_wer.py")])
 
+# # Old Code
+# def build_tensorrt_engine():
+#     build_dir = CODE_DIR / "tensorrt"
+#     onnx_path = MODELS_DIR / "onnx" / "wav2vec2_optimized.onnx"
+#     out_dir = MODELS_DIR / "tensorrt"
+#     out_dir.mkdir(parents=True, exist_ok=True)
+
+#     trtexec = shutil.which("trtexec")
+#     if trtexec:
+#         # test whether trtexec runs correctly
+#         try:
+#             ret = subprocess.run([trtexec, "--version"], capture_output=True, text=True, timeout=10)
+#             if ret.returncode == 0:
+#                 print("[TRT] trtexec is available and seems functional. Using trtexec for build (if scripts exist).")
+#                 # call existing scripts (they call trtexec internally)
+#                 fp16 = build_dir / "build_engine_fp16.sh"
+#                 mixed = build_dir / "build_engine_mixed.sh"
+#                 if fp16.exists(): run_cmd(["bash", str(fp16)], cwd=str(build_dir))
+#                 if mixed.exists(): run_cmd(["bash", str(mixed)], cwd=str(build_dir))
+#                 return
+#             else:
+#                 print("[TRT] trtexec exists but returned non-zero --version. Will fallback to Python API builder.")
+#         except Exception as e:
+#             print("[TRT] trtexec check failed:", e)
+#             print("[TRT] Will fallback to Python API builder.")
+
+#     # Fallback: use Python builder directly
+#     builder_py = CODE_DIR / "tensorrt" / "build_engine_py.py"
+#     if not builder_py.exists():
+#         raise FileNotFoundError("build_engine_py.py not found in code/tensorrt")
+#     for precision in ("fp16", "mixed", "fp32"):
+#         out_name = f"wav2vec2_trt_{precision}.plan"
+#         out_path = out_dir / out_name
+#         cmd = [
+#             sys.executable,
+#             str(builder_py),
+#             "--onnx", str(onnx_path),
+#             "--out_dir", str(out_dir),
+#             "--precision", precision,
+#             # you can tune min/opt/max here if desired
+#         ]
+#         try:
+#             print(f"[TRT] Building {precision} engine via Python API...")
+#             run_cmd(cmd, cwd=str(build_dir))
+#         except Exception as e:
+#             print(f"[TRT] Build {precision} failed: {e}")
+#             # continue trying other precisions
+
+# New Version:
 def build_tensorrt_engine():
+    """
+    Build TensorRT engines with the following priority:
+
+    1. Native trtexec (if present AND functional)
+    2. Local Python TensorRT API
+    3. Dockerized TensorRT build (version-safe for Triton)
+
+    This preserves legacy behavior while fixing Triton compatibility.
+    """
+
     build_dir = CODE_DIR / "tensorrt"
     onnx_path = MODELS_DIR / "onnx" / "wav2vec2_optimized.onnx"
     out_dir = MODELS_DIR / "tensorrt"
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    if not onnx_path.exists():
+        raise FileNotFoundError(f"ONNX model not found: {onnx_path}")
+
+    # ---------------------------------------
+    # Try trtexec (native, fastest path)
+    # ---------------------------------------
+
     trtexec = shutil.which("trtexec")
     if trtexec:
-        # test whether trtexec runs correctly
         try:
-            ret = subprocess.run([trtexec, "--version"], capture_output=True, text=True, timeout=10)
+            print("[TRT] Found trtexec → verifying...")
+            ret = subprocess.run(
+                [trtexec, "--version"],
+                capture_output=True,
+                text=True,
+                timeout=10
+            )
+
             if ret.returncode == 0:
-                print("[TRT] trtexec is available and seems functional. Using trtexec for build (if scripts exist).")
-                # call existing scripts (they call trtexec internally)
+                print("[TRT] trtexec is functional. Using shell build scripts.")
+
                 fp16 = build_dir / "build_engine_fp16.sh"
                 mixed = build_dir / "build_engine_mixed.sh"
-                if fp16.exists(): run_cmd(["bash", str(fp16)], cwd=str(build_dir))
-                if mixed.exists(): run_cmd(["bash", str(mixed)], cwd=str(build_dir))
-                return
+
+                ran_any = False
+
+                if fp16.exists():
+                    run_cmd(["bash", str(fp16)], cwd=str(build_dir))
+                    ran_any = True
+
+                if mixed.exists():
+                    run_cmd(["bash", str(mixed)], cwd=str(build_dir))
+                    ran_any = True
+
+                if ran_any:
+                    print("[TRT] TensorRT engines built via trtexec.")
+                    return
+                else:
+                    print("[TRT] trtexec OK but build scripts missing. Falling back.")
+
             else:
-                print("[TRT] trtexec exists but returned non-zero --version. Will fallback to Python API builder.")
+                print("[TRT] trtexec exists but is broken. Falling back.")
+
         except Exception as e:
             print("[TRT] trtexec check failed:", e)
-            print("[TRT] Will fallback to Python API builder.")
 
-    # Fallback: use Python builder directly
-    builder_py = CODE_DIR / "tensorrt" / "build_engine_py.py"
-    if not builder_py.exists():
-        raise FileNotFoundError("build_engine_py.py not found in code/tensorrt")
-    for precision in ("fp16", "mixed", "fp32"):
-        out_name = f"wav2vec2_trt_{precision}.plan"
-        out_path = out_dir / out_name
-        cmd = [
-            sys.executable,
-            str(builder_py),
-            "--onnx", str(onnx_path),
-            "--out_dir", str(out_dir),
-            "--precision", precision,
-            # you can tune min/opt/max here if desired
-        ]
+    # ---------------------------------------
+    # Try local Python TensorRT API (legacy behavior)
+    # ---------------------------------------
+
+    builder_py = build_dir / "build_engine_py.py"
+    if builder_py.exists():
         try:
-            print(f"[TRT] Building {precision} engine via Python API...")
-            run_cmd(cmd, cwd=str(build_dir))
+            print("[TRT] Attempting local TensorRT Python API build...")
+            for precision in ("fp16", "mixed", "fp32"):
+                print(f"[TRT] Building {precision} engine via Python API...")
+                cmd = [
+                    sys.executable,
+                    str(builder_py),
+                    "--onnx", str(onnx_path),
+                    "--out_dir", str(out_dir),
+                    "--precision", precision,
+                ]
+                run_cmd(cmd, cwd=str(build_dir))
+
+            print("[TRT] Local Python API build completed.")
+            return
+
         except Exception as e:
-            print(f"[TRT] Build {precision} failed: {e}")
-            # continue trying other precisions
+            print("[TRT] Local Python API build failed:", e)
+            print("[TRT] This may cause Triton incompatibility.")
+
+    # ---------------------------------------
+    # FINAL fallback — Dockerized TensorRT build (Triton-safe)
+    # ---------------------------------------
+
+    docker = shutil.which("docker")
+    if docker:
+        print("[TRT] Using Dockerized TensorRT build (version-safe for Triton).")
+
+        cmd = [
+            "docker", "run", "--gpus", "all", "--rm",
+            "-v", f"{PROJECT_ROOT}:/workspace",
+            "nvcr.io/nvidia/tritonserver:24.12-py3",
+            "python",
+            "/workspace/code/tensorrt/build_engine_py.py",
+            "--onnx", "/workspace/models/onnx/wav2vec2_optimized.onnx",
+            "--out_dir", "/workspace/models/tensorrt",
+            "--precision", "mixed",
+        ]
+
+        run_cmd(cmd)
+        print("[TRT] Dockerized TensorRT engine build completed.")
+        return
+
+    # ---------------------------------------
+    #  Nothing worked
+    # ---------------------------------------
+
+    raise RuntimeError(
+        "Failed to build TensorRT engines:\n"
+        "- trtexec unavailable or broken\n"
+        "- Python TensorRT API failed\n"
+        "- Docker not available\n"
+        "Cannot proceed with Triton deployment."
+    )
 
 def parse_trt_profiles():
     p1 = MODELS_DIR / "tensorrt" / "wav2vec2_optimized_trt_fp16.json"
@@ -252,7 +377,7 @@ def _choose_trt_engine(project_root: Path):
     return found
 
 # Old Version
-# def select_and_deploy_trt_to_triton(project_root: Path):
+def select_and_deploy_trt_to_triton(project_root: Path):
     print(f"{ts()} [Triton] Attempting to select a TRT engine for Triton model_repository...")
     found = _choose_trt_engine(project_root)
     if not found:
@@ -326,7 +451,182 @@ def _choose_trt_engine(project_root: Path):
     print(f"{ts()} [Triton] Starting tritonserver (this will block until terminated)...")
     run_cmd([triton_exe, f"--model-repository={project_root/'triton'/'model_repository'}", "--strict-model-config=false"])
 
-# New Version 
+# # New Version
+# def select_and_deploy_trt_to_triton(project_root: Path):
+#     """
+#     Select the best available TensorRT engine and deploy it to:
+#       triton/model_repository/wav2vec2/1/model.plan
+
+#     Selection logic:
+#       1) Lowest measured latency (if latency files exist)
+#       2) Precision priority: mixed → fp16 → fp32
+
+#     Guarantees:
+#       - Does NOT start Triton
+#       - Validates engine existence and size
+#       - Produces deterministic, debuggable output
+#     """
+
+#     print("[Triton] Selecting TensorRT engine for Triton deployment")
+
+#     TRT_DIR = project_root / "models" / "tensorrt"
+#     MODEL_REPO = project_root / "triton" / "model_repository" / "wav2vec2"
+#     VERSION_DIR = MODEL_REPO / "1"
+#     LOG_DIR = project_root / "results" / "terminal_logs"
+
+#     VERSION_DIR.mkdir(parents=True, exist_ok=True)
+#     LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+#     deploy_log = LOG_DIR / "triton_deploy.log"
+
+#     def log(msg: str):
+#         print(msg)
+#         with open(deploy_log, "a") as f:
+#             f.write(msg + "\n")
+
+#     # ---------------------------------------
+#     # 1. Discover TensorRT engines
+#     # ---------------------------------------
+
+#     engine_map = {
+#         "mixed": sorted(TRT_DIR.glob("*mixed*.plan")),
+#         "fp16":  sorted(TRT_DIR.glob("*fp16*.plan")),
+#         "fp32":  sorted(TRT_DIR.glob("*fp32*.plan")),
+#     }
+
+#     engine_map = {k: v for k, v in engine_map.items() if v}
+
+#     if not engine_map:
+#         log("[Triton][ERROR] No TensorRT .plan files found in models/tensorrt/")
+#         return
+
+#     log(f"[Triton] Discovered engines: { {k: len(v) for k, v in engine_map.items()} }")
+
+#     # ---------------------------------------
+#     # 2. Read latency measurements (if present)
+#     # ---------------------------------------
+
+#     latency_files = {
+#         "mixed": project_root / "results" / "latency_trt_mixed.txt",
+#         "fp16":  project_root / "results" / "latency_trt_fp16.txt",
+#         "fp32":  project_root / "results" / "latency_trt_fp32.txt",
+#     }
+
+#     latency = {}
+#     for prec, path in latency_files.items():
+#         if path.exists():
+#             try:
+#                 latency[prec] = float(path.read_text().strip())
+#                 log(f"[Triton] Latency[{prec}] = {latency[prec]:.3f} ms")
+#             except Exception:
+#                 latency[prec] = float("inf")
+#                 log(f"[Triton][WARN] Failed to parse latency file: {path.name}")
+#         else:
+#             latency[prec] = float("inf")
+
+#     # ---------------------------------------
+#     # 3. Choose precision
+#     # ---------------------------------------
+
+#     chosen_prec = None
+
+#     # Prefer measured latency if available
+#     best_by_latency = min(latency, key=lambda k: latency[k])
+#     if latency[best_by_latency] < float("inf") and best_by_latency in engine_map:
+#         chosen_prec = best_by_latency
+#         log(f"[Triton] Selected precision by latency → {chosen_prec}")
+#     else:
+#         # Fallback: deterministic precision order
+#         for pref in ("mixed", "fp16", "fp32"):
+#             if pref in engine_map:
+#                 chosen_prec = pref
+#                 log(f"[Triton] Selected precision by priority → {chosen_prec}")
+#                 break
+
+#     if chosen_prec is None:
+#         log("[Triton][ERROR] Unable to select a TensorRT engine")
+#         return
+
+#     # ---------------------------------------
+
+#     # 4. Select best engine file (largest = fully serialized)
+#     # ---------------------------------------
+
+#     candidate_engines = engine_map[chosen_prec]
+
+#     chosen_engine = max(candidate_engines, key=lambda p: p.stat().st_size)
+#     size_mb = chosen_engine.stat().st_size / (1024 * 1024)
+
+#     log(f"[Triton] Selected engine file: {chosen_engine.name}")
+#     log(f"[Triton] Engine size: {size_mb:.1f} MB")
+
+#     if size_mb < 100:
+#         log("[Triton][ERROR] Engine file too small — likely corrupted or partial")
+#         return
+
+#     # ---------------------------------------
+#     # 5. Deploy engine
+#     # ---------------------------------------
+
+#     dst_engine = VERSION_DIR / "model.plan"
+#     shutil.copy2(chosen_engine, dst_engine)
+#     log(f"[Triton] Engine copied to: {dst_engine}")
+
+#         # ---------------------------------------
+
+#     # 6. Validate config.pbtxt (never overwrite silently)
+#         # ---------------------------------------
+
+#     cfg_path = MODEL_REPO / "config.pbtxt"
+
+#     if not cfg_path.exists():
+#         log("[Triton] config.pbtxt missing — writing safe default")
+
+#         cfg_path.write_text(
+#             """
+#                 name: "wav2vec2"
+#                 backend: "tensorrt"
+#                 max_batch_size: 8
+
+#                 input [
+#                 {
+#                     name: "input_values"
+#                     data_type: TYPE_FP32
+#                     dims: [ -1, -1 ]
+#                 }
+#                 ]
+
+#                 output [
+#                 {
+#                     name: "logits"
+#                     data_type: TYPE_FP32
+#                     dims: [ -1, -1 ]
+#                 }
+#                 ]
+
+#                 instance_group [
+#                 {
+#                     kind: KIND_GPU
+#                     count: 1
+#                 }
+#                 ]
+#             """.strip()
+#         )
+
+#     log("[Triton] config.pbtxt validated")
+#     log("[Triton] TensorRT engine deployment complete")
+#     log("[Triton] Triton server NOT started by this function")
+
+#     print(f"[Triton] Wrote config to {cfg_path}")
+
+#     triton_exe = shutil.which("tritonserver")
+#     if triton_exe:
+#         print("[Triton] Starting tritonserver (will block). Run manually if you prefer.")
+#         run_cmd([triton_exe, f"--model-repository={project_root/'triton'/'model_repository'}", "--strict-model-config=false"])
+#     else:
+#         print("[Triton] tritonserver not found on PATH. To run manually:")
+#         print(f"  tritonserver --model-repository={project_root/'triton'/'model_repository'} --strict-model-config=false")
+
 def _discover_trt_engines(trt_dir: Path):
     # return dict precision -> path
     found = {}
@@ -344,112 +644,11 @@ def _discover_trt_engines(trt_dir: Path):
             found.setdefault("fp32", []).append(p)
     return found
 
-def select_and_deploy_trt_to_triton(project_root: Path):
-    print("[Triton] Attempting to select a TRT engine for Triton model_repository...")
-    TRT_DIR = project_root / "models" / "tensorrt"
-    TRT_DIR.mkdir(parents=True, exist_ok=True)
-    found = _discover_trt_engines(TRT_DIR)
-
-    if not found:
-        print("[Triton] No TensorRT engine files found in models/tensorrt/. Skipping Triton deployment.")
-        return
-
-    # read latency files if present
-    lat_files = {
-        "fp16": project_root / "results" / "latency_trt_fp16.txt",
-        "mixed": project_root / "results" / "latency_trt_mixed.txt",
-        "fp32": project_root / "results" / "latency_trt_fp32.txt",
-    }
-    scores = {}
-    # choose best file per precision (smallest size) if multiple
-    chosen_per_precision = {}
-    for prec, paths in found.items():
-        # pick smallest file (heuristic)
-        chosen = min(paths, key=lambda p: p.stat().st_size) if paths else None
-        chosen_per_precision[prec] = chosen
-        # latency score (lower better), default inf
-        pf = lat_files.get(prec)
-        if pf and pf.exists():
-            try:
-                scores[prec] = float(pf.read_text().strip())
-            except Exception:
-                scores[prec] = float("inf")
-        else:
-            scores[prec] = float("inf")
-
-    # If any have real latency, pick smallest; else prefer fp16->mixed->fp32
-    real_lat = {k: v for k, v in scores.items() if v not in (None, float("inf"))}
-    if real_lat:
-        chosen_prec = min(real_lat, key=real_lat.get)
-    else:
-        for pref in ("fp16", "mixed", "fp32"):
-            if chosen_per_precision.get(pref) is not None:
-                chosen_prec = pref
-                break
-
-    if chosen_prec is None:
-        print("[Triton] Unable to find a suitable engine to deploy.")
-        return
-
-    chosen_path = chosen_per_precision[chosen_prec]
-    print(f"[Triton] Selected engine: {chosen_prec} -> {chosen_path}")
-
-    # prepare model repository
-    triton_model_dir = project_root / "triton" / "model_repository" / "wav2vec2"
-    version_dir = triton_model_dir / "1"
-    version_dir.mkdir(parents=True, exist_ok=True)
-
-    dst_engine = version_dir / "model.plan"
-    shutil.copyfile(str(chosen_path), str(dst_engine))
-    print(f"[Triton] Copied engine to {dst_engine}")
-
-    # write minimal config.pbtxt (same as your existing)
-    cfg_path = triton_model_dir / "config.pbtxt"
-    cfg = f"""
-            name: "wav2vec2"
-            backend: "tensorrt"
-            max_batch_size: 8
-
-            input [
-            {{
-            name: "input_values"
-            data_type: TYPE_FP32
-            dims: [-1, -1]
-            }}
-            ]
-
-            output [
-            {{
-            name: "logits"
-            data_type: TYPE_FP32
-            dims: [-1, -1]
-            }}
-            ]
-
-            instance_group [
-            {{
-            kind: KIND_GPU
-            count: 1
-            }}
-            ]
-        """
-    cfg_path.write_text(cfg.strip())
-    print(f"[Triton] Wrote config to {cfg_path}")
-
-    triton_exe = shutil.which("tritonserver")
-    if triton_exe:
-        print("[Triton] Starting tritonserver (will block). Run manually if you prefer.")
-        run_cmd([triton_exe, f"--model-repository={project_root/'triton'/'model_repository'}", "--strict-model-config=false"])
-    else:
-        print("[Triton] tritonserver not found on PATH. To run manually:")
-        print(f"  tritonserver --model-repository={project_root/'triton'/'model_repository'} --strict-model-config=false")
-
 def _choose_netron_candidate(paths):
     for p in paths:
         if p.exists():
             return str(p)
     return None
-
 
 def launch_netron(model_path: str, port: int, label: str):
     if not shutil.which("netron"):
@@ -540,6 +739,7 @@ def deploy_best_trt_to_triton():
 
     print(f"[Triton] Engine deployed → {dst}")
 
+# Old Code
 def start_triton_server():
     import socket
 
@@ -563,6 +763,216 @@ def start_triton_server():
     print("👉 Triton running at http://localhost:8000")
     time.sleep(12)
 
+# New Code
+# def start_triton_server(project_root: Path, timeout_s: int = 60):
+#     """
+#     Start Triton Inference Server using Docker (preferred) or local tritonserver binary (fallback).
+#     - Mounts the project triton model_repository into container as /models (read-only).
+#     - Writes container/server logs to results/terminal_logs/triton_container.log for debugging.
+#     - Polls /v2/health/ready until server is ready or timeout.
+#     - Returns a dict with keys: {"mode": "docker"|"local"|"existing", "id": <container_id_or_pid_or_None>}
+#     """
+#     import socket
+#     import shutil
+#     import urllib.request
+#     import urllib.error
+#     import threading
+#     import os
+#     import json
+
+#     # prepare log dir
+#     log_dir = RESULTS_DIR / "terminal_logs"
+#     log_dir.mkdir(parents=True, exist_ok=True)
+#     triton_log = log_dir / "triton_container.log"
+
+#     def port_free(port: int) -> bool:
+#         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+#             return s.connect_ex(("127.0.0.1", port)) != 0
+
+#     # If port 8000 already bound, assume Triton (or something) is running.
+#     if not port_free(8000):
+#         print("[Triton] Port 8000 already in use — assuming Triton is running (will attempt health check).")
+#         # Do a health check below; do not try to start container.
+#         mode = "existing"
+#         container_id = None
+#     else:
+#         mode = None
+#         container_id = None
+
+#     # Helper: poll health endpoint
+#     def wait_for_ready(timeout: int = timeout_s) -> bool:
+#         end = time.time() + timeout
+#         url = "http://localhost:8000/v2/health/ready"
+#         while time.time() < end:
+#             try:
+#                 with urllib.request.urlopen(url, timeout=3) as resp:
+#                     body = resp.read().decode("utf-8")
+#                     # Triton's ready returns JSON like: {"ready":"TRUE"} typically
+#                     if '"READY"' in body.upper() or '"TRUE"' in body.upper() or 'READY' in body.upper():
+#                         print("[Triton] HTTP health endpoint reports READY.")
+#                         return True
+#             except Exception:
+#                 # keep polling
+#                 pass
+#             time.sleep(1.0)
+#         return False
+
+#     # Start Docker container if docker present and port is free
+#     docker_bin = shutil.which("docker")
+#     triton_bin = shutil.which("tritonserver")
+
+#     if mode != "existing":
+#         if docker_bin:
+#             # run with detached mode and a deterministic name
+#             container_name = f"triton_server_{os.getpid()}"
+#             model_repo_host = str(project_root / "triton" / "model_repository")
+#             if not (project_root / "triton" / "model_repository").exists():
+#                 raise RuntimeError(f"Triton model_repository does not exist: {model_repo_host}")
+
+#             cmd = [
+#                 docker_bin, "run", "--gpus", "all", "--rm", "-d",
+#                 "--name", container_name,
+#                 "-p", "8000:8000", "-p", "8001:8001", "-p", "8002:8002",
+#                 "-v", f"{model_repo_host}:/models:ro",
+#                 "nvcr.io/nvidia/tritonserver:24.12-py3",
+#                 "tritonserver",
+#                 "--model-repository=/models",
+#                 "--strict-model-config=false",
+#                 "--log-verbose=1"
+#             ]
+
+#             print("[Triton] Starting Triton Inference Server in Docker (detached):")
+#             print(" ".join(cmd))
+
+#             try:
+#                 out = subprocess.check_output(cmd, stderr=subprocess.STDOUT, text=True)
+#                 container_id = out.strip().splitlines()[-1]
+#                 mode = "docker"
+#                 print(f"[Triton] Docker container started: {container_id} (name={container_name})")
+#             except subprocess.CalledProcessError as e:
+#                 # capture docker run output and write to log for debugging
+#                 (triton_log).write_text(f"Failed to start docker container.\n\nRETURNCODE={e.returncode}\n\nSTDOUT+STDERR:\n{e.output}\n")
+#                 raise RuntimeError(f"Failed to start Triton docker container. See {triton_log} for details.") from e
+
+#             # start a thread to stream docker logs to triton_log
+#             def stream_logs():
+#                 try:
+#                     # 'docker logs -f <container>' streams until container exits
+#                     log_cmd = [docker_bin, "logs", "-f", container_name]
+#                     with open(triton_log, "a", buffering=1) as lf:
+#                         lf.write(f"=== Docker logs for {container_name} started at {datetime.now().isoformat()} ===\n")
+#                         proc = subprocess.Popen(log_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+#                         # stream lines into file (and a short summary to console)
+#                         for line in proc.stdout:
+#                             lf.write(line)
+#                     # when logs process ends, append marker
+#                     with open(triton_log, "a") as lf:
+#                         lf.write(f"\n=== Docker logs ended at {datetime.now().isoformat()} ===\n")
+#                 except Exception as ex:
+#                     with open(triton_log, "a") as lf:
+#                         lf.write(f"\n=== Failed to stream docker logs: {ex} ===\n")
+
+#             t = threading.Thread(target=stream_logs, daemon=True)
+#             t.start()
+
+#         elif triton_bin:
+#             # fallback: run local tritonserver binary (not in docker)
+#             logf = triton_log
+#             cmd = [
+#                 triton_bin,
+#                 f"--model-repository={str(project_root/'triton'/'model_repository')}",
+#                 "--strict-model-config=false",
+#                 "--log-verbose=1"
+#             ]
+#             print("[Triton] Docker not found; starting local tritonserver binary:")
+#             print(" ".join(cmd))
+#             logfile = open(logf, "a")
+#             proc = subprocess.Popen(cmd, stdout=logfile, stderr=subprocess.STDOUT)
+#             mode = "local"
+#             container_id = str(proc.pid)
+
+#             # start a thread to tail the logfile (append to console small status)
+#             def tail_logfile():
+#                 try:
+#                     with open(logf, "r") as f:
+#                         f.seek(0, os.SEEK_END)
+#                         while True:
+#                             line = f.readline()
+#                             if line:
+#                                 # print only important lines to console to avoid flooding
+#                                 if any(k in line.lower() for k in ("ready", "error", "failed", "loaded", "unable")):
+#                                     print("[Triton][LOG]", line.rstrip())
+#                             else:
+#                                 time.sleep(0.5)
+#                 except Exception:
+#                     pass
+
+#             t = threading.Thread(target=tail_logfile, daemon=True)
+#             t.start()
+#         else:
+#             print("[Triton] Neither 'docker' nor 'tritonserver' binary found on PATH. Cannot start Triton automatically.")
+#             print(f"[Triton] To start manually run:\n  tritonserver --model-repository={project_root/'triton'/'model_repository'} --strict-model-config=false")
+#             return {"mode": "none", "id": None}
+
+#     # At this point either Triton was already running or we just started it.
+#     print("👉 Triton running at http://localhost:8000 (waiting for readiness)")
+
+#     ready = wait_for_ready(timeout=timeout_s)
+#     if not ready:
+#         # attempt to provide useful diagnostics by scanning recent logs
+#         hint = ""
+#         try:
+#             logs = triton_log.read_text()
+#             # common TensorRT serialization/version mismatch indicator
+#             if "Serialization assertion" in logs or "Serialized Engine Version" in logs or "deserializeCudaEngine" in logs:
+#                 hint += ("\n[HINT] Triton reported a TensorRT engine deserialization error. "
+#                          "This commonly happens if the TensorRT runtime inside the Triton container "
+#                          "does not match the TensorRT version used to build the engine (.plan). "
+#                          "Fixes:\n"
+#                          " - Rebuild the TensorRT engine inside an environment matching Triton's TensorRT version (build inside the container),\n"
+#                          " - Or use the Triton container image whose TensorRT version matches your engine build.\n")
+#             if "failed to load" in logs or "UNAVAILABLE" in logs:
+#                 hint += ("\n[HINT] Triton failed to load the model; check config.pbtxt, model files and permissions.\n")
+#             # append last 4000 chars of logs for context
+#             snippet = logs[-4000:] if len(logs) > 0 else "(no logs)"
+#             (RESULTS_DIR / "triton_start_failure_info.txt").write_text(f"Readiness wait timed out after {timeout_s}s.\n\nLast logs snippet:\n{snippet}\n\n{hint}")
+#         except Exception:
+#             pass
+
+#         print(f"[Triton] Server did not become ready within {timeout_s}s. Inspect logs: {triton_log}")
+#         raise RuntimeError(f"Triton server readiness failed. See {triton_log} and {RESULTS_DIR/'triton_start_failure_info.txt'} for clues.")
+
+#     # If ready, additionally check model readiness via repository index and model readiness endpoint
+#     try:
+#         # check repository index and model ready state
+#         repo_idx_url = "http://localhost:8000/v2/repository/index"
+#         with urllib.request.urlopen(repo_idx_url, timeout=5) as r:
+#             repo_text = r.read().decode("utf-8")
+#             # write repository index to results for debugging
+#             (RESULTS_DIR / "triton_repository_index.json").write_text(repo_text)
+#     except Exception:
+#         pass
+
+#     # check if model is READY
+#     try:
+#         model_ready_url = f"http://localhost:8000/v2/models/wav2vec2/ready"
+#         with urllib.request.urlopen(model_ready_url, timeout=5) as r:
+#             model_ready_text = r.read().decode("utf-8")
+#             (RESULTS_DIR / "triton_model_ready.json").write_text(model_ready_text)
+#             if "READY" not in model_ready_text.upper() and "true" not in model_ready_text.lower():
+#                 print(f"[Triton] Model readiness endpoint returned: {model_ready_text}")
+#                 # still return success, but warn
+#                 print(f"[Triton] WARNING: Model may not be READY. Check {triton_log} for errors loading the model.")
+#     except urllib.error.HTTPError as he:
+#         # save response
+#         (RESULTS_DIR / "triton_model_ready.json").write_text(f"HTTPError: {he.code} {he.reason}")
+#         print(f"[Triton] Model readiness check returned HTTPError: {he.code} {he.reason}. See logs at {triton_log}")
+#     except Exception:
+#         print(f"[Triton] Model readiness check failed; check {triton_log}")
+
+#     print(f"[Triton] Server and endpoints appear reachable. Logs stored at {triton_log}")
+#     return {"mode": mode, "id": container_id}
+
 def run_triton_check():
     run_cmd([sys.executable, CODE_DIR / "triton" / "triton_check.py"])
 
@@ -581,7 +991,7 @@ def main():
         ("PyTorch Profiling", run_profiler),
         ("Export ONNX", export_onnx),
         ("Optimize ONNX", optimize_onnx),
-        ("Benchmark ONNX Runtime", benchmark_latency),
+        ("Benchmark Backend Runtime", benchmark_latency),
         ("Compute WER", compute_wer),
         ("Build TensorRT Engines", build_tensorrt_engine),
         # ("Deploy best TRT to Triton", lambda: select_and_deploy_trt_to_triton(PROJECT_ROOT)),

@@ -329,7 +329,7 @@ def shutdown_triton():
 def main():
     logger.info("========== Triton Inference Validation ==========")
 
-    # 🔒 Safety: don’t crash pipeline if Triton isn’t running
+    # Safety: Pipeline doesn't crash even if Triton isn’t running
     if not triton_reachable():
         logger.warning("[Triton] Server not reachable — skipping Triton validation")
         return

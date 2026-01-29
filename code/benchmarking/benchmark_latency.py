@@ -230,7 +230,13 @@ def file_exists_and_not_forced(path: Path, force: bool):
 def run_subprocess(cmd, cwd=None, capture_output=False, text=True, timeout=None):
     logger.debug(f"Running subprocess: {' '.join(map(str, cmd))} (cwd={cwd})")
     try:
-        res = subprocess.run(cmd, cwd=cwd, capture_output=capture_output, text=text, timeout=timeout)
+        res = subprocess.run(
+            [str(c) for c in cmd],   # ensure all elements are strings
+            cwd=str(cwd) if cwd else None,  # ensure cwd is string
+            capture_output=capture_output,
+            text=text,
+            timeout=timeout
+        )
         return res
     except Exception as e:
         logger.warning(f"Subprocess failed: {e}")
@@ -340,7 +346,7 @@ def benchmark_onnx(runs: int, warmup: int, force: bool):
     avg_ms = avg_sec * 1000.0
 
     lat_file.write_text(f"{avg_sec:.6f}")
-    logger.info(f"ONNX average latency: {avg_ms:.2f} ms")
+    logger.info(f"ONNX average latency: {avg_ms:.4f} ms")
 
     # ---- profiling ----
     profile_path = RESULTS_DIR / "onnx_profile.json"

@@ -40,3 +40,11 @@ TypeError: InferenceServerClient.__init__() got an unexpected keyword argument '
 2026-01-28 22:58:24 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
 2026-01-28 22:58:24 | INFO     | triton_check.py:330 | ========== Triton Inference Validation ==========
 2026-01-28 22:58:24 | WARNING  | triton_check.py:334 | [Triton] Server not reachable — skipping Triton validation
+2026-01-29 10:45:13 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-29 10:45:13 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
+2026-01-29 10:45:13 | INFO     | triton_check.py:330 | ========== Triton Inference Validation ==========
+2026-01-29 10:45:13 | WARNING  | triton_check.py:334 | [Triton] Server not reachable — skipping Triton validation
+2026-01-29 11:09:00 | DEBUG    | logger.py:88 | Logger initialized
+2026-01-29 11:09:00 | DEBUG    | logger.py:89 | Log file: /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/terminal_logs/triton_check.log
+2026-01-29 11:09:00 | INFO     | triton_check.py:330 | ========== Triton Inference Validation ==========
+2026-01-29 11:09:00 | WARNING  | triton_check.py:334 | [Triton] Server not reachable — skipping Triton validation

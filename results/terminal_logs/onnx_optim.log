@@ -56,3 +56,25 @@
 2026-01-28 22:51:39 | INFO     | optimize_onnx.py:145 | Final optimized ONNX validated successfully
 2026-01-28 22:51:39 | INFO     | optimize_onnx.py:153 | {"final_onnx": "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx", "opset": 18, "producer": "pytorch", "external_data_files": 0, "simplifier_used": false}
 2026-01-28 22:51:39 | INFO     | optimize_onnx.py:161 | ONNX optimization complete
+2026-01-29 10:32:33 | INFO     | optimize_onnx.py:68 | Starting ONNX optimization
+2026-01-29 10:32:33 | INFO     | optimize_onnx.py:69 | SRC = /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2.onnx
+2026-01-29 10:32:33 | INFO     | optimize_onnx.py:70 | DST = /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx
+2026-01-29 10:33:18 | INFO     | optimize_onnx.py:82 | Backed up existing optimized ONNX → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/backups/wav2vec2_optimized.onnx.bak.20260129T103233
+2026-01-29 10:33:42 | INFO     | optimize_onnx.py:90 | Source ONNX passed checker
+2026-01-29 10:33:42 | INFO     | optimize_onnx.py:98 | Running shape inference
+2026-01-29 10:34:14 | INFO     | optimize_onnx.py:101 | Shape-inferred ONNX written → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx
+2026-01-29 10:34:14 | INFO     | optimize_onnx.py:121 | No external-data files detected
+2026-01-29 10:34:41 | INFO     | optimize_onnx.py:145 | Final optimized ONNX validated successfully
+2026-01-29 10:34:41 | INFO     | optimize_onnx.py:153 | {"final_onnx": "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx", "opset": 18, "producer": "pytorch", "external_data_files": 0, "simplifier_used": false}
+2026-01-29 10:34:41 | INFO     | optimize_onnx.py:161 | ONNX optimization complete
+2026-01-29 11:00:28 | INFO     | optimize_onnx.py:68 | Starting ONNX optimization
+2026-01-29 11:00:28 | INFO     | optimize_onnx.py:69 | SRC = /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2.onnx
+2026-01-29 11:00:28 | INFO     | optimize_onnx.py:70 | DST = /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx
+2026-01-29 11:00:48 | INFO     | optimize_onnx.py:82 | Backed up existing optimized ONNX → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/backups/wav2vec2_optimized.onnx.bak.20260129T110028
+2026-01-29 11:01:10 | INFO     | optimize_onnx.py:90 | Source ONNX passed checker
+2026-01-29 11:01:10 | INFO     | optimize_onnx.py:98 | Running shape inference
+2026-01-29 11:01:24 | INFO     | optimize_onnx.py:101 | Shape-inferred ONNX written → /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx
+2026-01-29 11:01:24 | INFO     | optimize_onnx.py:121 | No external-data files detected
+2026-01-29 11:01:38 | INFO     | optimize_onnx.py:145 | Final optimized ONNX validated successfully
+2026-01-29 11:01:38 | INFO     | optimize_onnx.py:153 | {"final_onnx": "/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx", "opset": 18, "producer": "pytorch", "external_data_files": 0, "simplifier_used": false}
+2026-01-29 11:01:38 | INFO     | optimize_onnx.py:161 | ONNX optimization complete

@@ -177,3 +177,61 @@
 2026-01-28 22:58:24 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 2.71s
 2026-01-28 22:58:24 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/benchmarking/compare_backends.py (cwd=None)
 2026-01-28 22:58:28 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 3.78s
+2026-01-29 10:26:36 | INFO     | run_pipeline.py:48 | Pipeline started
+2026-01-29 10:26:36 | WARNING  | run_pipeline.py:49 | This is a warning
+2026-01-29 10:26:36 | ERROR    | run_pipeline.py:50 | Something went wrong
+2026-01-29 10:26:36 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/profiling/pytorch_profiler.py (cwd=None)
+2026-01-29 10:27:11 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 35.26s
+2026-01-29 10:27:11 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/onnx_export/export_to_onnx.py (cwd=None)
+2026-01-29 10:32:31 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 319.83s
+2026-01-29 10:32:31 | INFO     | run_pipeline.py:73 | [CMD] ls -lh /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models (cwd=None)
+2026-01-29 10:32:31 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 0.10s
+2026-01-29 10:32:31 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/onnx_optim/optimize_onnx.py (cwd=None)
+2026-01-29 10:34:41 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 129.93s
+2026-01-29 10:34:41 | INFO     | run_pipeline.py:73 | [CMD] ls -lh /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models (cwd=None)
+2026-01-29 10:34:41 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 0.04s
+2026-01-29 10:34:41 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/benchmarking/compute_wer.py (cwd=None)
+2026-01-29 10:35:34 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 52.72s
+2026-01-29 10:35:34 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/build_engine_py.py --onnx /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx --out_dir /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt --precision fp16 (cwd=/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt)
+2026-01-29 10:39:19 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 225.03s
+2026-01-29 10:39:19 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/build_engine_py.py --onnx /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx --out_dir /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt --precision mixed (cwd=/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt)
+2026-01-29 10:42:55 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 216.08s
+2026-01-29 10:42:55 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/build_engine_py.py --onnx /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx --out_dir /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt --precision fp32 (cwd=/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt)
+2026-01-29 10:44:46 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 110.39s
+2026-01-29 10:45:07 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/parse_trt_profile.py /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.json /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/trt_fp16_ops.csv (cwd=None)
+2026-01-29 10:45:09 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=4) in 1.62s
+2026-01-29 10:45:09 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/benchmarking/compare_backends.py (cwd=None)
+2026-01-29 10:45:12 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 2.50s
+2026-01-29 10:45:12 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/triton/triton_check.py (cwd=None)
+2026-01-29 10:45:13 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 1.17s
+2026-01-29 10:45:13 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/benchmarking/compare_backends.py (cwd=None)
+2026-01-29 10:45:15 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 1.94s
+2026-01-29 10:54:54 | INFO     | run_pipeline.py:48 | Pipeline started
+2026-01-29 10:54:54 | WARNING  | run_pipeline.py:49 | This is a warning
+2026-01-29 10:54:54 | ERROR    | run_pipeline.py:50 | Something went wrong
+2026-01-29 10:54:54 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/profiling/pytorch_profiler.py (cwd=None)
+2026-01-29 10:55:30 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 35.63s
+2026-01-29 10:55:30 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/onnx_export/export_to_onnx.py (cwd=None)
+2026-01-29 11:00:27 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 297.25s
+2026-01-29 11:00:27 | INFO     | run_pipeline.py:73 | [CMD] ls -lh /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models (cwd=None)
+2026-01-29 11:00:27 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 0.07s
+2026-01-29 11:00:27 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/onnx_optim/optimize_onnx.py (cwd=None)
+2026-01-29 11:01:38 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 70.68s
+2026-01-29 11:01:38 | INFO     | run_pipeline.py:73 | [CMD] ls -lh /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models (cwd=None)
+2026-01-29 11:01:38 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 0.06s
+2026-01-29 11:01:38 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/benchmarking/compute_wer.py (cwd=None)
+2026-01-29 11:02:29 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 50.59s
+2026-01-29 11:02:29 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/build_engine_py.py --onnx /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx --out_dir /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt --precision fp16 (cwd=/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt)
+2026-01-29 11:04:57 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 147.92s
+2026-01-29 11:04:57 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/build_engine_py.py --onnx /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx --out_dir /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt --precision mixed (cwd=/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt)
+2026-01-29 11:07:22 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 145.66s
+2026-01-29 11:07:22 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/build_engine_py.py --onnx /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/onnx/wav2vec2_optimized.onnx --out_dir /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt --precision fp32 (cwd=/mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt)
+2026-01-29 11:08:33 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 71.01s
+2026-01-29 11:08:44 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/tensorrt/parse_trt_profile.py /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/models/tensorrt/wav2vec2_optimized_trt_fp16.json /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/results/trt_fp16_ops.csv (cwd=None)
+2026-01-29 11:08:45 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=4) in 1.07s
+2026-01-29 11:08:45 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/benchmarking/compare_backends.py (cwd=None)
+2026-01-29 11:08:46 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 1.53s
+2026-01-29 11:09:00 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/triton/triton_check.py (cwd=None)
+2026-01-29 11:09:00 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 0.70s
+2026-01-29 11:09:00 | INFO     | run_pipeline.py:73 | [CMD] /home/arkapravodas/miniconda3/envs/env-ai4bharat/bin/python /mnt/e/D_Folder/IIT Madras AI4Bharat - GitHub/submission/code/benchmarking/compare_backends.py (cwd=None)
+2026-01-29 11:09:02 | INFO     | run_pipeline.py:91 | [CMD] finished (rc=0) in 1.30s

@@ -275,13 +275,20 @@ Pre-generated visualizations for documentation:
 ## Quick Start
 
 ### 1. Setup Environment
-
+For more detailed Environment Setup please follow the SETUP.md
+ 
 ```bash
 # Clone repository
-git clone https://github.com/Coder-Abhimanyu/AI4BHARAT-ASR-Model-Optimization.git
-cd AI4BHARAT-ASR-Model-Optimization/submission
+git clone https://github.com/Coder-by-Passion-Arka/AI4Bharat_ASR_MLOPS.git
 
+# Verify you are on the 'main' branch
+git checkout <branch-name>
+```
 # Create conda environment
+```bash
+# Create a fresh new env with python 3.10 interpreter
+conda create -n env-ai4bharat python=3.10
+
 conda env create -f environment.yml
 conda activate env-ai4bharat
 ```
@@ -294,28 +301,51 @@ See [SETUP.md](SETUP.md) for detailed installation instructions.
 python run_pipeline.py
 ```
 
-This executes all optimization steps and generates results in `results/`.
+### 3. Run the entire Project Pipeline using a single command
+```bash
+# Execute Main Orchastrator Script
+python run_pipeline.py
+```
+OR 
 
-### 3. Run Individual Steps
+### Run Individual Steps (If you want to run the pipeline step-by-etp) [NOT Recommended]
 
 ```bash
 # Profile PyTorch model
-python code/profiling/pytorch_profiler.py
+python -m code.profiling.pytorch_profiler.py
 
 # Export to ONNX
-python code/onnx_export/export_to_onnx.py
+python -m code.onnx_export.export_to_onnx.py
 
 # Optimize ONNX
-python code/onnx_optim/optimize_onnx.py
+python -m code.onnx_optim.optimize_onnx.py
 
 # Benchmark all backends
-python code/benchmarking/benchmark_latency.py
+python -m code.benchmarking.benchmark_latency.py
 
 # Compare results
-python code/benchmarking/compare_backends.py
+python -m code.benchmarking.compare_backends.py
+
+# Compute WER Score
+python -m code.benchmarking.compute_wer.py
+
+# Build TensorRT Engines (FP16, FP32, Mixed Precision)
+python -m code.tensorrt.build_engine_py.py
+
+# Compute Benchmark for each TensorRT engine
+python -m code.tensorrt.benchmark_trt_engine.py (for each engine)
+
+# Deploy model in Triton Server
+python -m code.triton.triton_check.py
+
+# Start Triton Server
+    # Follow the immediate next section
+# Compare Backend Results
+python -m code.benchmarking.compare_backends.py
+
 ```
 
-### 4. Start Triton Server
+### 4. Start Triton Server (Using Docker) [Recommended]
 
 ```bash
 # Via Docker (recommended)
@@ -326,7 +356,7 @@ docker run --gpus all --rm \
   tritonserver --model-repository=/models
 
 # Validate
-python code/triton/triton_check.py
+python -m code.triton.triton_check.py
 ```
 
 ---
@@ -381,7 +411,7 @@ python code/triton/triton_check.py
 
 When `run_pipeline.py` executes, files are called in this order:
 
-```
+```ini
 1. code/profiling/pytorch_profiler.py
 2. code/onnx_export/export_to_onnx.py
 3. code/onnx_optim/optimize_onnx.py
@@ -409,4 +439,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with for Indian Language AI**
+**Built by Inidia, for India 🙏🏽**
